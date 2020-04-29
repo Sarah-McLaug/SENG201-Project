@@ -71,4 +71,5 @@ Extra notes:
 --------------------------------------------------------------------------------
   - lab slot must be booked before 18th May 2020
   - final submission is due on the 25th May 2020
+  - assignment scope was reduced, random events are not necessary anymore
 --------------------------------------------------------------------------------
