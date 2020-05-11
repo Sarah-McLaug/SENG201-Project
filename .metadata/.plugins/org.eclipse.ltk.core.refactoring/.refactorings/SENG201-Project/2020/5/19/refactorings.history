@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 elements to &apos;SENG-201-Project&apos;&#x0A;- Original project: &apos;SENG201-Project&apos;&#x0A;- Destination element: &apos;SENG-201-Project&apos;&#x0A;- Original elements:&#x0A;     README.md&#x0A;     Project scheduling.txt&#x0A;     use-case-diagram.png&#x0A;- Update references to refactored element" description="Move files" destination="=SENG-201-Project" element1="README.md" element2="Project scheduling.txt" element3="use-case-diagram.png" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1588955594743" units="0" version="1.0"/>
+</session>
