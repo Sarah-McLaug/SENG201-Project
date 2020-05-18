@@ -90,7 +90,6 @@ public class Game {
 		while(playGame) {
 			System.out.println("Please choose an option: \n(1)View the status of the farm's crops and animals"
 					+ "\n(2)View the status of the farm"
-					+ "\n(3)Go to the store"
 					+ "\n(10)Exit");
 			action = sc.nextInt();
 			junk = sc.nextLine();
@@ -108,42 +107,6 @@ public class Game {
 				break;
 			case 2:
 				System.out.println(farm.getName() + " has $" + farm.getBalance() + " in the bank");
-				break;
-			case 3:
-				boolean inStore = true;
-				while(inStore) {
-					int storeAction = 0;
-					System.out.println("(1)View crops for sale"
-							+ "\n(2)View animals for sale"
-							+ "\n(3)View farming supplies for sale"
-							+ "\n(4)View what you already own"
-							+ "\n(5)Exit");
-					storeAction = sc.nextInt();
-					junk = sc.nextLine();
-					switch(storeAction) {
-					case 1:
-						for(int i = 0; i < store.getCrops().size(); i++) {
-							Crop c = store.getCrops().get(i);
-							System.out.println(c.getSpecies() 
-												+ ", Maturity Time: " 
-												+ c.getDaysUntilMature() 
-												+ ", Cost: " 
-												+ c.getPurchasePrice());
-						}
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					case 5:
-						inStore = false;
-						break;
-					default:
-						break;
-					}
-				}
 				break;
 			case 10:
 				playGame = false;

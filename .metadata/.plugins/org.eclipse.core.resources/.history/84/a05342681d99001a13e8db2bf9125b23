@@ -118,30 +118,10 @@ public class Game {
 							+ "\n(3)View farming supplies for sale"
 							+ "\n(4)View what you already own"
 							+ "\n(5)Exit");
-					storeAction = sc.nextInt();
-					junk = sc.nextLine();
 					switch(storeAction) {
 					case 1:
 						for(int i = 0; i < store.getCrops().size(); i++) {
-							Crop c = store.getCrops().get(i);
-							System.out.println(c.getSpecies() 
-												+ ", Maturity Time: " 
-												+ c.getDaysUntilMature() 
-												+ ", Cost: " 
-												+ c.getPurchasePrice());
 						}
-						break;
-					case 2:
-						break;
-					case 3:
-						break;
-					case 4:
-						break;
-					case 5:
-						inStore = false;
-						break;
-					default:
-						break;
 					}
 				}
 				break;
