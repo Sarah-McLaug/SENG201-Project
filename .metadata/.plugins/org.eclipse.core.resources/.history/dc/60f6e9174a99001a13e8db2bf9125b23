@@ -85,7 +85,6 @@ public class Game {
 		//stock the store
 		for(int i = 0; i < 10; i++) {
 			store.addCrop(new Crop("corn", 100, 100, 3, 10));
-			store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
 		}
 		
 		System.out.println("Game is starting! You have " + days + " days to make as much money as possible!");
@@ -106,8 +105,7 @@ public class Game {
 					System.out.println("Animals owned: ");
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
 						System.out.println("Species: " + farm.getAnimals().get(i).getSpecies()
-								+ ", Happiness: " + farm.getAnimals().get(i).getHappiness() + "/10.0"
-								+ ", Health: " + farm.getAnimals().get(i).getHealth() + "/10.0");
+								+ ", Happiness: " + farm.getAnimals().get(i).getHappiness() + "/10.0");
 					}
 				}
 				if(farm.getCrops().size() == 0) System.out.println("No crops growing");

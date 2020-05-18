@@ -32,8 +32,8 @@ public class Animal {
 		return this.dailyBonus;
 	}
 	
-	public void setDailyBonus(double dailyBonus) {
-		this.dailyBonus = dailyBonus;
+	public void setDailyBonus(double dailyBonus, double animalBonusFactor) {
+		this.dailyBonus = dailyBonus * animalBonusFactor;
 	}
 	
 	public double getHappiness() {
