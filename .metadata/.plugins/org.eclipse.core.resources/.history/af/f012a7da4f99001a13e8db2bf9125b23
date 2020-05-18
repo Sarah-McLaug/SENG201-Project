@@ -234,7 +234,7 @@ public class Game {
 				days--;
 				actionsRemaining = 2;
 				//TODO: other things to change over the day
-				System.out.println("You now have " + days + " days remaining.");
+				System.out.println("You now have 4 days remaining.");
 				break;
 			case 10:
 				playGame = false;

@@ -82,30 +82,24 @@ public class Game {
 		String farmName = sc.nextLine();
 		Farm farm = new Farm(farmName, type, new Farmer(farmerName, age));
 		Store store = new Store();
-		
 		//stock the store
 		for(int i = 0; i < 10; i++) {
 			store.addCrop(new Crop("corn", 100, 100, 3, 10));
 			store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
-			if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
-			else store.addItem(new FoodItem("Broccoli", 76, 2.0));
 		}
 		
 		System.out.println("Game is starting! You have " + days + " days to make as much money as possible!");
 		
 		boolean playGame = true;
-		int option = 0;
-		int actionsRemaining = 2;
+		int action = 0;
 		while(playGame) {
 			System.out.println("Please choose an option: \n(1)View the status of the farm's crops and animals"
 					+ "\n(2)View the status of the farm"
 					+ "\n(3)Go to the store"
-					+ "\n(4)Take an action (You have " + actionsRemaining + " action remaining"
-					+ "\n(5)Move to next day"
 					+ "\n(10)Exit");
-			option = sc.nextInt();
+			action = sc.nextInt();
 			junk = sc.nextLine();
-			switch(option) {
+			switch(action) {
 			case 1:
 				if(farm.getAnimals().size() == 0) System.out.println("No animals owned");
 				else {
@@ -193,34 +187,23 @@ public class Game {
 									+ "\nType the number of the farming supply you want to buy");
 							for(int i = 0; i < store.getItems().size(); i++) {
 								Item item = store.getItems().get(i);
-								System.out.println("("+ (i+1) + ")" + item.getName());
-								/*System.out.println("("+ (i+1) + ")" + item.getName() //TODO: I think we could use an abstract implementation to
-													+ ", Maturity Time: " 			   //get the item's specific bonus. need to figure out
-													+ item.getHappiness() 			   //best way to do so
+								System.out.println("("+ (i+1) + ")" + item.getName() 
+													+ ", Maturity Time: " 
+													+ a.getHappiness() 
 													+ ", Cost: " 
-													+ item.getPurchasePrice());*/
+													+ a.getPurchasePrice());
 							}
 							buying = sc.nextInt();
 							junk = sc.nextLine();
-							if(buying != 0 && buying <= store.getItems().size()+1) {
-								Item item = store.getItems().get(buying-1);
-								farm.addItem(item);
-								farm.removeBalance(item.getPrice());
-								store.sellItem(item);
+							if(buying != 0 && buying <= store.getAnimals().size()+1) {
+								Animal a = store.getAnimals().get(buying-1);
+								farm.addAnimal(a);
+								farm.removeBalance(a.getPurchasePrice());
+								store.sellAnimal(a);
 							}
 						}
 						break;
 					case 4:
-						int looking = -1;
-						while(looking != 0) {
-							System.out.println("(0)Exit back to Store menu"
-									+ "\nFarming supplies you own: ");
-							for(int i = 0; i < farm.getOwnedItems().size(); i++) {
-								System.out.println("Type: "+ farm.getOwnedItems().get(i).getName());
-							}
-							looking = sc.nextInt();
-							junk = sc.nextLine();
-						}
 						break;
 					case 5:
 						inStore = false;
@@ -229,12 +212,6 @@ public class Game {
 						break;
 					}
 				}
-				break;
-			case 5:
-				days--;
-				actionsRemaining = 2;
-				//TODO: other things to change over the day
-				System.out.println("You now have " + days + " days remaining.");
 				break;
 			case 10:
 				playGame = false;

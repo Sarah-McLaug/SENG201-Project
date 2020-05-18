@@ -193,7 +193,7 @@ public class Game {
 									+ "\nType the number of the farming supply you want to buy");
 							for(int i = 0; i < store.getItems().size(); i++) {
 								Item item = store.getItems().get(i);
-								System.out.println("("+ (i+1) + ")" + item.getName());
+								System.out.println(item.getName());
 								/*System.out.println("("+ (i+1) + ")" + item.getName() //TODO: I think we could use an abstract implementation to
 													+ ", Maturity Time: " 			   //get the item's specific bonus. need to figure out
 													+ item.getHappiness() 			   //best way to do so
@@ -211,15 +211,10 @@ public class Game {
 						}
 						break;
 					case 4:
-						int looking = -1;
-						while(looking != 0) {
-							System.out.println("(0)Exit back to Store menu"
-									+ "\nFarming supplies you own: ");
-							for(int i = 0; i < farm.getOwnedItems().size(); i++) {
-								System.out.println("Type: "+ farm.getOwnedItems().get(i).getName());
-							}
-							looking = sc.nextInt();
-							junk = sc.nextLine();
+						System.out.println("(0)Exit back to Store menu"
+								+ "\nFarming supplies you own: ");
+						for(int i = 0; i < farm.getOwnedItems().size(); i++) {
+							System.out.println("Type: "+ farm.getOwnedItems().get(i).getName());
 						}
 						break;
 					case 5:
@@ -229,12 +224,6 @@ public class Game {
 						break;
 					}
 				}
-				break;
-			case 5:
-				days--;
-				actionsRemaining = 2;
-				//TODO: other things to change over the day
-				System.out.println("You now have " + days + " days remaining.");
 				break;
 			case 10:
 				playGame = false;
