@@ -1,23 +1,20 @@
 package main;
 
 public class Farmer {
-	private String firstName;
-	private String lastName;
-	private int age;
+	private String name;
+	int age;
 	
-	public Farmer(String firstName, String lastName, int age) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Farmer(String name, int age) {
+		this.name = name;
 		this.age = age;
 	}
 	
 	public String getName() {
-		return firstName + " " + lastName;
+		return name;
 	}
 	
-	public void setName(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getAge() {

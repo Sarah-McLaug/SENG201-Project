@@ -36,22 +36,22 @@ public class Farm {
 		this.type = type;
 		switch(this.type) {
 		//TODO check if these cases are okay
-		case "Friendly Farm":
+		case "friendly":
 			balance = 10000;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.25;
 			cropYieldFactor = 1.0;
-		case "Fast Farm":
+		case "fast":
 			balance = 10000;
 			cropGrowthFactor = 1.25;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
-		case "Fertile Farm":
+		case "fertile":
 			balance = 10000;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.25;
-		case "Money Farm":
+		case "rich":
 			balance = 15000;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.0;

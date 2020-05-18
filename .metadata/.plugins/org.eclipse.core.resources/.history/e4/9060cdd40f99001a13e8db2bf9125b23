@@ -1,0 +1,47 @@
+package main;
+import java.util.ArrayList;
+
+public class Store {
+	private ArrayList<Crop> crops = new ArrayList<Crop>();
+	private ArrayList<Animal> animals = new ArrayList<Animal>();
+	private ArrayList<Item> items = new ArrayList<Item>();
+	
+	public void addCrop(Crop crop) {
+		crops.add(crop);
+	}
+	
+	public void sellCrop(Crop crop) {
+		for(int i = 0; i < crops.size(); i++) {
+			if(crops.get(i).getSpecies().equals(crop.getSpecies())) {
+				crops.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public void addAnimal(Animal animal) {
+		animals.add(animal);
+	}
+	
+	public void sellAnimal(Animal animal) {
+		for(int i = 0; i < animals.size(); i++) {
+			if(animals.get(i).getSpecies().equals(animal.getSpecies())) {
+				animals.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public void addItem(Item item) {
+		items.add(item);
+	}
+	
+	public void sellItem(Item item) {
+		for(int i = 0; i < items.size(); i++) {
+			if(items.get(i).getName().equals(item.getName())) {
+				items.remove(i);
+				break;
+			}
+		}
+	}
+}

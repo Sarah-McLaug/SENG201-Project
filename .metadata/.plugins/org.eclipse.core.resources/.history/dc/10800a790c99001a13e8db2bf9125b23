@@ -1,0 +1,58 @@
+package main;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Game {
+	private int duration;
+	private int actionCount;
+	private Farm farm;
+	private Store store;
+	
+	public Game(int duration, int actionCount) {
+		this.duration = duration;
+		this.actionCount = actionCount;
+	}
+	
+	//BEGIN getters and setters
+	public int getActionCount() {
+		return this.actionCount;
+	}
+	
+	public void setActionCount(int actionCount) {
+		this.actionCount = actionCount;
+	}
+	//END getters and setters
+	
+	//BEGIN methods
+	public void addActionCount() {
+		this.actionCount = this.actionCount + 1;
+	}
+	
+	public void skipDay() {
+		this.duration = this.duration - 1;
+	}
+	
+	/*
+	public double score(int numCrops, int numAnimals, double animalStatus, double moneyEarned) {
+		insert some func here
+	}
+	*/
+	//END methods
+	
+	public static void main(String[] args) {
+		//Start game
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter your name: ");
+		String name = sc.nextLine();
+		System.out.println("Please enter your age: ");
+		int age = sc.nextInt();
+		System.out.println("Pick a type of farm: \nFriendly Farm (1)\nFast Farm (2)\nFertile Farm (3)\nRich Farm (4)");
+		int typeInput = 0;
+		while(typeInput < 1 || typeInput > 4) {
+			typeInput = sc.nextInt();
+			if(typeInput < 1 || typeInput > 4) {
+				System.out.println("Not a valid farm type.");
+			}
+		}
+	}
+}

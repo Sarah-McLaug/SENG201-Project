@@ -183,3 +183,13 @@ Java Model Exception: Java Model Status [Crop(String, double, double, int, doubl
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-05-13 00:12:20.465
 !MESSAGE Crop(String, double, double, int, double, int, int) [in Crop [in [Working copy] Crop.java [in main [in src [in SENG-201-Project]]]]] does not exist
+!SESSION 2020-05-18 08:42:16.063 -----------------------------------------------
+eclipse.buildId=4.15.0.I20200305-0155
+java.version=1.8.0_60
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/sarahmclaughlin/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/sarahmclaughlin/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-05-18 08:44:29.105
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
