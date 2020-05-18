@@ -93,14 +93,6 @@ public class Farm {
 		balance = capital;
 	}
 	
-	public void addBalance(double profit) {
-		balance += profit;
-	}
-	
-	public void removeBalance(double cost) {
-		balance -= cost;
-	}
-	
 	public double getCropGrowthFactor() {
 		return cropGrowthFactor;
 	}

@@ -100,21 +100,15 @@ public class Game {
 			junk = sc.nextLine();
 			switch(action) {
 			case 1:
-				if(farm.getAnimals().size() == 0) System.out.println("No animals owned");
-				else {
-					System.out.println("Animals owned: ");
-					for(int i = 0; i < farm.getAnimals().size(); i++) {
-						System.out.println("Species: " + farm.getAnimals().get(i).getSpecies()
-								+ ", Happiness: " + farm.getAnimals().get(i).getHappiness() + "/10.0");
-					}
+				for(int i = 0; i < farm.getAnimals().size(); i++) {
+					//print out the animals properties
 				}
-				if(farm.getCrops().size() == 0) System.out.println("No crops growing");
-				else {
-					System.out.println("Crops growing: ");
-					for(int i = 0; i < farm.getCrops().size(); i++) {
-						System.out.println("Species: "+ farm.getCrops().get(i).getSpecies() 
-									+ ", Time until harvest: " + farm.getCrops().get(i).getDaysUntilMature() + " days");
-					}
+				for(int i = 0; i < farm.getCrops().size(); i++) {
+					//TODO: print out crop properties
+					System.out.println(farm.getCrops().get(i).getSpecies());
+				}
+				for(int i = 0; i < farm.getOwnedItems().size(); i++) {
+					//print out item properties
 				}
 				break;
 			case 2:
@@ -127,7 +121,7 @@ public class Game {
 					System.out.println("(1)View crops for sale"
 							+ "\n(2)View animals for sale"
 							+ "\n(3)View farming supplies for sale"
-							+ "\n(4)View owned farming supplies"
+							+ "\n(4)View what you already own"
 							+ "\n(5)Exit");
 					storeAction = sc.nextInt();
 					junk = sc.nextLine();
@@ -147,7 +141,7 @@ public class Game {
 							}
 							buying = sc.nextInt();
 							junk = sc.nextLine();
-							if(buying != 0 && buying <= store.getCrops().size()+1) {
+							if(buying != 0) {
 								Crop c = store.getCrops().get(buying-1);
 								farm.addCrop(c);
 								farm.removeBalance(c.getPurchasePrice());

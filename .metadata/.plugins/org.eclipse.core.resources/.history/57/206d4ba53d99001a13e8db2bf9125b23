@@ -105,7 +105,7 @@ public class Game {
 					System.out.println("Animals owned: ");
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
 						System.out.println("Species: " + farm.getAnimals().get(i).getSpecies()
-								+ ", Happiness: " + farm.getAnimals().get(i).getHappiness() + "/10.0");
+								+ ", Happiness: " + farm.getAnimals().get(i).getHappiness());
 					}
 				}
 				if(farm.getCrops().size() == 0) System.out.println("No crops growing");
@@ -113,7 +113,7 @@ public class Game {
 					System.out.println("Crops growing: ");
 					for(int i = 0; i < farm.getCrops().size(); i++) {
 						System.out.println("Species: "+ farm.getCrops().get(i).getSpecies() 
-									+ ", Time until harvest: " + farm.getCrops().get(i).getDaysUntilMature() + " days");
+									+ ", Time until harvest: " + farm.getCrops().get(i).getDaysUntilMature());
 					}
 				}
 				break;
