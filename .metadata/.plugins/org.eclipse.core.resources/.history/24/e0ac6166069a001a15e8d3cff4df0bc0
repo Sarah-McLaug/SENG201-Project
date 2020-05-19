@@ -584,7 +584,7 @@ public class Game {
 					farm.getAnimals().get(i).addHealth(-1);
 					farm.getAnimals().get(i).raiseHappiness(-1);
 				}
-				//reduce days until mature for crops
+				//reduce days until maturity for crops
 				for(int i = 0; i < farm.getCrops().size(); i++) {
 					if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
 				}
@@ -598,7 +598,7 @@ public class Game {
 					if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
 					else store.addItem(new FoodItem("Broccoli", 76, 2.0));
 				}
-				//TODO: if we have time, this is where random events could occur
+				//TODO: other things to change over the day
 				System.out.println("You now have " + days + " days remaining.");
 				break;
 			case 10:
