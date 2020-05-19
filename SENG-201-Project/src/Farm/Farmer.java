@@ -1,4 +1,4 @@
-package main;
+package Farm;
 
 public class Farmer {
 	private String name;

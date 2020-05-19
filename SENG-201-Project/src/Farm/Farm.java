@@ -1,5 +1,11 @@
-package main;
+package Farm;
 import java.util.ArrayList;
+
+import main.Animal;
+import main.Crop;
+import main.CropItem;
+import main.FoodItem;
+import main.Item;
 
 public class Farm {
 	private String name;
@@ -37,27 +43,27 @@ public class Farm {
 		switch(type) {
 		//TODO check if these cases are okay
 		case "friendly":
-			balance = 10000;
+			balance = 10000.00;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.25;
 			cropYieldFactor = 1.0;
 		case "fast":
-			balance = 10000;
+			balance = 10000.00;
 			cropGrowthFactor = 1.25;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		case "fertile":
-			balance = 10000;
+			balance = 10000.00;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.25;
 		case "rich":
-			balance = 15000;
+			balance = 15000.00;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		default:
-			balance = 12000;
+			balance = 12000.00;
 			cropGrowthFactor = 1.0;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
