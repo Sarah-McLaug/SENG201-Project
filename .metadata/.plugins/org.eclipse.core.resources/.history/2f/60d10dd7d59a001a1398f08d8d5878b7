@@ -8,12 +8,6 @@ public class Game {
 	private int actionCount;
 	private Store store;
 	
-	//default constructor TODO: do we need this??
-	public Game() {
-		duration = 10;
-		actionCount = 2;
-	}
-	
 	public Game(int duration, int actionCount) {
 		this.duration = duration;
 		this.actionCount = actionCount;
