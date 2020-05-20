@@ -18,12 +18,12 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import javax.swing.JFormattedTextField;
 
 public class StartScreen {
 
 	private JFrame screen;
 	private JTextField farmerNameField;
+	private JTextField farmerAgeField;
 	private JTextField farmNameField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final int windowWidth = 550;
@@ -81,10 +81,6 @@ public class StartScreen {
 		screen.getContentPane().add(farmerNameLabel);
 		
 		farmerNameField = new JTextField();
-		farmerNameField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		farmerNameField.setBounds(407, 64, 130, 26);
 		screen.getContentPane().add(farmerNameField);
 		farmerNameField.setColumns(10);
@@ -93,9 +89,10 @@ public class StartScreen {
 		farmerAgeLabel.setBounds(22, 97, 141, 16);
 		screen.getContentPane().add(farmerAgeLabel);
 		
-		JFormattedTextField farmerAgeField = new JFormattedTextField();
+		farmerAgeField = new JTextField();
 		farmerAgeField.setBounds(407, 92, 130, 26);
 		screen.getContentPane().add(farmerAgeField);
+		farmerAgeField.setColumns(10);
 		
 		JLabel farmNameLabel = new JLabel("Name your farm: ");
 		farmNameLabel.setBounds(22, 227, 109, 16);
@@ -127,31 +124,50 @@ public class StartScreen {
 		
 		JRadioButton friendlyFarmButton = new JRadioButton("Friendly Farm");
 		friendlyFarmButton.setBounds(120, 157, 117, 23);
+		friendlyFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmType = "friendly";
+				farmTypeSet = true;
+			}
+		});
 		buttonGroup.add(friendlyFarmButton);
 		screen.getContentPane().add(friendlyFarmButton);
 		
 		JRadioButton fertileFarmButton = new JRadioButton("Fertile Farm");
 		fertileFarmButton.setBounds(120, 192, 106, 23);
+		fertileFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmType = "fertile";
+				farmTypeSet = true;
+			}
+		});
 		buttonGroup.add(fertileFarmButton);
 		screen.getContentPane().add(fertileFarmButton);
 		
 		JRadioButton fastFarmButton = new JRadioButton("Fast Farm");
 		fastFarmButton.setBounds(294, 157, 93, 23);
+		fastFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmType = "fast";
+				farmTypeSet = true;
+			}
+		});
 		buttonGroup.add(fastFarmButton);
 		screen.getContentPane().add(fastFarmButton);
 		
 		JRadioButton richFarmButton = new JRadioButton("Rich Farm");
 		richFarmButton.setBounds(294, 192, 94, 23);
+		richFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmType = "rich";
+				farmTypeSet = true;
+			}
+		});
 		buttonGroup.add(richFarmButton);
 		screen.getContentPane().add(richFarmButton);
 		
 		JButton startGameButton = new JButton("Start Game");
-		startGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(farmerNameField.getText().length() > 3 && farmerNameField.getText().length() < 15) farmerNameSet = true;
-			}
-		});
-		startGameButton.setEnabled(true);
+		startGameButton.setEnabled(false);
 		startGameButton.setBounds(211, 322, 117, 50);
 		screen.getContentPane().add(startGameButton);
 	}

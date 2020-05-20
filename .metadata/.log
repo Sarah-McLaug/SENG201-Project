@@ -6022,3 +6022,6 @@ java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1447)
+
+!ENTRY org.eclipse.wb.core 1 1 2020-05-20 17:43:09.610
+!MESSAGE swing.model.layout.GridLayout_Converter.convert(ContainerInfo, GridLayoutInfo) collision: in cell (3,6)

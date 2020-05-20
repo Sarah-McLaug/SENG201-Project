@@ -7,7 +7,6 @@ public class Game {
 	private int duration;
 	private int actionCount;
 	private Store store;
-	private Farm farm;
 	
 	//default constructor TODO: do we need this??
 	public Game() {
@@ -27,14 +26,6 @@ public class Game {
 	
 	public void setActionCount(int actionCount) {
 		this.actionCount = actionCount;
-	}
-	
-	public Farm getFarm() {
-		return farm;
-	}
-	
-	public void setFarm(Farm farm) {
-		this.farm = farm;
 	}
 	//END getters and setters
 	

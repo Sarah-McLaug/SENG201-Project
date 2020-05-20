@@ -19,7 +19,8 @@ public class Farm {
 		this.name = name;
 		this.type = type;
 		this.farmer = farmer;
-		setType(type);
+		this.type = type;
+		setType();
 	}
 	
 	public String getName() {
@@ -34,9 +35,8 @@ public class Farm {
 		return type;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
-		switch(this.type) {
+	public void setType() {
+		switch(type) {
 		//TODO check if these cases are okay
 		case "friendly":
 			balance = 10000.00;

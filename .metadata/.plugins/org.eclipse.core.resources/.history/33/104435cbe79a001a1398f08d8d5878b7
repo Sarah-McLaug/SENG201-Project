@@ -18,12 +18,12 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import javax.swing.JFormattedTextField;
 
 public class StartScreen {
 
 	private JFrame screen;
 	private JTextField farmerNameField;
+	private JTextField farmerAgeField;
 	private JTextField farmNameField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final int windowWidth = 550;
@@ -93,9 +93,10 @@ public class StartScreen {
 		farmerAgeLabel.setBounds(22, 97, 141, 16);
 		screen.getContentPane().add(farmerAgeLabel);
 		
-		JFormattedTextField farmerAgeField = new JFormattedTextField();
+		farmerAgeField = new JTextField();
 		farmerAgeField.setBounds(407, 92, 130, 26);
 		screen.getContentPane().add(farmerAgeField);
+		farmerAgeField.setColumns(10);
 		
 		JLabel farmNameLabel = new JLabel("Name your farm: ");
 		farmNameLabel.setBounds(22, 227, 109, 16);

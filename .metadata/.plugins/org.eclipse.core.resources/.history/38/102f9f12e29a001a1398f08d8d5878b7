@@ -32,10 +32,6 @@ public class Game {
 	public Farm getFarm() {
 		return farm;
 	}
-	
-	public void setFarm(Farm farm) {
-		this.farm = farm;
-	}
 	//END getters and setters
 	
 	//BEGIN methods
