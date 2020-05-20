@@ -1,4 +1,4 @@
-package Farm;
+package main;
 import java.util.ArrayList;
 
 import main.Animal;
@@ -15,10 +15,10 @@ public class Farm {
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
 	private ArrayList<Item> ownedItems = new ArrayList<Item>();
 	private double balance;
-	private double cropGrowthFactor;
+	private int cropGrowthBonus;
 	private double animalBonusFactor;
 	private double cropYieldFactor;
-	
+
 	public Farm(String name, String type, Farmer farmer) {
 		this.name = name;
 		this.type = type;
@@ -44,27 +44,27 @@ public class Farm {
 		//TODO check if these cases are okay
 		case "friendly":
 			balance = 10000.00;
-			cropGrowthFactor = 1.0;
+			cropGrowthBonus = 1;
 			animalBonusFactor = 1.25;
 			cropYieldFactor = 1.0;
 		case "fast":
 			balance = 10000.00;
-			cropGrowthFactor = 1.25;
+			cropGrowthBonus = 1;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		case "fertile":
 			balance = 10000.00;
-			cropGrowthFactor = 1.0;
+			cropGrowthBonus = 1;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.25;
 		case "rich":
 			balance = 15000.00;
-			cropGrowthFactor = 1.0;
+			cropGrowthBonus = 1;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		default:
 			balance = 12000.00;
-			cropGrowthFactor = 1.0;
+			cropGrowthBonus = 1;
 			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		}
@@ -99,6 +99,8 @@ public class Farm {
 		balance = capital;
 	}
 	
+	//?
+	/*
 	public void addBalance(double profit) {
 		balance += profit;
 	}
@@ -106,13 +108,18 @@ public class Farm {
 	public void removeBalance(double cost) {
 		balance -= cost;
 	}
+	*/
 	
-	public double getCropGrowthFactor() {
-		return cropGrowthFactor;
+	public void updateBalance(double value) {
+		balance += value;
 	}
 	
-	public void setCropGrowthFactor(double factor) {
-		cropGrowthFactor = factor;
+	public int getCropGrowthFactor() {
+		return cropGrowthBonus;
+	}
+	
+	public void setCropGrowthFactor(int bonus) {
+		cropGrowthBonus = bonus;
 	}
 	
 	public double getAnimalBonusFactor() {
@@ -129,6 +136,26 @@ public class Farm {
 	
 	public void setCropYieldFactor(double factor) {
 		cropYieldFactor = factor;
+	}
+	
+	public static ArrayList<String> getOwnedCropTypes(ArrayList<Crop> c) {
+		ArrayList<String> ownedCropTypes = new ArrayList<String>();
+		int cropQuantity = c.size();
+		
+		boolean newSpecies = true;
+		for (int j = 0; j < cropQuantity; j++) {
+			for (int i = 0; i < ownedCropTypes.size(); i++) {
+				if (c.get(j).getSpecies() == ownedCropTypes.get(i)) {
+					newSpecies = false;
+					break;
+				}
+			}
+			if (newSpecies) {
+				ownedCropTypes.add(c.get(j).getSpecies());
+			}
+			
+		}
+		return ownedCropTypes;
 	}
 	
 	public void addCrop(Crop crop) {
@@ -183,9 +210,11 @@ public class Farm {
 	
 	//TODO: TEST THIS, I think i have to go back an index but i'm not sure
 	public void harvestCrop() {
+		//Must update the fields array in the case that we harvest all of one type of crop
 		for(int i = 0; i < crops.size(); i++) {
 			if(crops.get(i).getDaysUntilMature() == 0) {
-				balance += crops.get(i).getSellingPrice()*cropGrowthFactor;
+				//'cropGrowthFactor' refactored to 'cropGrwothBonus' ---> it must be an integer. e.g. daysTillMature -= cropGrowthBonus 
+				//balance += crops.get(i).getSellingPrice()*cropGrowthFactor;
 				crops.remove(i);
 				i--;
 			}
@@ -194,8 +223,18 @@ public class Farm {
 	
 	//TODO: Review to make sure these are okay
 	public void tendCrop() {
-		cropGrowthFactor += 0.1;
+		//cropGrowthFactor += 0.1;
 		animalBonusFactor += 0.5;
+	}
+	
+	public void waterCrop(String targetSpecies) {
+		int cropQuantity = this.crops.size();
+		for (int j = 0; j < cropQuantity; j++) {
+			if (crops.get(j).getSpecies() == targetSpecies) {
+				//water the crop
+				crops.get(j).setDaysUntilMature(crops.get(j).getDaysUntilMature() - 1, 0);
+			}
+		}
 	}
 	
 	public void addItem(Item item) {

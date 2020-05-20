@@ -7,14 +7,14 @@ public class Crop {
 	private int daysUntilMature;
 	private double health;
 	
-	public Crop(String species, double purchasePrice, double sellingPrice, int daysUntilMature, double health) {
+	public Crop(String species, double purchasePrice, double sellingPrice, int daysUntilMature, double health, int growthBonus) {
 		this.species = species;
 		this.purchasePrice = purchasePrice;
 		this.sellingPrice = sellingPrice;
-		this.daysUntilMature = daysUntilMature;
+		this.daysUntilMature = daysUntilMature - growthBonus;
 		this.health = health;
 	}
-	
+
 	//BEGIN getters and setters
 	public String getSpecies() {
 		return this.species;

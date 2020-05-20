@@ -2,7 +2,6 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Farm.*;
 
 public class Game {
 	private int duration;
@@ -41,8 +40,12 @@ public class Game {
 	//END methods
 	
 	public static void main(String[] args) {
+		//BEGIN Initialisation
+		//-----------------------------------------------------------------------------------------------------------------
 		//Variables for handling data input and input defence 
+		
 		Scanner sc = new Scanner(System.in);
+		/* SKIP INITIALIZE QUESTIONS FOR EASY DEBUGGING, some defaults loaded below
 		String input = "";
 		int inputLength;
 		char character;
@@ -64,7 +67,7 @@ public class Game {
 		
 		String farmType = "";
 		
-		//BEGIN Initialisation
+		
 		System.out.println("Welcome to Basic Farming Simulator.");
 		System.out.println();
 		System.out.println("Complete the following steps to begin your farming journey: \n");
@@ -235,56 +238,170 @@ public class Game {
 				farmType = "rich";
 				break;
 		}
+		*/
+		
+		//Defaults for easy testing:
+		String farmName = "Incognito Farms";
+		String farmType = "friendly";
+		String farmerName = "Lollipop Chainsaw";
+		int age = 22;
+		int days = 5;
 		
 		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
 		Store store = new Store();
+	
+		//Define crop species
+		ArrayList <String> cropSpecies = new ArrayList <String>();
+		cropSpecies.add("banana");
+		cropSpecies.add("corn");
+		cropSpecies.add("kiwi");
+		cropSpecies.add("kumera");
+		cropSpecies.add("mango");
+		cropSpecies.add("spinach");
 		
-		//stock the store
+		//Define animal species
+		ArrayList <String> animalSpecies = new ArrayList <String>();
+		animalSpecies.add("llama");
+		animalSpecies.add("koala");
+		animalSpecies.add("panda");
+		
+		
 		for(int i = 0; i < 10; i++) {
-			store.addCrop(new Crop("corn", 100, 100, 3, 10));
-			store.addCrop(new Crop("spinach", 100, 100, 3, 10));
-			store.addCrop(new Crop("kiwi", 100, 100, 2, 10));
+			//TODO: add in appropriate values for crops/animals
+			store.addCrop(new Crop("banana", 100, 100, 2, 10, farm.getCropGrowthFactor()));
+			store.addCrop(new Crop("corn", 100, 100, 3, 10, farm.getCropGrowthFactor()));
+			store.addCrop(new Crop("kiwi", 100, 100, 2, 10, farm.getCropGrowthFactor()));
+			store.addCrop(new Crop("kumera", 100, 100, 2, 10, farm.getCropGrowthFactor()));
+			store.addCrop(new Crop("mango", 100, 100, 2, 10, farm.getCropGrowthFactor()));
+			store.addCrop(new Crop("spinach", 100, 100, 3, 10, farm.getCropGrowthFactor()));
+			
 			store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
+			
 			if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
 			else store.addItem(new FoodItem("Broccoli", 76, 2.0));
 		}
+		//-----------------------------------------------------------------------------------------------------------------
 		//END Initialisation
 		
 		System.out.println();
 		
 		//BEGIN game
+		//-----------------------------------------------------------------------------------------------------------------
 		System.out.println("The game has begun! You have " + days + " days to make as much money as possible!");
 		System.out.println("----------------------------------------------------------------------");
 		System.out.println();
-		
-		boolean playingGame = true;
-		int option = 0;
-		int actionsRemaining = 2;
-		
 		System.out.println("\t (Enter the index of an option to execute.)");
 		System.out.println();
 		
+		
+		boolean playingGame = true;
+		
+		int option = 0;
+		int actionsRemaining = 2;
+		
+		//CLI menus
+		boolean storeMenu = false;
+		boolean actionMenu = false;
+		boolean cropActionMenu = false;
+		boolean fieldsMenu = false;
+		boolean cropsForSaleMenu = false;
+		boolean animalsForSaleMenu = false;
+		boolean itemsForSaleMenu = false;
+		boolean inventoryMenu = false;
+		boolean animalActionMenu = false;
+		boolean farmActionMenu = false;
+		
+		String gameMenuOptions = "\n" + farm.getName()
+				+ "\n---------------------------------------------------"
+				+ "\n(1) View the status of the farm's crops and animals"
+				+ "\n(2) View the status of the farm"
+				+ "\n(3) Go to the store"
+				+ "\n(4) Take an action (You have %s actions remaining)"
+				+ "\n(5) Move to the next day"
+				+ "\n(10) Quit game "
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		String storeMenuOptions = "\n" + "Store"
+				+ "\n-----------------------------------"
+				+ "\n(1) View crops for sale"
+				+ "\n(2) View animals for sale"
+				+ "\n(3) View farming supplies for sale"
+				+ "\n(4) View owned farming supplies"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		
+		String actionMenuOptions = "\n" + "Actions"
+				+ "\n-----------------------------------"
+				+ "\n(1) Tend to crops"
+				+ "\n(2) Tend to animals"
+				+ "\n(3) Tend to farm"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		String cropActionMenuOptions = "\n" + "Crop Actions"
+				+ "\n-----------------------------------"
+				+ "\n(1) Water crops"
+				+ "\n(2) Use crop item"
+				+ "\n(3) Harvest crops"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		String cropSelectMenu = "\n" + "Crops"
+				+ "\n-----------------------------------"
+				+ "\n(1) banana"
+				+ "\n(2) corn"
+				+ "\n(3) kiwi"
+				+ "\n(4) kumera"
+				+ "\n(5) mango"
+				+ "\n(6) spinach"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nEnter the index of the crop you want to water, alternatively enter 0 to go back."
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		String animalActionMenuOptions = "\n" + "Animal Actions"
+				+ "\n-----------------------------------"
+				+ "\n(1) Feed animals"
+				+ "\n(2) Play with animals"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		String farmActionMenuOptions = "\n" + "Farm Actions"
+				+ "\n-----------------------------------"
+				+ "\n(1) ???"
+				+ "\n(2) ???"
+				+ "\n(0) Go back"
+				+ "\n"
+				+ "\nPlease enter an option: ";
+		
+		
 		String format3 = "%-20s%-20s%s%n";
 		String format2 = "%-20s%-20s%n";
-		String format4 = "%-20s%-20s%s%-20s%n";
-		int selection;
+		
+		
+	
+		//in game variables 
+		
+		ArrayList <Crop> ownedCrops = new ArrayList<Crop>();
+		String selectedSpecies = "";
+		int cropSize = 0;
+		boolean farmerOwnsCrop = false;
+		ArrayList <Item> inventory = new ArrayList<Item>();
 		
 		while(playingGame) {
-			System.out.println(farm.getName()
-					+ "\n---------------------------------------------------"
-					+ "\n(1) View the status of the farm's crops and animals"
-					+ "\n(2) View the status of the farm"
-					+ "\n(3) Go to the store"
-					+ "\n(4) Take an action (You have " + actionsRemaining + " actions remaining)"
-					+ "\n(5) Move to the next day"
-					+ "\n(10) Quit game");
-			System.out.println();
-			System.out.print("Please enter an option: ");
+			System.out.printf(gameMenuOptions, actionsRemaining);
 			option = sc.nextInt();
 			sc.nextLine();
 			switch(option) {
 			case 1:
-				//View farm investments status
+				//View the status of the farm's crops and animals
 				System.out.println();
 				System.out.println("\t \t Investment Status ");
 				System.out.println("--------------------------------------------------");
@@ -318,31 +435,28 @@ public class Game {
 				System.out.println();
 				break;
 			case 2:
-				System.out.println();
+				//View the status of the farm
 				System.out.println(farm.getName() + " has $" + farm.getBalance() + " in the bank.");
 				System.out.println();
 				break;
 			case 3:
-				System.out.println();
-				boolean inStore = true;
-				while(inStore) {
-					int storeAction = 0;
-					System.out.println("Store"
-							+ "\n-----------------------------------"
-							+ "\n(1) View crops for sale"
-							+ "\n(2) View animals for sale"
-							+ "\n(3) View farming supplies for sale"
-							+ "\n(4) View owned farming supplies"
-							+ "\n(5) Main menu");
-					System.out.println();
-					System.out.print("Please enter an option: ");
-					storeAction = sc.nextInt();
-					System.out.println();
+				//Go to the store
+				
+				storeMenu = true;
+				while(storeMenu) {
+					System.out.print(storeMenuOptions);
+					option = sc.nextInt();
 					sc.nextLine();
-					switch(storeAction) {
+					System.out.println();
+					switch(option) {
+					case 0:
+						//Go back
+						storeMenu = false;
+						break;
 					case 1:
-						int buying = -1;
-						while (buying != 0) {
+						//View crops for sale
+						cropsForSaleMenu = true;
+						while (cropsForSaleMenu) {
 							System.out.println("Crops for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-10s%-20s%-10s%n","i:", "Species: ", "Days to mature: ", "Price: ");
@@ -355,20 +469,23 @@ public class Game {
 							System.out.println();
 							System.out.println("Enter the index of the crop you would like to buy, alternatively enter 0 to go back. \n");
 							System.out.print("Please enter an option: ");
-							buying = sc.nextInt();
+							option = sc.nextInt();
 							sc.nextLine();
-							if(buying != 0 && buying <= store.getCrops().size()+1) {
-								Crop c = store.getCrops().get(buying-1);
+							if (option == 0) {
+								cropsForSaleMenu = false;
+							}
+							if(option != 0 && option <= store.getCrops().size()+1) {
+								Crop c = store.getCrops().get(option-1);
 								farm.addCrop(c);
-								farm.removeBalance(c.getPurchasePrice());
+								farm.updateBalance(-c.getPurchasePrice());
 								store.sellCrop(c);
 							}
 						}
-						System.out.println();
 						break;
 					case 2:
-						buying = -1;
-						while (buying != 0) {
+						//View animals for sale
+						animalsForSaleMenu = true;
+						while (animalsForSaleMenu) {
 							System.out.println("Animals for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-10s%-20s%-10s%n","i:", "Species: ", "Happiness: ", "Price: ");
@@ -381,19 +498,23 @@ public class Game {
 							System.out.println();
 							System.out.println("Enter the index of the animal you would like to buy, alternatively enter 0 to go back. \n");
 							System.out.print("Please enter an option: ");
-							buying = sc.nextInt();
+							option = sc.nextInt();
 							sc.nextLine();
-							if(buying != 0 && buying <= store.getAnimals().size()+1) {
-								Animal a = store.getAnimals().get(buying-1);
+							if (option == 0) {
+								animalsForSaleMenu = false;
+							}
+							if(option != 0 && option <= store.getAnimals().size()+1) {
+								Animal a = store.getAnimals().get(option-1);
 								farm.addAnimal(a);
-								farm.removeBalance(a.getPurchasePrice());
+								farm.updateBalance(-a.getPurchasePrice());
 								store.sellAnimal(a);
 							}
 						}
 						break;
 					case 3:
-						buying = -1;
-						while (buying != 0) {
+						//View farming supplies for sale
+						itemsForSaleMenu = true;
+						while (itemsForSaleMenu) {
 							System.out.println("Items for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
@@ -410,21 +531,25 @@ public class Game {
 								System.out.println("------------------------------------------");
 							}
 							System.out.println();
-							System.out.println("Enter the index of the animal you would like to buy, alternatively enter 0 to go back. \n");
+							System.out.println("Enter the index of the item you would like to buy, alternatively enter 0 to go back. \n");
 							System.out.print("Please enter an option: ");
-							buying = sc.nextInt();
+							option = sc.nextInt();
 							sc.nextLine();
-							if(buying != 0 && buying <= store.getItems().size()+1) {
-								Item item = store.getItems().get(buying-1);
+							if (option == 0) {
+								itemsForSaleMenu = false;
+							}
+							if(option != 0 && option <= store.getItems().size()+1) {
+								Item item = store.getItems().get(option-1);
 								farm.addItem(item);
-								farm.removeBalance(item.getPrice());
+								farm.updateBalance(-item.getPrice());
 								store.sellItem(item);
 							}
 						}
 						break;
 					case 4:
-						int looking = -1;
-						while(looking != 0) {
+						//View owned farming supplies
+						inventoryMenu = true;
+						while(inventoryMenu) {
 							System.out.println("Inventory");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
@@ -436,15 +561,15 @@ public class Game {
 							System.out.println("Enter 0 to go back.");
 							System.out.println();
 							System.out.print("Please enter an option: ");
-							System.out.println();
-							looking = sc.nextInt();
+							option = sc.nextInt();
+							if (option == 0) {
+								inventoryMenu = false;
+							}
 							sc.nextLine();
 						}
-						break;
-					case 5:
-						inStore = false;
 						System.out.println();
 						break;
+					
 						
 					default:
 						break;
@@ -452,124 +577,164 @@ public class Game {
 				}
 				break;
 			case 4:
-				//list actions
-				/*
-				 * Tend to crops ---> lessen their maturity time
-				 * 			- but only 1 crop per action i.e. just spinach crops, just broccoli crops
-				 * 			A. Water them (free)
-				 * 			B. Use item
-				 * 
-				 * Feed animals ---> increase health
-				 * 				(use food items)
-				 * 
-				 * Play with animals ---> increase happiness
-				 * 
-				 * Harvest crops ---> only fully matured crops are harvested in exchange for money
-				 * 
-				 * Tend to farm land ---> allows for more crops to be grown? keeps animals happier for longer.
-				 */
-				boolean viewingActionTypes = true;
-				while(viewingActionTypes) {
-					selection = 0;
-					System.out.println("Actions"
-							+ "\n-----------------------------------"
-							+ "\n(1) Tend to crops"
-							+ "\n(2) Tend to animals"
-							+ "\n(3) Tend to farm"
-							+ "\n(0) Go back");
-					System.out.println();
-					System.out.print("Please enter an option: ");
-					selection = sc.nextInt();
-					System.out.println();
+				
+				actionMenu = true;
+				while(actionMenu) {
+					System.out.print(actionMenuOptions);
+					option = sc.nextInt();
 					sc.nextLine();
-					switch(selection) {
+					switch(option) {
 					case 0:
-						viewingActionTypes = false;
+						actionMenu = false;
 						break;
 					case 1:
-						boolean viewingCropActions = true;
-						while(viewingCropActions) {
-							System.out.println("Crop Actions"
-									+ "\n-----------------------------------"
-									+ "\n(1) Water crops"
-									+ "\n(2) Use crop item"
-									+ "\n(0) Go back");
-							System.out.println();
-							System.out.print("Please enter an option: ");
-							selection = sc.nextInt();
-							System.out.println("selection: " + selection);
+						//Tend to crops
+						ownedCrops = farm.getCrops();
+						cropActionMenu = true;
+						while(cropActionMenu) {
+							System.out.print(cropActionMenuOptions);
+							option = sc.nextInt();
 							sc.nextLine();
 						
-						switch(selection) {
+						switch(option) {
 						case 0:
-							viewingCropActions = false;
+							//Go back
+							cropActionMenu = false;
 							break;
 						case 1:
-							
-							boolean selectingCrop = true;
-							while(selectingCrop) {
-								System.out.println("inside");
-								//Which crop do you want to water?
-								//find the crops that the farmer owns
-								ArrayList<String> ownedCropTypes = new ArrayList<String>();
-								ArrayList<Crop> crops = farm.getCrops();
-								System.out.println("These are your crops: " + crops.toString());
-								int cropQuantity = crops.size();
+							//Water crops
+							fieldsMenu = true;
+							while(fieldsMenu) {
 								
-								boolean newSpecies = true;
-								for (int j = 0; j < cropQuantity; j++) {
-									for (int i = 0; i < ownedCropTypes.size(); i++) {
-										if (crops.get(j).getSpecies() == ownedCropTypes.get(i)) {
-											newSpecies = false;
+								System.out.print(cropSelectMenu);
+								
+								if (actionsRemaining > 0) {
+								option = sc.nextInt();
+								System.out.println();
+								sc.nextLine();
+								
+								switch(option) {
+								case 1:
+									selectedSpecies = cropSpecies.get(0);
+									break;
+								case 2:
+									selectedSpecies = cropSpecies.get(1);
+									break;
+								case 3:
+									selectedSpecies = cropSpecies.get(2);
+									break;
+								case 4:
+									selectedSpecies = cropSpecies.get(3);
+									break;
+								case 5:
+									selectedSpecies = cropSpecies.get(4);
+									break;
+								case 6:
+									selectedSpecies = cropSpecies.get(5);
+									break;
+								}
+								
+								//if farm option is not out of range
+								if (option-1 <= cropSpecies.size()) {
+									
+								}
+									//check that the farmer owns this crop
+									for (int j = 0; j < farm.getCrops().size(); j++) {
+										if (ownedCrops.get(j).getSpecies() == selectedSpecies) {
+											farmerOwnsCrop = true;
 											break;
 										}
 									}
-									if (newSpecies) {
-										ownedCropTypes.add(crops.get(j).getSpecies());
-										
-									}
-									
-									
-								}
-								System.out.println(ownedCropTypes);
-								System.out.println("Owned Crops");
-								System.out.println("-----------------------------------");
-								for (int j = 0; j < ownedCropTypes.size(); j++) {
-									System.out.println("("+ (j+1) + ") " + ownedCropTypes.get(j));
-								}	
 								
+									if (farmerOwnsCrop) {
+										//water that crop
+										farm.waterCrop(selectedSpecies);
+										actionsRemaining--;
+										farmerOwnsCrop = false;
+									} else {
+										System.out.println();
+										System.out.printf(" You do not own any %s.%n", selectedSpecies);
+										System.out.println();
+										System.out.print("Please enter an option: ");
+										break;
+									}
+								
+								
+								} else {
+									System.out.println();
+									System.out.println(" You've used all your actions for today!");
+									System.out.println();
+									System.out.print("Please enter an option: ");
+									break;
+								}
+							}
+							break;
+						case 2:
+							//Use crop item
+							//View owned crop items
+							inventoryMenu = true;
+							while(inventoryMenu) {
+								System.out.println("Inventory");
+								System.out.println("------------------------------------------");
+								System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
+								System.out.println("------------------------------------------");
+								for(int i = 0; i < farm.getOwnedItems().size(); i++) {
+									//TODO: determine how to differentiate crop items from animal items
+									/*
+									if (inventory.get(i).getPurpose() == for crops)
+									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", farm.getOwnedItems().get(i).getName(), "?", "?");
+									*/
+								}
 								System.out.println();
-								System.out.println("Enter the index of the crop you want to water, alternatively enter 0 to go back.");
+								System.out.println("Enter 0 to go back.");
 								System.out.println();
 								System.out.print("Please enter an option: ");
-								selection = sc.nextInt();
-								System.out.println();
-								sc.nextLine();
-								for (int j = 0; j < cropQuantity; j++) {
-									if (crops.get(j).getSpecies() == ownedCropTypes.get(selection - 1)) {
-										//water the crop
-										//TODO: investigate get/set days till mature. They are dodgy.
-										crops.get(j).setDaysUntilMature(crops.get(j).getDaysUntilMature() - 1, 0);
-									}
+								option = sc.nextInt();
+								if (option == 0) {
+									inventoryMenu = false;
 								}
-								actionsRemaining--;
-								break;
-								
+								sc.nextLine();
 							}
+							System.out.println();
 							break;
 							
 						}
-						}
+					}
 						break;
 					case 2:
+						//Tend to animals
+						
+						animalActionMenu = true;
+						while(animalActionMenu) {
+							System.out.print(animalActionMenuOptions);
+							option = sc.nextInt();
+							sc.nextLine();
+							switch(option) {
+							case 0:
+								animalActionMenu = false;
+								break;
+							}
+						}
 						break;
 					case 3:
-						
+						farmActionMenu = true;
+						while(farmActionMenu) {
+							System.out.print(farmActionMenuOptions);
+							option = sc.nextInt();
+							sc.nextLine();
+							switch(option) {
+							case 0:
+								farmActionMenu = false;
+								break;
+							}
+						}
+						//Tend to farm
+						break;
 					case 4:
 						break;
 					}
-					
 				}
+				break;
 			case 5:
 				days--;
 				if(days > 0) {
@@ -577,7 +742,7 @@ public class Game {
 					//give animal money TODO: decide threshold for happy animal bonus
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
 						if(farm.getAnimals().get(i).getHappiness() >= 8) {
-							farm.addBalance(farm.getAnimals().get(i).getDailyBonus());
+							farm.updateBalance(farm.getAnimals().get(i).getDailyBonus());
 						}
 					}
 					//lower animal happiness & health TODO: decide health/happiness lowering factor
@@ -590,11 +755,12 @@ public class Game {
 						if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
 					}
 					//re-stock the store TODO: decide if this is how to re-stock the store
+					//TODO: ---> for all the species/animals (defined above in (cropSpecies/animalSpecies)) restock each species by a random number from x to y
 					store = new Store();
 					for(int i = 0; i < 10; i++) {
-						store.addCrop(new Crop("corn", 100, 100, 3, 10));
-						store.addCrop(new Crop("spinach", 100, 100, 3, 10));
-						store.addCrop(new Crop("kiwi", 100, 100, 2, 10));
+						store.addCrop(new Crop("corn", 100, 100, 3, 10, farm.getCropGrowthFactor()));
+						store.addCrop(new Crop("spinach", 100, 100, 3, 10, farm.getCropGrowthFactor()));
+						store.addCrop(new Crop("kiwi", 100, 100, 2, 10, farm.getCropGrowthFactor()));
 						store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
 						if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
 						else store.addItem(new FoodItem("Broccoli", 76, 2.0));
@@ -614,6 +780,7 @@ public class Game {
 			
 		}
 		sc.close();
+		//-----------------------------------------------------------------------------------------------------------------
 		//END game
 	}
 }
