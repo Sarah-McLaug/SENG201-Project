@@ -32,16 +32,18 @@ public class Animal {
 		return this.dailyBonus;
 	}
 	
-	public void setDailyBonus(double dailyBonus) {
-		this.dailyBonus = dailyBonus;
+	public void setDailyBonus(double animalHappinessFactor, double animalHealthFactor) {
+		//The daily bonus from an animal must be a function of it's happiness and it's health
+		//These decimals should be happiness/health factors from the farm
+		this.dailyBonus = dailyBonus + (0.05 * this.happiness) + (0.25 * this.health);
 	}
 	
 	public double getHappiness() {
 		return this.happiness;
 	}
 	
-	public void setHappiness(double happiness) {
-		this.happiness = happiness;
+	public void updateHappiness(double happinessValue) {
+		this.happiness += happinessValue;
 	}
 	
 	public double getHealth() {
@@ -53,11 +55,17 @@ public class Animal {
 	}
 	//END getters and setters
 	
+	/*
 	public void addHealth(double health) {
 		this.health += health;
 	}
 	
 	public void raiseHappiness(double happiness) {
 		this.happiness += happiness;
+	}
+	*/
+	
+	public void updateHealth(double health) {
+		this.health += health;
 	}
 }

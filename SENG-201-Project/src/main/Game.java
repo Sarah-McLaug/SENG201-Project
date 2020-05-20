@@ -245,7 +245,7 @@ public class Game {
 		String farmType = "friendly";
 		String farmerName = "Lollipop Chainsaw";
 		int age = 22;
-		int days = 5;
+		int day = 5;
 		
 		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
 		Store store = new Store();
@@ -287,7 +287,7 @@ public class Game {
 		
 		//BEGIN game
 		//-----------------------------------------------------------------------------------------------------------------
-		System.out.println("The game has begun! You have " + days + " days to make as much money as possible!");
+		System.out.println("The game has begun! You have " + day + " days to make as much money as possible!");
 		System.out.println("----------------------------------------------------------------------");
 		System.out.println();
 		System.out.println("\t (Enter the index of an option to execute.)");
@@ -383,17 +383,18 @@ public class Game {
 		
 		
 		String format3 = "%-20s%-20s%s%n";
-		String format2 = "%-20s%-20s%n";
 		
 		
 	
 		//in game variables 
 		
 		ArrayList <Crop> ownedCrops = new ArrayList<Crop>();
+		ArrayList <Animal> ownedAnimals = new ArrayList<Animal>();
 		String selectedSpecies = "";
-		int cropSize = 0;
 		boolean farmerOwnsCrop = false;
 		ArrayList <Item> inventory = new ArrayList<Item>();
+		Item item;
+		int count;
 		
 		while(playingGame) {
 			System.out.printf(gameMenuOptions, actionsRemaining);
@@ -402,6 +403,8 @@ public class Game {
 			switch(option) {
 			case 1:
 				//View the status of the farm's crops and animals
+				ownedCrops = farm.getCrops();
+				ownedAnimals = farm.getAnimals();
 				System.out.println();
 				System.out.println("\t \t Investment Status ");
 				System.out.println("--------------------------------------------------");
@@ -411,8 +414,8 @@ public class Game {
 					System.out.println("**************************************************");
 					System.out.printf(format3, "Species:", "Happiness/10:", "Health/10:");
 					System.out.println("--------------------------------------------------");
-					for(int i = 0; i < farm.getAnimals().size(); i++) {
-						System.out.printf(format3, farm.getAnimals().get(i).getSpecies(), farm.getAnimals().get(i).getHappiness(), farm.getAnimals().get(i).getHealth());
+					for(int i = 0; i < ownedAnimals.size(); i++) {
+						System.out.printf(format3, ownedAnimals.get(i).getSpecies(), ownedAnimals.get(i).getHappiness(), ownedAnimals.get(i).getHealth());
 						System.out.println("--------------------------------------------------");
 					}
 					System.out.println("**************************************************");
@@ -423,10 +426,10 @@ public class Game {
 				else {
 					System.out.println("Crops");
 					System.out.println("**************************************************");
-					System.out.printf(format2, "Species:", "Time until mature:");
-					for(int i = 0; i < farm.getCrops().size(); i++) {
+					System.out.printf(format3, "Species:", "Time until mature:", "Age:");
+					for(int i = 0; i < ownedCrops.size(); i++) {
 						System.out.println("--------------------------------------------------");
-						System.out.printf(format2, farm.getCrops().get(i).getSpecies() , farm.getCrops().get(i).getDaysUntilMature() );
+						System.out.printf(format3, ownedCrops.get(i).getSpecies() , ownedCrops.get(i).getDaysUntilMature(), ownedCrops.get(i).getAge(day));
 						System.out.println("--------------------------------------------------");
 					}
 					System.out.println("**************************************************");
@@ -476,7 +479,7 @@ public class Game {
 							}
 							if(option != 0 && option <= store.getCrops().size()+1) {
 								Crop c = store.getCrops().get(option-1);
-								farm.addCrop(c);
+								farm.addCrop(c, day);
 								farm.updateBalance(-c.getPurchasePrice());
 								store.sellCrop(c);
 							}
@@ -515,20 +518,25 @@ public class Game {
 						//View farming supplies for sale
 						itemsForSaleMenu = true;
 						while (itemsForSaleMenu) {
+							//Should keep food/crop items separate in the GUI
 							System.out.println("Items for sale");
-							System.out.println("------------------------------------------");
-							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
-							System.out.println("------------------------------------------");
+							System.out.println("-------------------------------------------------------------");
+							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "Description: ", "Health Points: ", "Growth Enhancement: ");
+							System.out.println("-------------------------------------------------------------");
 							for(int i = 0; i < store.getItems().size(); i++) {
-								Item item = store.getItems().get(i);
-								System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), "?", "?");
+								item = store.getItems().get(i);
+								if (item.isFoodItem()) {
+									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), item.getBenefit(), 0);
+								} else {
+									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), 0, item.getBenefit());
+								}
 								
 								/*System.out.println("("+ (i+1) + ")" + item.getName() //TODO: I think we could use an abstract implementation to
 													+ ", Maturity Time: " 			   //get the item's specific bonus. need to figure out
 													+ item.getHappiness() 			   //best way to do so
 													+ ", Cost: " 
 													+ item.getPurchasePrice()); */
-								System.out.println("------------------------------------------");
+								System.out.println("-------------------------------------------------------------");
 							}
 							System.out.println();
 							System.out.println("Enter the index of the item you would like to buy, alternatively enter 0 to go back. \n");
@@ -539,7 +547,7 @@ public class Game {
 								itemsForSaleMenu = false;
 							}
 							if(option != 0 && option <= store.getItems().size()+1) {
-								Item item = store.getItems().get(option-1);
+								item = store.getItems().get(option-1);
 								farm.addItem(item);
 								farm.updateBalance(-item.getPrice());
 								store.sellItem(item);
@@ -550,14 +558,33 @@ public class Game {
 						//View owned farming supplies
 						inventoryMenu = true;
 						while(inventoryMenu) {
+							inventory = farm.getInventory();
 							System.out.println("Inventory");
 							System.out.println("------------------------------------------");
-							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
+							System.out.println("Food items");
+							System.out.println("******************************************");
+							System.out.printf( "%-6s%-15s%-20s%n","i:", "Description: ", "Health Points: ");
 							System.out.println("------------------------------------------");
-							for(int i = 0; i < farm.getOwnedItems().size(); i++) {
-								System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", farm.getOwnedItems().get(i).getName(), "?", "?");
+							for(int i = 0; i < inventory.size(); i++) {
+								item = inventory.get(i);
+								if (item.isFoodItem()) {
+									System.out.printf("%-6s%-15s%-20s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+									System.out.println("------------------------------------------");
+								}
 							}
-							System.out.println();
+							System.out.println("****************************************** \n");
+							System.out.println("Crop items");
+							System.out.println("******************************************");
+							System.out.printf( "%-6s%-15s%-20s%n","i:", "Description: ", "Growth Enhancement: ");
+							System.out.println("------------------------------------------");
+							for(int i = 0; i < inventory.size(); i++) {
+								item = inventory.get(i);
+								if (!item.isFoodItem()) {
+									System.out.printf("%-6s%-15s%-20s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+									System.out.println("------------------------------------------");
+								}
+							}
+							System.out.println("****************************************** \n");
 							System.out.println("Enter 0 to go back.");
 							System.out.println();
 							System.out.print("Please enter an option: ");
@@ -568,10 +595,6 @@ public class Game {
 							sc.nextLine();
 						}
 						System.out.println();
-						break;
-					
-						
-					default:
 						break;
 					}
 				}
@@ -674,19 +697,21 @@ public class Game {
 							//View owned crop items
 							inventoryMenu = true;
 							while(inventoryMenu) {
-								System.out.println("Inventory");
+								inventory = farm.getInventory();
+								System.out.println("Crop Items");
 								System.out.println("------------------------------------------");
-								System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
+								System.out.printf( "%-6s%-15s%-20s%n","i:", "Description: ", "Growth Enhancement: ");
 								System.out.println("------------------------------------------");
-								for(int i = 0; i < farm.getOwnedItems().size(); i++) {
-									//TODO: determine how to differentiate crop items from animal items
-									/*
-									if (inventory.get(i).getPurpose() == for crops)
-									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", farm.getOwnedItems().get(i).getName(), "?", "?");
-									*/
+								count = 0;
+								for(int i = 0; i < farm.getInventory().size(); i++) {
+									
+									if (!inventory.get(i).isFoodItem()) {
+									System.out.printf("%-6s%-15s%-20s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+									count++;
+									}
 								}
 								System.out.println();
-								System.out.println("Enter 0 to go back.");
+								System.out.println("Enter the index of the item you want to use.");
 								System.out.println();
 								System.out.print("Please enter an option: ");
 								option = sc.nextInt();
@@ -694,6 +719,23 @@ public class Game {
 									inventoryMenu = false;
 								}
 								sc.nextLine();
+								
+								//In GUI option can be the id of the item the user wants to use
+								if (option < count && option >=0) {
+									if (actionsRemaining > 0) {
+										//find the item in the list
+										//remove it from the inventory
+										//apply it's benefits
+										actionsRemaining--;
+									} else {
+										System.out.println();
+										System.out.println(" You've used all your actions for today!");
+										System.out.println();
+										System.out.print("Please enter an option: ");
+										break;
+									}
+								}
+								
 							}
 							System.out.println();
 							break;
@@ -712,6 +754,59 @@ public class Game {
 							switch(option) {
 							case 0:
 								animalActionMenu = false;
+								break;
+							case 1:
+								//Feed animals
+								if (actionsRemaining > 0) {
+									inventoryMenu = true;
+									while(inventoryMenu) {
+										inventory = farm.getInventory();
+										System.out.println("Food items");
+										System.out.println("------------------------------------------");
+										System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "Description: ", "Health Points: ");
+										System.out.println("------------------------------------------");
+										for(int i = 0; i < farm.getInventory().size(); i++) {
+											
+											if (inventory.get(i).isFoodItem()) {
+											System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+											}
+										}
+										System.out.println();
+										System.out.println("Enter 0 to go back.");
+										System.out.println();
+										System.out.print("Please enter an option: ");
+										option = sc.nextInt();
+										if (option == 0) {
+											inventoryMenu = false;
+										}
+										sc.nextLine();
+										/*
+										if (option < in range of foodItems) {
+											
+										}
+										*/
+									}
+									System.out.println();
+									
+									
+									
+								} else {
+									System.out.println();
+									System.out.println(" You've used all your actions for today!");
+									System.out.println();
+									System.out.print("Please enter an option: ");
+								}
+								break;
+							case 2:
+								if (actionsRemaining > 0) {
+									farm.playAnimals();
+									actionsRemaining--;
+								} else {
+									System.out.println();
+									System.out.println(" You've used all your actions for today!");
+									System.out.println();
+									System.out.print("Please enter an option: ");
+								}
 								break;
 							}
 						}
@@ -736,8 +831,8 @@ public class Game {
 				}
 				break;
 			case 5:
-				days--;
-				if(days > 0) {
+				day--;
+				if(day > 0) {
 					actionsRemaining = 2;
 					//give animal money TODO: decide threshold for happy animal bonus
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
@@ -746,9 +841,13 @@ public class Game {
 						}
 					}
 					//lower animal happiness & health TODO: decide health/happiness lowering factor
+					/*
+					 * Note: 
+					 * When a farmer plays with an animal it's happiness is increased by it's the farms animalHappinessFactor 
+					 */
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
-						farm.getAnimals().get(i).addHealth(-1);
-						farm.getAnimals().get(i).raiseHappiness(-1);
+						farm.getAnimals().get(i).updateHealth(-1);
+						farm.getAnimals().get(i).updateHappiness(-1);
 					}
 					//reduce days until mature for crops
 					for(int i = 0; i < farm.getCrops().size(); i++) {
@@ -766,7 +865,7 @@ public class Game {
 						else store.addItem(new FoodItem("Broccoli", 76, 2.0));
 					}
 					//TODO: if we have time, this is where random events could occur
-					System.out.println("You now have " + days + " days remaining.");
+					System.out.println("You now have " + day + " days remaining.");
 				} else {
 					playingGame = false;
 				}

@@ -6,6 +6,7 @@ public class Crop {
 	private double sellingPrice;
 	private int daysUntilMature;
 	private double health;
+	private int dayPlanted;
 	
 	public Crop(String species, double purchasePrice, double sellingPrice, int daysUntilMature, double health, int growthBonus) {
 		this.species = species;
@@ -43,6 +44,15 @@ public class Crop {
 	public void setDaysUntilMature(int days, int growthBonus) {
 		this.daysUntilMature = days - growthBonus;
 		if(daysUntilMature < 0) daysUntilMature = 0;
+	}
+	
+	public void setDayPlanted(int day) {
+		this.dayPlanted = day;
+	}
+	
+	public int getAge(int currentDay) {
+		//Days count down to 0
+		return this.dayPlanted - currentDay;
 	}
 	
 	public double getHealth() {
