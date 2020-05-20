@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JSlider;
 import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 
 public class StartScreen {
 
@@ -18,7 +17,6 @@ public class StartScreen {
 	private JTextField farmerNameField;
 	private JTextField farmerAgeField;
 	private JTextField farmNameField;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -102,22 +100,18 @@ public class StartScreen {
 		frame.getContentPane().add(farmTypeLabel);
 		
 		JRadioButton friendlyFarmButton = new JRadioButton("Friendly Farm");
-		buttonGroup.add(friendlyFarmButton);
 		friendlyFarmButton.setBounds(16, 119, 141, 23);
 		frame.getContentPane().add(friendlyFarmButton);
 		
 		JRadioButton fertileFarmButton = new JRadioButton("Fertile Farm");
-		buttonGroup.add(fertileFarmButton);
 		fertileFarmButton.setBounds(16, 154, 141, 23);
 		frame.getContentPane().add(fertileFarmButton);
 		
 		JRadioButton fastFarmButton = new JRadioButton("Fast Farm");
-		buttonGroup.add(fastFarmButton);
 		fastFarmButton.setBounds(289, 119, 141, 23);
 		frame.getContentPane().add(fastFarmButton);
 		
 		JRadioButton richFarmButton = new JRadioButton("Rich Farm");
-		buttonGroup.add(richFarmButton);
 		richFarmButton.setBounds(289, 154, 141, 23);
 		frame.getContentPane().add(richFarmButton);
 	}
