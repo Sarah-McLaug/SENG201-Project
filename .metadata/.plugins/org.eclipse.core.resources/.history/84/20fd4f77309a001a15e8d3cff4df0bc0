@@ -571,39 +571,35 @@ public class Game {
 					
 				}
 			case 5:
-				days--;
-				if(days > 0) {
-					actionsRemaining = 2;
-					//give animal money TODO: decide threshold for happy animal bonus
-					for(int i = 0; i < farm.getAnimals().size(); i++) {
-						if(farm.getAnimals().get(i).getHappiness() >= 8) {
-							farm.addBalance(farm.getAnimals().get(i).getDailyBonus());
-						}
+				//days--;
+				actionsRemaining = 2;
+				//give animal money TODO: decide threshold for happy animal bonus
+				for(int i = 0; i < farm.getAnimals().size(); i++) {
+					if(farm.getAnimals().get(i).getHappiness() >= 8) {
+						farm.addBalance(farm.getAnimals().get(i).getDailyBonus());
 					}
-					//lower animal happiness & health TODO: decide health/happiness lowering factor
-					for(int i = 0; i < farm.getAnimals().size(); i++) {
-						farm.getAnimals().get(i).addHealth(-1);
-						farm.getAnimals().get(i).raiseHappiness(-1);
-					}
-					//reduce days until mature for crops
-					for(int i = 0; i < farm.getCrops().size(); i++) {
-						if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
-					}
-					//re-stock the store TODO: decide if this is how to re-stock the store
-					store = new Store();
-					for(int i = 0; i < 10; i++) {
-						store.addCrop(new Crop("corn", 100, 100, 3, 10));
-						store.addCrop(new Crop("spinach", 100, 100, 3, 10));
-						store.addCrop(new Crop("kiwi", 100, 100, 2, 10));
-						store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
-						if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
-						else store.addItem(new FoodItem("Broccoli", 76, 2.0));
-					}
-					//TODO: if we have time, this is where random events could occur
-					System.out.println("You now have " + days + " days remaining.");
-				} else {
-					playingGame = false;
 				}
+				//lower animal happiness & health TODO: decide health/happiness lowering factor
+				for(int i = 0; i < farm.getAnimals().size(); i++) {
+					farm.getAnimals().get(i).addHealth(-1);
+					farm.getAnimals().get(i).raiseHappiness(-1);
+				}
+				//reduce days until mature for crops
+				for(int i = 0; i < farm.getCrops().size(); i++) {
+					if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
+				}
+				//re-stock the store TODO: decide if this is how to re-stock the store
+				store = new Store();
+				for(int i = 0; i < 10; i++) {
+					store.addCrop(new Crop("corn", 100, 100, 3, 10));
+					store.addCrop(new Crop("spinach", 100, 100, 3, 10));
+					store.addCrop(new Crop("kiwi", 100, 100, 2, 10));
+					store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
+					if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
+					else store.addItem(new FoodItem("Broccoli", 76, 2.0));
+				}
+				//TODO: if we have time, this is where random events could occur
+				System.out.println("You now have " + days + " days remaining.");
 				break;
 			case 10:
 				playingGame = false;
