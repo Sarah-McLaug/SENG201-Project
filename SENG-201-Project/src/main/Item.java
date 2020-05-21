@@ -1,17 +1,23 @@
 package main;
-// Note: should consider giving each item a unique id so they can be directly accessed and deleted from the jtable rather than repopulating every time an item is used
-public abstract class Item {
+
+public class Item {
 	private String name;
 	private double price;
+<<<<<<< HEAD
 	private String purpose;
 	private static int count = 0;
 	private int id;
+=======
+>>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 	
-	public Item(String name, double price, String purpose) {
+	public Item(String name, double price) {
 		this.name = name;
 		this.price = price;
+<<<<<<< HEAD
 		this.purpose = purpose;
 		id = count++;
+=======
+>>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 	}
 	
 	//BEGIN getters and setters
@@ -26,6 +32,7 @@ public abstract class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+<<<<<<< HEAD
 	
 	public boolean isFoodItem() {
 		return this.purpose == "food";
@@ -39,5 +46,7 @@ public abstract class Item {
 	public abstract int getBenefit();
 	
 	//get HP/growth enhancement interface?
+=======
+>>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 	//END getters and setters
 }

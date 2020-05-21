@@ -2,9 +2,9 @@ package main;
 
 public class FoodItem extends Item{
 	private double healthPoints;
-
+	
 	public FoodItem(String name, double price, double healthPoints) {
-		super(name, price, "food");
+		super(name, price);
 		this.healthPoints = healthPoints;
 	}
 	
@@ -18,8 +18,4 @@ public class FoodItem extends Item{
 	}
 	//END getters and setters
 
-	public int getBenefit() {
-		//TODO: implementing interface in parent
-		return (int) this.healthPoints;
-	};
 }

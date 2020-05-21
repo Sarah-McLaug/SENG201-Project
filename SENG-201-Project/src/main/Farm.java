@@ -1,6 +1,11 @@
 package main;
 import java.util.ArrayList;
 
+import main.Animal;
+import main.Crop;
+import main.CropItem;
+import main.FoodItem;
+import main.Item;
 
 public class Farm {
 	private String name;
@@ -8,11 +13,10 @@ public class Farm {
 	private Farmer farmer;
 	private ArrayList<Crop> crops = new ArrayList<Crop>();
 	private ArrayList<Animal> animals = new ArrayList<Animal>();
-	private ArrayList<Item> inventory = new ArrayList<Item>();
+	private ArrayList<Item> ownedItems = new ArrayList<Item>();
 	private double balance;
 	private int cropGrowthBonus;
-	private double animalHappinessFactor;
-	private double animalHealthFactor;
+	private double animalBonusFactor;
 	private double cropYieldFactor;
 
 	public Farm(String name, String type, Farmer farmer) {
@@ -41,33 +45,27 @@ public class Farm {
 		case "friendly":
 			balance = 10000.00;
 			cropGrowthBonus = 1;
-			//animals are 25% more happy
-			animalHappinessFactor = 1.25;
-			animalHealthFactor = 1;
+			animalBonusFactor = 1.25;
 			cropYieldFactor = 1.0;
 		case "fast":
 			balance = 10000.00;
 			cropGrowthBonus = 1;
-			animalHappinessFactor = 1.0;
-			animalHealthFactor = 1;
+			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		case "fertile":
 			balance = 10000.00;
 			cropGrowthBonus = 1;
-			animalHappinessFactor = 1.0;
-			animalHealthFactor = 1;
+			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.25;
 		case "rich":
 			balance = 15000.00;
 			cropGrowthBonus = 1;
-			animalHappinessFactor = 1.0;
-			animalHealthFactor = 1;
+			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		default:
 			balance = 12000.00;
 			cropGrowthBonus = 1;
-			animalHappinessFactor = 1.0;
-			animalHealthFactor = 1;
+			animalBonusFactor = 1.0;
 			cropYieldFactor = 1.0;
 		}
 	}
@@ -89,8 +87,8 @@ public class Farm {
 		return animals;
 	}
 	
-	public ArrayList<Item> getInventory() {
-		return inventory;
+	public ArrayList<Item> getOwnedItems() {
+		return ownedItems;
 	}
 	
 	public double getBalance() {
@@ -125,13 +123,12 @@ public class Farm {
 		cropGrowthBonus = bonus;
 	}
 	
-	public double getAnimalHappinessFactor() {
-		return animalHappinessFactor;
+	public double getAnimalBonusFactor() {
+		return animalBonusFactor;
 	}
-
 	
-	public double getAnimalHealthFactor() {
-		return animalHealthFactor;
+	public void setAnimalBonusFactor(double factor) {
+		animalBonusFactor = factor;
 	}
 	
 	public double getCropYieldFactor() {
@@ -142,31 +139,50 @@ public class Farm {
 		cropYieldFactor = factor;
 	}
 	
-	public void addCrop(Crop c, int currentDay) {
-		c.setDayPlanted(currentDay);
-		crops.add(c);
+	public static ArrayList<String> getOwnedCropTypes(ArrayList<Crop> c) {
+		ArrayList<String> ownedCropTypes = new ArrayList<String>();
+		int cropQuantity = c.size();
+		
+		boolean newSpecies = true;
+		for (int j = 0; j < cropQuantity; j++) {
+			for (int i = 0; i < ownedCropTypes.size(); i++) {
+				if (c.get(j).getSpecies() == ownedCropTypes.get(i)) {
+					newSpecies = false;
+					break;
+				}
+			}
+			if (newSpecies) {
+				ownedCropTypes.add(c.get(j).getSpecies());
+			}
+			
+		}
+		return ownedCropTypes;
+	}
+	
+	public void addCrop(Crop crop) {
+		crops.add(crop);
 	}
 	
 	public void addAnimal(Animal animal) {
 		animals.add(animal);
 	}
 	
-	public void feedAnimals(FoodItem food) {
+	public void feedAnimal(FoodItem food) {
 		for(int i = 0; i < animals.size(); i++) {
-			animals.get(i).updateHealth(food.getHealthPoints());
+			animals.get(i).addHealth(food.getHealthPoints());
 		}
 		
-		for(int i = 0; i < inventory.size(); i++) {
-			if(inventory.get(i).getName().equals(food.getName())) {
-				inventory.remove(i);
+		for(int i = 0; i < ownedItems.size(); i++) {
+			if(ownedItems.get(i).getName().equals(food.getName())) {
+				ownedItems.remove(i);
 				break;
 			}
 		}
 	}
 	
-	public void playAnimals() {
+	public void playAnimal() {
 		for(int i = 0; i < animals.size(); i++) {
-			animals.get(i).updateHappiness(this.animalHappinessFactor); //TODO decide how much to raise animal happiness by ---> by the happiness factor?
+			animals.get(i).raiseHappiness(2.0); //TODO decide how much to raise animal happiness by
 		}
 	}
 	
@@ -185,9 +201,9 @@ public class Farm {
 			}
 		}
 		
-		for(int i = 0; i < inventory.size(); i++) {
-			if(inventory.get(i).getName().equals(cropItem.getName())) {
-				inventory.remove(i);
+		for(int i = 0; i < ownedItems.size(); i++) {
+			if(ownedItems.get(i).getName().equals(cropItem.getName())) {
+				ownedItems.remove(i);
 				break;
 			}
 		}
@@ -209,7 +225,7 @@ public class Farm {
 	//TODO: Review to make sure these are okay
 	public void tendCrop() {
 		//cropGrowthFactor += 0.1;
-		animalHappinessFactor += 0.5;
+		animalBonusFactor += 0.5;
 	}
 	
 	public void waterCrop(String targetSpecies) {
@@ -223,6 +239,6 @@ public class Farm {
 	}
 	
 	public void addItem(Item item) {
-		inventory.add(item);
+		ownedItems.add(item);
 	}
 }
