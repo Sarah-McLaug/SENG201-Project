@@ -9,12 +9,6 @@ public class Game {
 	private Store store;
 	private Farm farm;
 	
-	//default constructor TODO: do we need this??
-	public Game() {
-		duration = 10;
-		actionCount = 2;
-	}
-	
 	public Game(int duration, int actionCount) {
 		this.duration = duration;
 		this.actionCount = actionCount;
@@ -27,14 +21,6 @@ public class Game {
 	
 	public void setActionCount(int actionCount) {
 		this.actionCount = actionCount;
-	}
-	
-	public int getDuration() {
-		return this.duration;
-	}
-	
-	public void setDuration(int duration) {
-		this.duration = duration;
 	}
 	
 	public Farm getFarm() {

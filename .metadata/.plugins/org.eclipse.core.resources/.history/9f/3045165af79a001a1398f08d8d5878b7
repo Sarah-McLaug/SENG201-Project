@@ -26,6 +26,9 @@ public class StartScreen {
 	private JFrame screen;
 	private JTextField farmerNameField;
 	private JTextField farmNameField;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final int windowWidth = 550;
+	private final int windowHeight = 400;
 	private Game game;
 	private String farmType;
 	private int age;
@@ -33,16 +36,11 @@ public class StartScreen {
 	private boolean farmerAgeSet = false;
 	private boolean farmTypeSet = false;
 	private boolean farmNameSet = false;
-	private String inputError = "";
-	
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final int windowWidth = 550;
-	private final int windowHeight = 400;
-	private final String farmerNameError = "Farmer name not valid.\n";
-	private final String farmerAgeError = "Farmer age not valid.\n";
-	private final String farmTypeError = "Please select a farm type.\n";
-	private final String farmNameError = "Farm name not valid.\n";
-	
+	private final String farmerNameError = "Farmer name not valid.";
+	private final String farmerAgeError = "Farmer age not valid.";
+	private final String farmTypeError = "Please select a farm type.";
+	private final String farmNameError = "Farm name not valid.";
+
 	/**
 	 * Launch the application.
 	 */
@@ -182,23 +180,15 @@ public class StartScreen {
 			public void actionPerformed(ActionEvent e) {
 				if(farmerNameField.getText().length() >= 3 && farmerNameField.getText().length() <= 15) farmerNameSet = true;
 				else farmerNameSet = false;
-				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input, validate it
+				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input
 				if(age > 0) farmerAgeSet = true;
 				else farmerAgeSet = false;
 				if(farmNameField.getText().length() > 0) farmNameSet = true;
 				else farmNameSet = false;
-				if(!farmerNameSet || !farmerAgeSet || !farmTypeSet || !farmNameSet) {
-					if(!farmerNameSet) inputError += farmerNameError;
-					if(!farmerAgeSet) inputError += farmerAgeError;
-					if(!farmTypeSet) inputError += farmTypeError;
-					if(!farmNameSet) inputError += farmNameError;
-					JOptionPane.showMessageDialog(screen, inputError, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-					inputError = "";
+				if(!farmerNameSet || !farmNameSet || !farmTypeSet || !farmerAgeSet) {
+					JOptionPane.showMessageDialog(screen, "Testing popup", "Invalid Input", JOptionPane.ERROR_MESSAGE);
 				} else {
 					game.setFarm(new Farm(farmNameField.getText(), farmType, new Farmer(farmerNameField.getText(), age)));
-					game.setDuration((int)gameLengthSlider.getValue());
-					game.setActionCount(2);
-					//TODO: close start screen and open main screen
 				}
 			}
 		});

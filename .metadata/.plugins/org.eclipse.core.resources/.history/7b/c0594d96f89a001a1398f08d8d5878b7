@@ -182,7 +182,7 @@ public class StartScreen {
 			public void actionPerformed(ActionEvent e) {
 				if(farmerNameField.getText().length() >= 3 && farmerNameField.getText().length() <= 15) farmerNameSet = true;
 				else farmerNameSet = false;
-				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input, validate it
+				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input
 				if(age > 0) farmerAgeSet = true;
 				else farmerAgeSet = false;
 				if(farmNameField.getText().length() > 0) farmNameSet = true;
@@ -196,9 +196,6 @@ public class StartScreen {
 					inputError = "";
 				} else {
 					game.setFarm(new Farm(farmNameField.getText(), farmType, new Farmer(farmerNameField.getText(), age)));
-					game.setDuration((int)gameLengthSlider.getValue());
-					game.setActionCount(2);
-					//TODO: close start screen and open main screen
 				}
 			}
 		});

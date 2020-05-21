@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JSlider;
@@ -26,23 +25,16 @@ public class StartScreen {
 	private JFrame screen;
 	private JTextField farmerNameField;
 	private JTextField farmNameField;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final int windowWidth = 550;
+	private final int windowHeight = 400;
 	private Game game;
 	private String farmType;
-	private int age;
 	private boolean farmerNameSet = false;
 	private boolean farmerAgeSet = false;
 	private boolean farmTypeSet = false;
 	private boolean farmNameSet = false;
-	private String inputError = "";
-	
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final int windowWidth = 550;
-	private final int windowHeight = 400;
-	private final String farmerNameError = "Farmer name not valid.\n";
-	private final String farmerAgeError = "Farmer age not valid.\n";
-	private final String farmTypeError = "Please select a farm type.\n";
-	private final String farmNameError = "Farm name not valid.\n";
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -134,45 +126,21 @@ public class StartScreen {
 		screen.getContentPane().add(farmTypeLabel);
 		
 		JRadioButton friendlyFarmButton = new JRadioButton("Friendly Farm");
-		friendlyFarmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				farmTypeSet = true;
-				farmType = "friendly";
-			}
-		});
 		friendlyFarmButton.setBounds(120, 157, 117, 23);
 		buttonGroup.add(friendlyFarmButton);
 		screen.getContentPane().add(friendlyFarmButton);
 		
 		JRadioButton fertileFarmButton = new JRadioButton("Fertile Farm");
-		fertileFarmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				farmTypeSet = true;
-				farmType = "fertile";
-			}
-		});
 		fertileFarmButton.setBounds(120, 192, 106, 23);
 		buttonGroup.add(fertileFarmButton);
 		screen.getContentPane().add(fertileFarmButton);
 		
 		JRadioButton fastFarmButton = new JRadioButton("Fast Farm");
-		fastFarmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				farmTypeSet = true;
-				farmType = "fast";
-			}
-		});
 		fastFarmButton.setBounds(294, 157, 93, 23);
 		buttonGroup.add(fastFarmButton);
 		screen.getContentPane().add(fastFarmButton);
 		
 		JRadioButton richFarmButton = new JRadioButton("Rich Farm");
-		richFarmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				farmTypeSet = true;
-				farmType = "rich";
-			}
-		});
 		richFarmButton.setBounds(294, 192, 94, 23);
 		buttonGroup.add(richFarmButton);
 		screen.getContentPane().add(richFarmButton);
@@ -180,26 +148,9 @@ public class StartScreen {
 		JButton startGameButton = new JButton("Start Game");
 		startGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(farmerNameField.getText().length() >= 3 && farmerNameField.getText().length() <= 15) farmerNameSet = true;
-				else farmerNameSet = false;
-				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input, validate it
-				if(age > 0) farmerAgeSet = true;
-				else farmerAgeSet = false;
-				if(farmNameField.getText().length() > 0) farmNameSet = true;
-				else farmNameSet = false;
-				if(!farmerNameSet || !farmerAgeSet || !farmTypeSet || !farmNameSet) {
-					if(!farmerNameSet) inputError += farmerNameError;
-					if(!farmerAgeSet) inputError += farmerAgeError;
-					if(!farmTypeSet) inputError += farmTypeError;
-					if(!farmNameSet) inputError += farmNameError;
-					JOptionPane.showMessageDialog(screen, inputError, "Invalid Input", JOptionPane.ERROR_MESSAGE);
-					inputError = "";
-				} else {
-					game.setFarm(new Farm(farmNameField.getText(), farmType, new Farmer(farmerNameField.getText(), age)));
-					game.setDuration((int)gameLengthSlider.getValue());
-					game.setActionCount(2);
-					//TODO: close start screen and open main screen
-				}
+				if(farmerNameField.getText().length() > 3 && farmerNameField.getText().length() < 15) farmerNameSet = true;
+				//TODO: Parse if user entered an above 0 integer
+				
 			}
 		});
 		startGameButton.setEnabled(true);
