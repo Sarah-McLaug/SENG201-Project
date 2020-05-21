@@ -21,7 +21,6 @@ public class MainScreen {
 	private final int windowWidth = 800;
 	private JTable tendCropsTable;
 	private JTable animalFoodTable;
-	private JTable harvestableCropsTable;
 
 	/**
 	 * Launch the application.
@@ -115,21 +114,8 @@ public class MainScreen {
 		playAnimalsTab.add(playAnimalsBtn);
 		JPanel harvestCropsTab = new JPanel();
 		actionTabs.addTab("Harvest Crops", null, harvestCropsTab, null);
-		
-		JScrollPane harvestableCropsTableContainer = new JScrollPane();
-		harvestCropsTab.add(harvestableCropsTableContainer);
-		
-		harvestableCropsTable = new JTable();
-		harvestableCropsTable.setRowSelectionAllowed(false);
-		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
-		
-		JButton harvestCropsBtn = new JButton("Harvest Crops");
-		harvestCropsTab.add(harvestCropsBtn);
 		JPanel tendFarmTab = new JPanel();
 		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
-		
-		JButton tendFarmBtn = new JButton("Tend the Farm");
-		tendFarmTab.add(tendFarmBtn);
 		
 		JPanel storePanel = new JPanel();
 		mainTabs.addTab("County Store", null, storePanel, null);

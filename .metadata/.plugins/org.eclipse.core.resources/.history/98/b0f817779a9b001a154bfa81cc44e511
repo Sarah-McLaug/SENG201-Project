@@ -128,9 +128,6 @@ public class MainScreen {
 		JPanel tendFarmTab = new JPanel();
 		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
 		
-		JButton tendFarmBtn = new JButton("Tend the Farm");
-		tendFarmTab.add(tendFarmBtn);
-		
 		JPanel storePanel = new JPanel();
 		mainTabs.addTab("County Store", null, storePanel, null);
 		storePanel.setLayout(null);

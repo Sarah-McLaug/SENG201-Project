@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class MainScreen {
 
@@ -19,9 +17,6 @@ public class MainScreen {
 	
 	private final int windowHeight = 500;
 	private final int windowWidth = 800;
-	private JTable tendCropsTable;
-	private JTable animalFoodTable;
-	private JTable harvestableCropsTable;
 
 	/**
 	 * Launch the application.
@@ -82,7 +77,7 @@ public class MainScreen {
 		
 		JLabel actionsRemainingLabel = new JLabel("You have 2 actions left");
 		actionsRemainingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		actionsRemainingLabel.setBounds(0, 10, 780, 16);
+		actionsRemainingLabel.setBounds(0, 6, 780, 16);
 		actionsPanel.add(actionsRemainingLabel);
 		
 		JTabbedPane actionTabs = new JTabbedPane(JTabbedPane.BOTTOM);
@@ -90,46 +85,14 @@ public class MainScreen {
 		actionsPanel.add(actionTabs);
 		JPanel tendCropsTab = new JPanel();
 		actionTabs.addTab("Tend Crops", null, tendCropsTab, null);
-		
-		JScrollPane tendCropsTableContainer = new JScrollPane();
-		tendCropsTab.add(tendCropsTableContainer);
-		
-		tendCropsTable = new JTable();
-		tendCropsTableContainer.setViewportView(tendCropsTable);
 		JPanel feedAnimalsTab = new JPanel();
 		actionTabs.addTab("Feed Animals", null, feedAnimalsTab, null);
-		
-		JScrollPane animalFoodTableContainer = new JScrollPane();
-		feedAnimalsTab.add(animalFoodTableContainer);
-		
-		animalFoodTable = new JTable();
-		animalFoodTableContainer.setViewportView(animalFoodTable);
-		
-		JButton feedAnimalsBtn = new JButton("Feed Animals");
-		feedAnimalsBtn.setEnabled(false);
-		feedAnimalsTab.add(feedAnimalsBtn);
 		JPanel playAnimalsTab = new JPanel();
 		actionTabs.addTab("Play with Animals", null, playAnimalsTab, null);
-		
-		JButton playAnimalsBtn = new JButton("Play with Animals");
-		playAnimalsTab.add(playAnimalsBtn);
 		JPanel harvestCropsTab = new JPanel();
 		actionTabs.addTab("Harvest Crops", null, harvestCropsTab, null);
-		
-		JScrollPane harvestableCropsTableContainer = new JScrollPane();
-		harvestCropsTab.add(harvestableCropsTableContainer);
-		
-		harvestableCropsTable = new JTable();
-		harvestableCropsTable.setRowSelectionAllowed(false);
-		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
-		
-		JButton harvestCropsBtn = new JButton("Harvest Crops");
-		harvestCropsTab.add(harvestCropsBtn);
 		JPanel tendFarmTab = new JPanel();
 		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
-		
-		JButton tendFarmBtn = new JButton("Tend the Farm");
-		tendFarmTab.add(tendFarmBtn);
 		
 		JPanel storePanel = new JPanel();
 		mainTabs.addTab("County Store", null, storePanel, null);
