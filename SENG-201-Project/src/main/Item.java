@@ -1,13 +1,13 @@
 package main;
-
+// Note: should consider giving each item a unique id so they can be directly accessed and deleted from the jtable rather than repopulating every time an item is used
 public abstract class Item {
 	private String name;
 	private double price;
 	private String purpose;
-	private static int count = 0;
+	private static int count = 1;
 	private int id;
-
-	public Item(String name, double price) {
+	
+	public Item(String name, double price, String purpose) {
 		this.name = name;
 		this.price = price;
 		this.purpose = purpose;

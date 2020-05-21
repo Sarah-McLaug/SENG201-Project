@@ -4,7 +4,7 @@ public class CropItem extends Item {
 	private int growthEnhancement;
 	
 	public CropItem(String name, double price, int growthEnhancement) {
-		super(name, price);
+		super(name, price, "crop");
 		this.growthEnhancement = growthEnhancement;
 	}
 	
@@ -18,6 +18,7 @@ public class CropItem extends Item {
 	}
 	
 	public int getBenefit() {
-		return growthEnhancement;
-	}
+		//TODO: implementing interface in parent
+		return this.growthEnhancement;
+	};
 }

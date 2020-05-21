@@ -18,9 +18,9 @@ public class Store {
 		crops.add(crop);
 	}
 	
-	public void sellCrop(Crop crop) {
+	public void sellCrop(int id) {
 		for(int i = 0; i < crops.size(); i++) {
-			if(crops.get(i).getSpecies().equals(crop.getSpecies())) {
+			if(crops.get(i).getId() == id) {
 				crops.remove(i);
 				break;
 			}
@@ -83,6 +83,7 @@ public class Store {
 	}
 	*/
 	
+	
 	public int getItemStockCount(String description) {
 		int count = 0;
 		for (int j  = 0; j < items.size(); j++) {
@@ -97,9 +98,9 @@ public class Store {
 		animals.add(animal);
 	}
 	
-	public void sellAnimal(Animal animal) {
+	public void sellAnimal(int id) {
 		for(int i = 0; i < animals.size(); i++) {
-			if(animals.get(i).getSpecies().equals(animal.getSpecies())) {
+			if(animals.get(i).getId() == id) {
 				animals.remove(i);
 				break;
 			}
@@ -122,4 +123,69 @@ public class Store {
 			}
 		}
 	}
+	
+	
+	//Perhaps these methods can be implemented as an interface they do the same thing just with different types
+	//---------------------------------------------------------------------------------------------------------
+	public boolean itemExists(int id) {
+		boolean exists = false;
+		for (int j = 0; j < items.size(); j++) {
+			if (items.get(j).getId() == id) {
+				exists = true;
+			}
+		}
+		return exists;
+	}
+	
+	public boolean cropExists(int id) {
+		boolean exists = false;
+		for (int j = 0; j < crops.size(); j++) {
+			if (crops.get(j).getId() == id) {
+				exists = true;
+			}
+		}
+		return exists;
+	}
+	
+	public boolean animalExists(int id) {
+		boolean exists = false;
+		for (int j = 0; j < animals.size(); j++) {
+			if (animals.get(j).getId() == id) {
+				exists = true;
+			}
+		}
+		return exists;
+	}
+	//---------------------------------------------------------------------------------------------------------
+	
+	//and with these...?
+	//---------------------------------------------------------------------------------------------------------
+	public Item fetchItem(int id) {
+		
+		for (int j = 0; j < items.size(); j++) {
+			if (items.get(j).getId() == id) {
+				return items.get(j);
+			}
+		}
+		return null;
+	}
+	
+	public Animal fetchAnimal(int id) {
+		for (int j = 0; j < animals.size(); j++) {
+			if (animals.get(j).getId() == id) {
+				return animals.get(j);
+			}
+		}
+		return null;
+	}
+	
+	public Crop fetchCrop(int id) {
+		for (int j = 0; j < crops.size(); j++) {
+			if (crops.get(j).getId() == id) {
+				return crops.get(j);
+			}
+		}
+		return null;
+	}
+	//---------------------------------------------------------------------------------------------------------
 }
