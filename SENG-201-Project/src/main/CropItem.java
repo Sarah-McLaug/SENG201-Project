@@ -16,4 +16,8 @@ public class CropItem extends Item {
 	public void setGrowthEnhancement(int growthEnhancement) {
 		this.growthEnhancement = growthEnhancement;
 	}
+	
+	public int getBenefit() {
+		return growthEnhancement;
+	}
 }

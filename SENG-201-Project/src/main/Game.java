@@ -448,7 +448,6 @@ public class Game {
 		int cropSize = 0;
 		boolean farmerOwnsCrop = false;
 		ArrayList <Item> inventory = new ArrayList<Item>();
-<<<<<<< HEAD
 		ArrayList <Item> storeItems = new ArrayList<Item>();
 		ArrayList <Crop> storeCrops = new ArrayList<Crop>();
 		ArrayList <Animal> storeAnimals = new ArrayList<Animal>();
@@ -459,8 +458,6 @@ public class Game {
 		Crop c;
 		Animal a;
 		int quantity = 0;
-=======
->>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 		
 		while(playingGame) {
 			System.out.printf(gameMenuOptions, actionsRemaining);
@@ -543,13 +540,10 @@ public class Game {
 								cropsForSaleMenu = false;
 							}
 							if(option != 0 && option <= store.getCrops().size()+1) {
-<<<<<<< HEAD
 								c = storeCrops.get(option-1);
-								farm.addCrop(c, day);
-=======
-								Crop c = store.getCrops().get(option-1);
 								farm.addCrop(c);
->>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
+								//c = store.getCrops().get(option-1); TODO: there was a merge conflict here, i don't know which was correct
+								//farm.addCrop(c);
 								farm.updateBalance(-c.getPurchasePrice());
 								store.sellCrop(c);
 							}
@@ -590,7 +584,6 @@ public class Game {
 						//View farming supplies for sale
 						itemsForSaleMenu = true;
 						while (itemsForSaleMenu) {
-<<<<<<< HEAD
 							//Should keep food/crop items separate in the GUI
 							storeItems = store.getFoodItems();
 							System.out.println("Items for sale");
@@ -623,13 +616,12 @@ public class Game {
 							for (int j = 0; j < cropItems.size(); j++) {
 								item = cropItems.get(j);
 								System.out.printf( "%-6s%-20s%-15s%-20s%n", "(" + item.getId() + ")", item.getName(), item.getBenefit(), store.getItemStockCount(item.getName()));
-=======
 							System.out.println("Items for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
 							System.out.println("------------------------------------------");
 							for(int i = 0; i < store.getItems().size(); i++) {
-								Item item = store.getItems().get(i);
+								item = store.getItems().get(i);
 								System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), "?", "?");
 								
 								/*System.out.println("("+ (i+1) + ")" + item.getName() //TODO: I think we could use an abstract implementation to
@@ -638,7 +630,6 @@ public class Game {
 													+ ", Cost: " 
 													+ item.getPurchasePrice()); */
 								System.out.println("------------------------------------------");
->>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 							}
 							System.out.println("*******************************************************");
 							System.out.println();
@@ -652,24 +643,21 @@ public class Game {
 								itemsForSaleMenu = false;
 							}
 							if(option != 0 && option <= store.getItems().size()+1) {
-<<<<<<< HEAD
 								item = store.getItems().get(option - 1);
-=======
-								Item item = store.getItems().get(option-1);
->>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
+								//Item item = store.getItems().get(option-1);
 								farm.addItem(item);
 								farm.updateBalance(-item.getPrice());
 								store.sellItem(option);
 							}
 						}
 						break;
+					}
 					case 4:
 						//View owned farming supplies
 						inventoryMenu = true;
 						while(inventoryMenu) {
 							System.out.println("Inventory");
 							System.out.println("------------------------------------------");
-<<<<<<< HEAD
 							System.out.println("Food items");
 							System.out.println("******************************************");
 							System.out.printf( "%-6s%-15s%-20s%n","id:", "Description: ", "Health Points: ");
@@ -692,12 +680,11 @@ public class Game {
 									System.out.printf("%-6s%-15s%-20s%n", "("+ inventory.get(i).getId() + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
 									System.out.println("------------------------------------------");
 								}
-=======
+							}
 							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "?: ", "?: ", "?: ");
 							System.out.println("------------------------------------------");
 							for(int i = 0; i < farm.getOwnedItems().size(); i++) {
 								System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", farm.getOwnedItems().get(i).getName(), "?", "?");
->>>>>>> parent of 36ebf6b... abstract class for items, commenting, item processing structure
 							}
 							System.out.println();
 							System.out.println("Enter 0 to go back.");
@@ -931,3 +918,4 @@ public class Game {
 		//END game
 	}
 }
+		

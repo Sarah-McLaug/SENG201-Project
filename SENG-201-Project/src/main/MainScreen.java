@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.JTable;
 
 public class MainScreen {
 
@@ -17,6 +19,7 @@ public class MainScreen {
 	
 	private final int windowHeight = 500;
 	private final int windowWidth = 800;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -52,7 +55,7 @@ public class MainScreen {
 		screen.getContentPane().setLayout(null);
 		
 		JTabbedPane mainTabs = new JTabbedPane(JTabbedPane.TOP);
-		mainTabs.setBounds(6, 42, 788, 436);
+		mainTabs.setBounds(0, 42, 800, 436);
 		screen.getContentPane().add(mainTabs);
 		
 		JPanel mainPanel = new JPanel();
@@ -60,31 +63,40 @@ public class MainScreen {
 		mainPanel.setLayout(null);
 		
 		JButton viewCropAnimalStatusButton = new JButton("View Crops & Animals");
-		viewCropAnimalStatusButton.setBounds(180, 31, 200, 60);
+		viewCropAnimalStatusButton.setBounds(180, 30, 200, 60);
 		mainPanel.add(viewCropAnimalStatusButton);
 		
 		JButton viewFarmStatusButton = new JButton("View Farm Funds");
-		viewFarmStatusButton.setBounds(420, 31, 200, 60);
+		viewFarmStatusButton.setBounds(400, 30, 200, 60);
 		mainPanel.add(viewFarmStatusButton);
 		
 		JButton nextDayButton = new JButton("Move to Next Day");
-		nextDayButton.setBounds(611, 339, 150, 45);
+		nextDayButton.setBounds(615, 330, 150, 45);
 		mainPanel.add(nextDayButton);
 		
 		JPanel actionsPanel = new JPanel();
 		mainTabs.addTab("Actions", null, actionsPanel, null);
 		actionsPanel.setLayout(null);
 		
-		JLabel actionsLeftLabel = new JLabel("You have 2 actions left");
-		actionsLeftLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		actionsLeftLabel.setBounds(0, 6, 768, 16);
-		actionsPanel.add(actionsLeftLabel);
+		JLabel actionsRemainingLabel = new JLabel("You have 2 actions left");
+		actionsRemainingLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		actionsRemainingLabel.setBounds(0, 12, 778, 16);
+		actionsPanel.add(actionsRemainingLabel);
 		
 		JTabbedPane actionTabs = new JTabbedPane(JTabbedPane.BOTTOM);
-		actionTabs.setBounds(0, 30, 768, 350);
+		actionTabs.setBounds(0, 30, 778
+				, 350);
 		actionsPanel.add(actionTabs);
 		JPanel tendCropsTab = new JPanel();
 		actionTabs.addTab("Tend Crops", null, tendCropsTab, null);
+		
+		String[] colHeadings = {"COLUMN1","COLUMN2"};
+		int numRows = 5 ;
+		DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) ;
+		model.setColumnIdentifiers(colHeadings);
+		table = new JTable(model);
+		tendCropsTab.add(table);
+		
 		JPanel feedAnimalsTab = new JPanel();
 		actionTabs.addTab("Feed Animals", null, feedAnimalsTab, null);
 		JPanel playAnimalsTab = new JPanel();
@@ -103,7 +115,7 @@ public class MainScreen {
 		storePanel.add(storeTabs);
 		
 		JPanel viewItemsTab = new JPanel();
-		storeTabs.addTab("View Your Items", null, viewItemsTab, null);
+		storeTabs.addTab("View Your Supplies", null, viewItemsTab, null);
 		
 		JPanel buyAnimalsTab = new JPanel();
 		storeTabs.addTab("Buy Animals", null, buyAnimalsTab, null);

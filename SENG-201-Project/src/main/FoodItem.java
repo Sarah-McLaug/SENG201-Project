@@ -17,5 +17,9 @@ public class FoodItem extends Item{
 		this.healthPoints = healthPoints;
 	}
 	//END getters and setters
+	
+	public int getBenefit() {
+		return (int) healthPoints;
+	}
 
 }
