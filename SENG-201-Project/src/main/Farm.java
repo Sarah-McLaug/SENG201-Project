@@ -116,11 +116,12 @@ public class Farm {
 		balance += value;
 	}
 	
-	public int getCropGrowthFactor() {
+	public int getCropGrowthBonus() {
 		return cropGrowthBonus;
 	}
 	
-	public void setCropGrowthFactor(int bonus) {
+	
+	public void setCropGrowthBonus(int bonus) {
 		cropGrowthBonus = bonus;
 	}
 	

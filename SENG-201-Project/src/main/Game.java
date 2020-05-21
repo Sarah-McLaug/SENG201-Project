@@ -62,6 +62,40 @@ public class Game {
 	*/
 	//END methods
 	
+	public static void populateStore(Store store, ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
+			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
+		
+		//TODO: make these random in a set range
+		int amountCrops = 5;
+		int amountAnimals = 1;
+		int amountFoodItems = 3;
+		int amountCropItems = 3;
+		
+		for (int j = 0; j < cropSpecies.size(); j++) {
+			for (int i = 0; i < amountCrops; i++) {
+				store.addCrop(cropSpecies.get(j));
+			}
+		}
+		
+		for (int j = 0; j < animalSpecies.size(); j++) {
+			for (int i = 0; i < amountAnimals; i++) {
+				store.addAnimal(animalSpecies.get(j));
+			}
+		}
+		
+		for (int j = 0; j < foodItems.size(); j++) {
+			for (int i = 0; i < amountFoodItems; i++) {
+				store.addItem(foodItems.get(j));
+			}
+		}
+		
+		for (int j = 0; j < cropItems.size(); j++) {
+			for (int i = 0; i < amountCropItems; i++) {
+				store.addItem(cropItems.get(j));
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		//BEGIN Initialisation
 		//-----------------------------------------------------------------------------------------------------------------
@@ -271,38 +305,35 @@ public class Game {
 		int day = 5;
 		
 		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
+		int cropGrowthBonus = farm.getCropGrowthBonus();
 		Store store = new Store();
 	
-		//Define crop species
-		ArrayList <String> cropSpecies = new ArrayList <String>();
-		cropSpecies.add("banana");
-		cropSpecies.add("corn");
-		cropSpecies.add("kiwi");
-		cropSpecies.add("kumera");
-		cropSpecies.add("mango");
-		cropSpecies.add("spinach");
+		//Define game elements
+		final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
+		cropSpecies.add(new Crop("banana", 1, 1, 1, 1, cropGrowthBonus));
+		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, cropGrowthBonus));
+		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, cropGrowthBonus));
+		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, cropGrowthBonus));
+		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, cropGrowthBonus));
+		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, cropGrowthBonus));
 		
-		//Define animal species
-		ArrayList <String> animalSpecies = new ArrayList <String>();
-		animalSpecies.add("llama");
-		animalSpecies.add("koala");
-		animalSpecies.add("panda");
+		final ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
+		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
 		
+		final ArrayList <Item> foodItems = new ArrayList <Item>();
+		foodItems.add(new FoodItem("sugar cane", 1, 1));
+		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
+		foodItems.add(new FoodItem("brocooli", 1, 1));
 		
-		for(int i = 0; i < 10; i++) {
-			//TODO: add in appropriate values for crops/animals
-			store.addCrop(new Crop("banana", 100, 100, 2, 10, farm.getCropGrowthFactor()));
-			store.addCrop(new Crop("corn", 100, 100, 3, 10, farm.getCropGrowthFactor()));
-			store.addCrop(new Crop("kiwi", 100, 100, 2, 10, farm.getCropGrowthFactor()));
-			store.addCrop(new Crop("kumera", 100, 100, 2, 10, farm.getCropGrowthFactor()));
-			store.addCrop(new Crop("mango", 100, 100, 2, 10, farm.getCropGrowthFactor()));
-			store.addCrop(new Crop("spinach", 100, 100, 3, 10, farm.getCropGrowthFactor()));
-			
-			store.addAnimal(new Animal("Llama", 150, 35, 7.3, 9.0));
-			
-			if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
-			else store.addItem(new FoodItem("Broccoli", 76, 2.0));
-		}
+		final ArrayList <Item> cropItems = new ArrayList <Item>();
+		cropItems.add(new CropItem("fertilizer", 1, 1));
+		cropItems.add(new CropItem("pestiside", 1, 1));
+		
+		//fill the store with the elements
+		populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems);
+		
 		//-----------------------------------------------------------------------------------------------------------------
 		//END Initialisation
 		
@@ -416,8 +447,16 @@ public class Game {
 		String selectedSpecies = "";
 		boolean farmerOwnsCrop = false;
 		ArrayList <Item> inventory = new ArrayList<Item>();
+		ArrayList <Item> storeItems = new ArrayList<Item>();
+		ArrayList <Crop> storeCrops = new ArrayList<Crop>();
+		ArrayList <Animal> storeAnimals = new ArrayList<Animal>();
+		
+		
 		Item item;
 		int count;
+		Crop c;
+		Animal a;
+		int quantity = 0;
 		
 		while(playingGame) {
 			System.out.printf(gameMenuOptions, actionsRemaining);
@@ -483,12 +522,13 @@ public class Game {
 						//View crops for sale
 						cropsForSaleMenu = true;
 						while (cropsForSaleMenu) {
+							storeCrops = store.getCrops();
 							System.out.println("Crops for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-10s%-20s%-10s%n","i:", "Species: ", "Days to mature: ", "Price: ");
 							System.out.println("------------------------------------------");
-							for(int i = 0; i < store.getCrops().size(); i++) {
-								Crop c = store.getCrops().get(i);
+							for(int i = 0; i < storeCrops.size(); i++) {
+								c = storeCrops.get(i);
 								System.out.printf("%-6s%-10s%-20s%-10s%n", "("+ (i+1) + ")", c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice());
 								System.out.println("------------------------------------------");
 							}
@@ -501,7 +541,7 @@ public class Game {
 								cropsForSaleMenu = false;
 							}
 							if(option != 0 && option <= store.getCrops().size()+1) {
-								Crop c = store.getCrops().get(option-1);
+								c = storeCrops.get(option-1);
 								farm.addCrop(c, day);
 								farm.updateBalance(-c.getPurchasePrice());
 								store.sellCrop(c);
@@ -512,12 +552,14 @@ public class Game {
 						//View animals for sale
 						animalsForSaleMenu = true;
 						while (animalsForSaleMenu) {
+							storeAnimals = store.getAnimals();
 							System.out.println("Animals for sale");
 							System.out.println("------------------------------------------");
 							System.out.printf( "%-6s%-10s%-20s%-10s%n","i:", "Species: ", "Happiness: ", "Price: ");
 							System.out.println("------------------------------------------");
-							for(int i = 0; i < store.getAnimals().size(); i++) {
-								Animal a = store.getAnimals().get(i);
+							
+							for(int i = 0; i < storeAnimals.size(); i++) {
+								a = storeAnimals.get(i);
 								System.out.printf("%-6s%-10s%-20s%-10s%n", "("+ (i+1) + ")", a.getSpecies(), a.getHappiness() , a.getPurchasePrice());
 								System.out.println("------------------------------------------");
 							}
@@ -529,8 +571,8 @@ public class Game {
 							if (option == 0) {
 								animalsForSaleMenu = false;
 							}
-							if(option != 0 && option <= store.getAnimals().size()+1) {
-								Animal a = store.getAnimals().get(option-1);
+							if(option != 0 && option <= storeAnimals.size()+1) {
+								a = storeAnimals.get(option-1);
 								farm.addAnimal(a);
 								farm.updateBalance(-a.getPurchasePrice());
 								store.sellAnimal(a);
@@ -542,27 +584,43 @@ public class Game {
 						itemsForSaleMenu = true;
 						while (itemsForSaleMenu) {
 							//Should keep food/crop items separate in the GUI
+							storeItems = store.getFoodItems();
 							System.out.println("Items for sale");
 							System.out.println("-------------------------------------------------------------");
-							System.out.printf( "%-6s%-15s%-20s%-10s%n","i:", "Description: ", "Health Points: ", "Growth Enhancement: ");
-							System.out.println("-------------------------------------------------------------");
-							for(int i = 0; i < store.getItems().size(); i++) {
-								item = store.getItems().get(i);
-								if (item.isFoodItem()) {
-									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), item.getBenefit(), 0);
-								} else {
-									System.out.printf("%-6s%-15s%-20s%-10s%n", "("+ (i+1) + ")", item.getName(), 0, item.getBenefit());
-								}
-								
-								/*System.out.println("("+ (i+1) + ")" + item.getName() //TODO: I think we could use an abstract implementation to
-													+ ", Maturity Time: " 			   //get the item's specific bonus. need to figure out
-													+ item.getHappiness() 			   //best way to do so
-													+ ", Cost: " 
-													+ item.getPurchasePrice()); */
-								System.out.println("-------------------------------------------------------------");
-							}
 							System.out.println();
-							System.out.println("Enter the index of the item you would like to buy, alternatively enter 0 to go back. \n");
+							//BEGIN food items
+							//----------------------------------------------------------------------------------------------------------------------------
+							System.out.println("Food items");
+							System.out.println("**************************************************");
+							System.out.printf( "%-6s%-20s%-15s%-20s%n", "i:", "Description: ", "Health Points: ", "Quantity:");
+							System.out.println("--------------------------------------------------");
+							
+							for (int j = 0; j < foodItems.size(); j++) {
+								item = foodItems.get(j);
+								System.out.printf( "%-6s%-20s%-15s%-20s%n","(" + item.getId() + ")", item.getName(), item.getBenefit(), store.getItemStockCount(item.getName()));
+							}
+							System.out.println("**************************************************");
+							System.out.println();
+							//----------------------------------------------------------------------------------------------------------------------------
+							//END food items
+							
+							//BEGIN crop items
+							//----------------------------------------------------------------------------------------------------------------------------
+							storeItems = store.getCropItems();
+							System.out.println("Crop items");
+							System.out.println("*******************************************************");
+							System.out.printf( "%-6s%-20s%-15s%-20s%n","i:", "Description: ", "Growth Enhancement: ", "Quantity:");
+							System.out.println("-------------------------------------------------------");
+							
+							for (int j = 0; j < cropItems.size(); j++) {
+								item = cropItems.get(j);
+								System.out.printf( "%-6s%-20s%-15s%-20s%n", "(" + item.getId() + ")", item.getName(), item.getBenefit(), store.getItemStockCount(item.getName()));
+							}
+							System.out.println("*******************************************************");
+							System.out.println();
+							//----------------------------------------------------------------------------------------------------------------------------
+							//END crop items
+							System.out.println("Enter the id of the item you would like to buy, alternatively enter 0 to go back. \n");
 							System.out.print("Please enter an option: ");
 							option = sc.nextInt();
 							sc.nextLine();
@@ -570,10 +628,10 @@ public class Game {
 								itemsForSaleMenu = false;
 							}
 							if(option != 0 && option <= store.getItems().size()+1) {
-								item = store.getItems().get(option-1);
+								item = store.getItems().get(option - 1);
 								farm.addItem(item);
 								farm.updateBalance(-item.getPrice());
-								store.sellItem(item);
+								store.sellItem(option);
 							}
 						}
 						break;
@@ -586,24 +644,24 @@ public class Game {
 							System.out.println("------------------------------------------");
 							System.out.println("Food items");
 							System.out.println("******************************************");
-							System.out.printf( "%-6s%-15s%-20s%n","i:", "Description: ", "Health Points: ");
+							System.out.printf( "%-6s%-15s%-20s%n","id:", "Description: ", "Health Points: ");
 							System.out.println("------------------------------------------");
 							for(int i = 0; i < inventory.size(); i++) {
 								item = inventory.get(i);
 								if (item.isFoodItem()) {
-									System.out.printf("%-6s%-15s%-20s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+									System.out.printf("%-6s%-15s%-20s%n", "("+ inventory.get(i).getId() + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
 									System.out.println("------------------------------------------");
 								}
 							}
 							System.out.println("****************************************** \n");
 							System.out.println("Crop items");
 							System.out.println("******************************************");
-							System.out.printf( "%-6s%-15s%-20s%n","i:", "Description: ", "Growth Enhancement: ");
+							System.out.printf( "%-6s%-15s%-20s%n","id:", "Description: ", "Growth Enhancement: ");
 							System.out.println("------------------------------------------");
 							for(int i = 0; i < inventory.size(); i++) {
 								item = inventory.get(i);
 								if (!item.isFoodItem()) {
-									System.out.printf("%-6s%-15s%-20s%n", "("+ (i+1) + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
+									System.out.printf("%-6s%-15s%-20s%n", "("+ inventory.get(i).getId() + ")", inventory.get(i).getName(), inventory.get(i).getBenefit());
 									System.out.println("------------------------------------------");
 								}
 							}
@@ -661,22 +719,22 @@ public class Game {
 								
 								switch(option) {
 								case 1:
-									selectedSpecies = cropSpecies.get(0);
+									selectedSpecies = cropSpecies.get(0).getSpecies();
 									break;
 								case 2:
-									selectedSpecies = cropSpecies.get(1);
+									selectedSpecies = cropSpecies.get(1).getSpecies();
 									break;
 								case 3:
-									selectedSpecies = cropSpecies.get(2);
+									selectedSpecies = cropSpecies.get(2).getSpecies();
 									break;
 								case 4:
-									selectedSpecies = cropSpecies.get(3);
+									selectedSpecies = cropSpecies.get(3).getSpecies();
 									break;
 								case 5:
-									selectedSpecies = cropSpecies.get(4);
+									selectedSpecies = cropSpecies.get(4).getSpecies();
 									break;
 								case 6:
-									selectedSpecies = cropSpecies.get(5);
+									selectedSpecies = cropSpecies.get(5).getSpecies();
 									break;
 								}
 								
@@ -876,6 +934,10 @@ public class Game {
 					for(int i = 0; i < farm.getCrops().size(); i++) {
 						if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
 					}
+					
+					//random quantities defined in this funciton
+					populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems);
+					/*
 					//re-stock the store TODO: decide if this is how to re-stock the store
 					//TODO: ---> for all the species/animals (defined above in (cropSpecies/animalSpecies)) restock each species by a random number from x to y
 					store = new Store();
@@ -887,6 +949,7 @@ public class Game {
 						if(i%2 == 0) store.addItem(new CropItem("Fertilizer", 85, 1));
 						else store.addItem(new FoodItem("Broccoli", 76, 2.0));
 					}
+					*/
 					//TODO: if we have time, this is where random events could occur
 					System.out.println("You now have " + day + " days remaining.");
 				} else {

@@ -4,11 +4,14 @@ public abstract class Item {
 	private String name;
 	private double price;
 	private String purpose;
+	private static int count = 0;
+	private int id;
 	
 	public Item(String name, double price, String purpose) {
 		this.name = name;
 		this.price = price;
 		this.purpose = purpose;
+		id = count++;
 	}
 	
 	//BEGIN getters and setters
@@ -28,6 +31,9 @@ public abstract class Item {
 		return this.purpose == "food";
 	}
 	
+	public int getId() {
+		return this.id;
+	}
 	//we need to implement an interface here for the case that it is growthEnhancment (int) or HP (double)
 	//for now HP is casted to int in the child class...
 	public abstract int getBenefit();
