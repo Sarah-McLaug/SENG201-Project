@@ -91,28 +91,9 @@ public class MainScreen {
 		actionTabs.addTab("Play with Animals", null, playAnimalsTab, null);
 		JPanel harvestCropsTab = new JPanel();
 		actionTabs.addTab("Harvest Crops", null, harvestCropsTab, null);
-		JPanel tendFarmTab = new JPanel();
-		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
 		
 		JPanel storePanel = new JPanel();
 		mainTabs.addTab("County Store", null, storePanel, null);
-		storePanel.setLayout(null);
-		
-		JTabbedPane storeTabs = new JTabbedPane(JTabbedPane.BOTTOM);
-		storeTabs.setBounds(0, 0, 768, 380);
-		storePanel.add(storeTabs);
-		
-		JPanel viewItemsTab = new JPanel();
-		storeTabs.addTab("View Your Items", null, viewItemsTab, null);
-		
-		JPanel buyAnimalsTab = new JPanel();
-		storeTabs.addTab("Buy Animals", null, buyAnimalsTab, null);
-		
-		JPanel buyCropsTab = new JPanel();
-		storeTabs.addTab("Buy Crops", null, buyCropsTab, null);
-		
-		JPanel buyItemsTab = new JPanel();
-		storeTabs.addTab("Buy Farming Supplies", null, buyItemsTab, null);
 		
 		JLabel farmNameLabel = new JLabel("Farm Name");
 		farmNameLabel.setBounds(0, 6, 800, 30);
