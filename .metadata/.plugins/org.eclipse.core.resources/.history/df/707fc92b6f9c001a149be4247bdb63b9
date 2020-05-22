@@ -68,61 +68,16 @@ public class Game {
 	//BEGIN methods
 	//-----------------------------------------------------------------------------------------------------------------
 	public void populateStore() {
-		
-		//remove remaining stock
-		//remove crops
-		if(store.getCrops().size() != 0) {
-			for(int i = 0; i < store.getCrops().size(); i++) {
-				store.sellCrop(store.getCrops().get(i).getId());
-			}
-		}
-		
-		//remove animals
-		for(int i = 0; i < store.getAnimals().size(); i++) {
-			store.sellAnimal(store.getAnimals().get(i).getId());
-		}
-		
-		//remove items
 		for(int i = 0; i < store.getItems().size(); i++) {
 			store.sellItem(store.getItems().get(i).getId());
 		}
-		
 		int range = 2; //TODO: add appropriate range for each item
-		
-		//generate crops in store
 		for(int i = 0; i < cropSpecies.size(); i++) {
 			int amountCrops = (int) (Math.random() * range);
 			for(int j = 0; j < amountCrops; j++) {
 				Crop newCrop = cropSpecies.get(i);
 				newCrop.setDayPlanted(day);
 				store.addCrop(newCrop);
-			}
-		}
-		
-		//generate animals in store
-		for(int i = 0; i < animalSpecies.size(); i++) {
-			int amountAnimals = (int) (Math.random() * range);
-			for(int j = 0; j < amountAnimals; j++) {
-				Animal newAnimal = animalSpecies.get(i);
-				store.addAnimal(newAnimal);
-			}
-		}
-		
-		//generate foodItems in store
-		for(int i = 0; i < foodItems.size(); i++) {
-			int amountFoodItems = (int) (Math.random() * range);
-			for(int j = 0; j < amountFoodItems; j++) {
-				FoodItem newFoodItem = (FoodItem) foodItems.get(i);
-				store.addItem(newFoodItem);
-			}
-		}
-		
-		//generate cropItems in store
-		for(int i = 0; i < cropItems.size(); i++) {
-			int amountCropItems = (int) (Math.random() * range);
-			for(int j = 0; j < amountCropItems; j++) {
-				CropItem newCropItem = (CropItem) cropItems.get(i);
-				store.addItem(newCropItem);
 			}
 		}
 	}

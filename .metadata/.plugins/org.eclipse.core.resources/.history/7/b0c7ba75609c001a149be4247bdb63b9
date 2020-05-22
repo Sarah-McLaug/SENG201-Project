@@ -81,7 +81,9 @@ public class MainScreen {
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(2);
-				dummyGame.populateStore();
+				
+				//Fill the store with the elements
+				dummyGame.populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
 				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -364,7 +366,7 @@ public class MainScreen {
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
 		String[] storeAnimalsColumnNames = {"Species", "Price"};
-		Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][2];
+		Object[][] storeAnimalsData = new Object[3][2];
 		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
 			Animal a = game.getStore().getAnimals().get(i);
 			Object[] tableRow = {a.getSpecies(), a.getPurchasePrice()};

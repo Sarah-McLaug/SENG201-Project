@@ -81,7 +81,9 @@ public class MainScreen {
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(2);
-				dummyGame.populateStore();
+				
+				//Fill the store with the elements
+				dummyGame.populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
 				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

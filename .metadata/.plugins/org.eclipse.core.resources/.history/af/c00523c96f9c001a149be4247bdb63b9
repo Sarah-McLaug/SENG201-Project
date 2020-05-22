@@ -71,10 +71,8 @@ public class Game {
 		
 		//remove remaining stock
 		//remove crops
-		if(store.getCrops().size() != 0) {
-			for(int i = 0; i < store.getCrops().size(); i++) {
-				store.sellCrop(store.getCrops().get(i).getId());
-			}
+		for(int i = 0; i < store.getCrops().size(); i++) {
+			store.sellCrop(store.getCrops().get(i).getId());
 		}
 		
 		//remove animals
@@ -109,22 +107,15 @@ public class Game {
 		}
 		
 		//generate foodItems in store
-		for(int i = 0; i < foodItems.size(); i++) {
+		for (int i = 0; i < foodItems.size(); i++) {
 			int amountFoodItems = (int) (Math.random() * range);
-			for(int j = 0; j < amountFoodItems; j++) {
+			for (int i = 0; i < amountFoodItems; i++) {
 				FoodItem newFoodItem = (FoodItem) foodItems.get(i);
 				store.addItem(newFoodItem);
 			}
 		}
 		
 		//generate cropItems in store
-		for(int i = 0; i < cropItems.size(); i++) {
-			int amountCropItems = (int) (Math.random() * range);
-			for(int j = 0; j < amountCropItems; j++) {
-				CropItem newCropItem = (CropItem) cropItems.get(i);
-				store.addItem(newCropItem);
-			}
-		}
 	}
 	
 	//Uses the predefined elements (see below) to populate the store with a random amount of each element

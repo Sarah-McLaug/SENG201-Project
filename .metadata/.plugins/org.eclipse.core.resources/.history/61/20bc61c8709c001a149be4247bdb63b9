@@ -71,10 +71,8 @@ public class Game {
 		
 		//remove remaining stock
 		//remove crops
-		if(store.getCrops().size() != 0) {
-			for(int i = 0; i < store.getCrops().size(); i++) {
-				store.sellCrop(store.getCrops().get(i).getId());
-			}
+		for(int i = 0; i < store.getCrops().size(); i++) {
+			store.sellCrop(store.getCrops().get(i).getId());
 		}
 		
 		//remove animals

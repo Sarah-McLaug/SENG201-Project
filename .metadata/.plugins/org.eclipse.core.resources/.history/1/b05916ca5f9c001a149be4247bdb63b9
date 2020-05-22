@@ -81,7 +81,9 @@ public class MainScreen {
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(2);
-				dummyGame.populateStore();
+				
+				//Fill the store with the elements
+				dummyGame.populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
 				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -347,7 +349,7 @@ public class MainScreen {
 			else tableRow[1] = "Crop Item";
 			ownedItemsData[i] = tableRow;
 		}
-		ownedItemsTable = new JTable(ownedItemsData, ownedItemsColumnNames);
+		ownedItemsTable = new JTable();
 		ownedItemsTableContainer.setViewportView(ownedItemsTable);
 		
 		JLabel inventoryLabel = new JLabel("Inventory");
@@ -363,14 +365,7 @@ public class MainScreen {
 		storeAnimalsTableContainer.setBounds(5, 5, 500, 292);
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
-		String[] storeAnimalsColumnNames = {"Species", "Price"};
-		Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][2];
-		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
-			Animal a = game.getStore().getAnimals().get(i);
-			Object[] tableRow = {a.getSpecies(), a.getPurchasePrice()};
-			storeAnimalsData[i] = tableRow;
-		}
-		storeAnimalsTable = new JTable(storeAnimalsData, storeAnimalsColumnNames);
+		storeAnimalsTable = new JTable();
 		storeAnimalsTableContainer.setViewportView(storeAnimalsTable);
 		
 		JButton buyAnimalsBtn = new JButton("Purchase");
