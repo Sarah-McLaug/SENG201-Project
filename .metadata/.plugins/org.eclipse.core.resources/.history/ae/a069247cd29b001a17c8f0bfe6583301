@@ -10,27 +10,15 @@ public class Game {
 	private int duration;
 	private int actionCount;
 	
-	public Farm getFarm() {
-		return farm;
-	}
-	
 	public void setFarm(Farm farm) {
 		this.farm = farm;
-	}
-	
-	public int getDuration() {
-		return duration;
 	}
 	
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 	
-	public int getActionCount() {
-		return actionCount;
-	}
-	
-	public void setActionCount(int actionCount) {
+	public void  setActionCount(int actionCount) {
 		this.actionCount = actionCount;
 	}
 	//*********************************************

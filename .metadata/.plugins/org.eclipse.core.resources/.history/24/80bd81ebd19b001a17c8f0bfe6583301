@@ -8,8 +8,6 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.ArrayList;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -34,54 +32,10 @@ public class MainScreen {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//Defaults for easy testing: TODO: (remove later)
-				//--------------------------------------------------------------------
-				String farmName = "Incognito Farms";
-				String farmType = "friendly";
-				String farmerName = "Lollipop Chainsaw";
-				int age = 22;
-				int day = 5;
-				//--------------------------------------------------------------------
-				
-				Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
-				Store store = new Store();
-				int actionsRemaining = 2;
-				boolean playingGame = true;
-				
-				//Define game elements
-				//-------------------------------------------------------------------------
-				final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
-				cropSpecies.add(new Crop("banana", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				cropSpecies.add(new Crop("mango", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-				
-				final ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
-				animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
-				animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
-				animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
-				
-				final ArrayList <Item> foodItems = new ArrayList <Item>();
-				foodItems.add(new FoodItem("sugar cane", 1, 1));
-				foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
-				foodItems.add(new FoodItem("brocooli", 1, 1));
-				
-				final ArrayList <Item> cropItems = new ArrayList <Item>();
-				cropItems.add(new CropItem("fertilizer", 1, 1));
-				cropItems.add(new CropItem("pestiside", 1, 1));
-				//-------------------------------------------------------------------------
-				
-
-				Game dummyGame = new Game();
-				dummyGame.setFarm(farm);
-				dummyGame.setDuration(5);
-				dummyGame.setActionCount(2);
-				
-				//Fill the store with the elements
-				dummyGame.populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
-				
+		Game dummyGame = new Game();
+		dummyGame.setFarm(new Farm("Sarah's Farm", "friendly", new Farmer("Sarah", 21)));
+		dummyGame.setDuration(5);
+		dummyGame.setActionCount(2);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -232,7 +186,7 @@ public class MainScreen {
 		storeItemsTable = new JTable();
 		storeItemsTableContainer.setViewportView(storeItemsTable);
 		
-		JLabel farmNameLabel = new JLabel(game.getFarm().getName());
+		JLabel farmNameLabel = new JLabel("Farm Name");
 		farmNameLabel.setBounds(0, 6, 800, 30);
 		screen.getContentPane().add(farmNameLabel);
 		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);

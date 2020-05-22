@@ -34,7 +34,7 @@ public class MainScreen {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//Defaults for easy testing: TODO: (remove later)
+		//Defaults for easy testing: (remove later)
 				//--------------------------------------------------------------------
 				String farmName = "Incognito Farms";
 				String farmType = "friendly";
@@ -232,7 +232,7 @@ public class MainScreen {
 		storeItemsTable = new JTable();
 		storeItemsTableContainer.setViewportView(storeItemsTable);
 		
-		JLabel farmNameLabel = new JLabel(game.getFarm().getName());
+		JLabel farmNameLabel = new JLabel("Farm Name");
 		farmNameLabel.setBounds(0, 6, 800, 30);
 		screen.getContentPane().add(farmNameLabel);
 		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
