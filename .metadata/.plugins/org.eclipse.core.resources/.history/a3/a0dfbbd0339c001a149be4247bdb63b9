@@ -7,7 +7,6 @@ public class Game {
 	//Consider
 	//********************************************
 	private Farm farm;
-	private Store store;
 	private int duration;
 	private int actionCount;
 	
@@ -17,14 +16,6 @@ public class Game {
 	
 	public void setFarm(Farm farm) {
 		this.farm = farm;
-	}
-	
-	public Store getStore() {
-		return store;
-	}
-	
-	public void setStore(Store store) {
-		this.store = store;
 	}
 	
 	public int getDuration() {
