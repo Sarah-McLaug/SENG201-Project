@@ -241,7 +241,7 @@ public class MainScreen {
 		feedAnimalsItemTableContainer.setBounds(385, 5, 370, 250);
 		feedAnimalsTab.add(feedAnimalsItemTableContainer);
 		
-		String[] feedAnimalsItemColumnNames = {"Name", "Health Points"};
+		String[] feedAnimalsIteColumnNames = {"Name", "Health Points"};
 		Object[][] feedAnimalsItemData = new Object[game.getFarm().getInventory().size()][2];
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
@@ -251,7 +251,7 @@ public class MainScreen {
 			}
 		}
 		
-		feedAnimalsItemTable = new JTable(feedAnimalsItemData, feedAnimalsItemColumnNames);
+		feedAnimalsItemTable = new JTable();
 		feedAnimalsItemTableContainer.setViewportView(feedAnimalsItemTable);
 		
 		JButton feedAnimalsBtn = new JButton("Feed Animals");
@@ -268,22 +268,11 @@ public class MainScreen {
 		playAnimalsTableContainer.setBounds(5, 5, 500, 292);
 		playAnimalsTab.add(playAnimalsTableContainer);
 		
-		String[] playAnimalsColumnNames = {"Species", "Happiness"};
-		Object[][] playAnimalsData = new Object[game.getFarm().getAnimals().size()][2];
-		for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-			Animal a = game.getFarm().getAnimals().get(i);
-			Object[] tableRow = {a.getSpecies(), a.getHappiness()};
-			playAnimalsData[i] = tableRow;
-		}
-		
-		playAnimalsTable = new JTable(playAnimalsData, playAnimalsColumnNames);
-		playAnimalsTable.setRowSelectionAllowed(false);
+		playAnimalsTable = new JTable();
 		playAnimalsTableContainer.setViewportView(playAnimalsTable);
 		
 		JButton playAnimalsBtn = new JButton("Play with Animals");
 		playAnimalsBtn.setBounds(552, 119, 155, 60);
-		if(game.getFarm().getAnimals().size() > 0) playAnimalsBtn.setEnabled(true);
-		else playAnimalsBtn.setEnabled(false);
 		playAnimalsTab.add(playAnimalsBtn);
 		
 		JPanel harvestCropsTab = new JPanel();
@@ -294,17 +283,7 @@ public class MainScreen {
 		harvestableCropsTableContainer.setBounds(5, 5, 500, 292);
 		harvestCropsTab.add(harvestableCropsTableContainer);
 		
-		String[] harvestableCropsColumnNames = {"Species", "Selling Price"};
-		Object[][] harvestableCropsData = new Object[game.getFarm().getCrops().size()][2];
-		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-			Crop c = game.getFarm().getCrops().get(i);
-			if(c.getDaysUntilMature() == 0) {
-				Object[] tableRow = {c.getSpecies(), c.getSellingPrice()};
-				harvestableCropsData[i] = tableRow;
-			}
-		}
-		
-		harvestableCropsTable = new JTable(harvestableCropsData, harvestableCropsColumnNames);
+		harvestableCropsTable = new JTable();
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		

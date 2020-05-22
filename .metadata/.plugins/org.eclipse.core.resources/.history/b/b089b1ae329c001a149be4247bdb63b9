@@ -300,11 +300,11 @@ public class MainScreen {
 			Crop c = game.getFarm().getCrops().get(i);
 			if(c.getDaysUntilMature() == 0) {
 				Object[] tableRow = {c.getSpecies(), c.getSellingPrice()};
-				harvestableCropsData[i] = tableRow;
+				havestableCropsData[i] = tableRow;
 			}
 		}
 		
-		harvestableCropsTable = new JTable(harvestableCropsData, harvestableCropsColumnNames);
+		harvestableCropsTable = new JTable();
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		

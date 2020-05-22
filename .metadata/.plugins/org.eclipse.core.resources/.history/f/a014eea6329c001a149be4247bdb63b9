@@ -294,17 +294,9 @@ public class MainScreen {
 		harvestableCropsTableContainer.setBounds(5, 5, 500, 292);
 		harvestCropsTab.add(harvestableCropsTableContainer);
 		
-		String[] harvestableCropsColumnNames = {"Species", "Selling Price"};
-		Object[][] harvestableCropsData = new Object[game.getFarm().getCrops().size()][2];
-		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-			Crop c = game.getFarm().getCrops().get(i);
-			if(c.getDaysUntilMature() == 0) {
-				Object[] tableRow = {c.getSpecies(), c.getSellingPrice()};
-				harvestableCropsData[i] = tableRow;
-			}
-		}
 		
-		harvestableCropsTable = new JTable(harvestableCropsData, harvestableCropsColumnNames);
+		
+		harvestableCropsTable = new JTable();
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
