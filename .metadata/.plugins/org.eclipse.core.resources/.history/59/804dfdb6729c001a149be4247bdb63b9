@@ -7,7 +7,7 @@ public class Game {
 	//Consider
 	//********************************************
 	private Farm farm;
-	private Store store = new Store();
+	private Store store;
 	private int duration;
 	private int actionCount;
 	private int day;
@@ -67,11 +67,7 @@ public class Game {
 	
 	//BEGIN methods
 	//-----------------------------------------------------------------------------------------------------------------
-	public void populateStore(ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
-			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
-		
-		ArrayList<Crop> testCrop = store.getCrops();
-		
+	public void populateStore() {
 		/*
 		//remove remaining stock
 		//remove crops
@@ -79,7 +75,7 @@ public class Game {
 			for(int i = 0; i < store.getCrops().size(); i++) {
 				store.sellCrop(store.getCrops().get(i).getId());
 			}
-		}
+		}*/
 		
 		//remove animals
 		for(int i = 0; i < store.getAnimals().size(); i++) {
@@ -128,7 +124,7 @@ public class Game {
 				CropItem newCropItem = (CropItem) cropItems.get(i);
 				store.addItem(newCropItem);
 			}
-		}*/
+		}
 	}
 	
 	//Uses the predefined elements (see below) to populate the store with a random amount of each element

@@ -7,7 +7,7 @@ public class Game {
 	//Consider
 	//********************************************
 	private Farm farm;
-	private Store store = new Store();
+	private Store store;
 	private int duration;
 	private int actionCount;
 	private int day;

@@ -81,7 +81,7 @@ public class MainScreen {
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(2);
-				dummyGame.populateStore(animalSpecies, cropSpecies, foodItems, cropItems);
+				dummyGame.populateStore(cropSpecies, animalSpecies, foodItems, cropItems);
 				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
