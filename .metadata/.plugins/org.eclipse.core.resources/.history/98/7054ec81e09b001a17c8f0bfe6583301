@@ -155,7 +155,7 @@ public class MainScreen {
 		actionsPanel.add(actionsRemainingLabel);
 		
 		JTabbedPane actionTabs = new JTabbedPane(JTabbedPane.BOTTOM);
-		actionTabs.setBounds(0, 38, 780, 350);
+		actionTabs.setBounds(10, 38, 780, 350);
 		actionsPanel.add(actionTabs);
 		
 		JPanel tendCropsTab = new JPanel();
@@ -163,7 +163,7 @@ public class MainScreen {
 		tendCropsTab.setLayout(null);
 		
 		JScrollPane tendCropsTableContainer = new JScrollPane();
-		tendCropsTableContainer.setBounds(5, 5, 370, 250);
+		tendCropsTableContainer.setBounds(5, 5, 350, 250);
 		tendCropsTab.add(tendCropsTableContainer);
 		
 		String[] tendCropsColumnNames = {"Species", "Days Until Mature", "Age"};
@@ -178,42 +178,23 @@ public class MainScreen {
 		tendCropsTableContainer.setViewportView(tendCropsTable);
 		
 		JScrollPane tendCropsItemTableContainer = new JScrollPane();
-		tendCropsItemTableContainer.setBounds(385, 5, 370, 250);
+		tendCropsItemTableContainer.setBounds(376, 5, 375, 250);
 		tendCropsTab.add(tendCropsItemTableContainer);
 		
-		String[] cropItemsColumnNames = {"Name", "Growth Enhancement"};
-		Object[][] cropItemsData = new Object[game.getFarm().getInventory().size()+1][2];
-		Object[] waterRow = {"Water", "1 Day"};
-		cropItemsData[0] = waterRow;
+		String[] tendCropsItemColumnNames = {"Name", "Growth Enhancement", "Price"};
+		Object[][] cropItemsData = new Object[game.getFarm().getInventory().size()+1][3];
+		Object[] waterRow = {"Water", "1 Day", "$0.00"};
+		cropsData[0] = waterRow;
 		for(int i = 0; i < game.getFarm().getInventory().size() - 1; i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
-				Object[] tableRow = {item.getName(), item.getBenefit()};
+				Object[] tableRow = {item.getName(), item.getBenefit(), item.getPrice()};
 				cropItemsData[i+1] = tableRow;
 			}
 		}
 		
-		tendCropsItemTable = new JTable(cropItemsData, cropItemsColumnNames);
+		tendCropsItemTable = new JTable();
 		tendCropsItemTableContainer.setViewportView(tendCropsItemTable);
-		
-		JButton tendCropsBtn = new JButton("Tend Crops");
-		if(tendCropsTable.getSelectionModel().isSelectionEmpty() || 
-				tendCropsItemTable.getSelectionModel().isSelectionEmpty()) tendCropsBtn.setEnabled(false);
-		else tendCropsBtn.setEnabled(true);
-		tendCropsBtn.setBounds(315, 268, 120, 30);
-		tendCropsTab.add(tendCropsBtn);
-		
-		JLabel tendCropsTableTitle = new JLabel("Crops");
-		tendCropsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		tendCropsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		tendCropsTableTitle.setBounds(156, 255, 61, 13);
-		tendCropsTab.add(tendCropsTableTitle);
-		
-		JLabel tendCropsItemTableTitle = new JLabel("Inventory");
-		tendCropsItemTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		tendCropsItemTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		tendCropsItemTableTitle.setBounds(539, 255, 61, 13);
-		tendCropsTab.add(tendCropsItemTableTitle);
 		
 		JPanel feedAnimalsTab = new JPanel();
 		actionTabs.addTab("Feed Animals", null, feedAnimalsTab, null);

@@ -29,7 +29,6 @@ public class MainScreen {
 	private JTable storeAnimalsTable;
 	private JTable storeCropsTable;
 	private JTable storeItemsTable;
-	private JTable tendCropsItemTable;
 
 	/**
 	 * Launch the application.
@@ -78,7 +77,7 @@ public class MainScreen {
 				Game dummyGame = new Game();
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
-				dummyGame.setActionCount(2);
+				dummyGame.setActionCount(4);
 				
 				//Fill the store with the elements
 				dummyGame.populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
@@ -108,25 +107,16 @@ public class MainScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//set up frame
 		screen = new JFrame();
 		screen.setResizable(false);
 		screen.setBounds(100, 100, windowWidth, windowHeight);
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.getContentPane().setLayout(null);
 		
-		JLabel farmNameLabel = new JLabel(game.getFarm().getName());
-		farmNameLabel.setBounds(0, 6, 800, 30);
-		screen.getContentPane().add(farmNameLabel);
-		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		farmNameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		
 		JTabbedPane mainTabs = new JTabbedPane(JTabbedPane.TOP);
 		mainTabs.setBounds(0, 40, 800, 436);
 		screen.getContentPane().add(mainTabs);
 		
-		//-------------------------------------------------------------
-		//set up overview tab
 		JPanel mainPanel = new JPanel();
 		mainTabs.addTab("Overview", null, mainPanel, null);
 		mainPanel.setLayout(null);
@@ -143,8 +133,6 @@ public class MainScreen {
 		nextDayButton.setBounds(612, 330, 150, 45);
 		mainPanel.add(nextDayButton);
 		
-		//-------------------------------------------------------------
-		//set up actions tab
 		JPanel actionsPanel = new JPanel();
 		mainTabs.addTab("Actions", null, actionsPanel, null);
 		actionsPanel.setLayout(null);
@@ -155,66 +143,16 @@ public class MainScreen {
 		actionsPanel.add(actionsRemainingLabel);
 		
 		JTabbedPane actionTabs = new JTabbedPane(JTabbedPane.BOTTOM);
-		actionTabs.setBounds(0, 38, 780, 350);
+		actionTabs.setBounds(0, 30, 780, 350);
 		actionsPanel.add(actionTabs);
-		
 		JPanel tendCropsTab = new JPanel();
 		actionTabs.addTab("Tend Crops", null, tendCropsTab, null);
-		tendCropsTab.setLayout(null);
 		
 		JScrollPane tendCropsTableContainer = new JScrollPane();
-		tendCropsTableContainer.setBounds(5, 5, 370, 250);
 		tendCropsTab.add(tendCropsTableContainer);
 		
-		String[] tendCropsColumnNames = {"Species", "Days Until Mature", "Age"};
-		Object[][] cropsData = new Object[game.getFarm().getCrops().size()][3];
-		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-			Crop c = game.getFarm().getCrops().get(i);
-			Object[] tableRow = {c.getSpecies(), c.getDaysUntilMature(), c.getAge(5)};
-			cropsData[i] = tableRow;
-		}
-		
-		tendCropsTable = new JTable(cropsData, tendCropsColumnNames);
+		tendCropsTable = new JTable();
 		tendCropsTableContainer.setViewportView(tendCropsTable);
-		
-		JScrollPane tendCropsItemTableContainer = new JScrollPane();
-		tendCropsItemTableContainer.setBounds(385, 5, 370, 250);
-		tendCropsTab.add(tendCropsItemTableContainer);
-		
-		String[] cropItemsColumnNames = {"Name", "Growth Enhancement"};
-		Object[][] cropItemsData = new Object[game.getFarm().getInventory().size()+1][2];
-		Object[] waterRow = {"Water", "1 Day"};
-		cropItemsData[0] = waterRow;
-		for(int i = 0; i < game.getFarm().getInventory().size() - 1; i++) {
-			Item item = game.getFarm().getInventory().get(i);
-			if(!item.isFoodItem()) {
-				Object[] tableRow = {item.getName(), item.getBenefit()};
-				cropItemsData[i+1] = tableRow;
-			}
-		}
-		
-		tendCropsItemTable = new JTable(cropItemsData, cropItemsColumnNames);
-		tendCropsItemTableContainer.setViewportView(tendCropsItemTable);
-		
-		JButton tendCropsBtn = new JButton("Tend Crops");
-		if(tendCropsTable.getSelectionModel().isSelectionEmpty() || 
-				tendCropsItemTable.getSelectionModel().isSelectionEmpty()) tendCropsBtn.setEnabled(false);
-		else tendCropsBtn.setEnabled(true);
-		tendCropsBtn.setBounds(315, 268, 120, 30);
-		tendCropsTab.add(tendCropsBtn);
-		
-		JLabel tendCropsTableTitle = new JLabel("Crops");
-		tendCropsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		tendCropsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		tendCropsTableTitle.setBounds(156, 255, 61, 13);
-		tendCropsTab.add(tendCropsTableTitle);
-		
-		JLabel tendCropsItemTableTitle = new JLabel("Inventory");
-		tendCropsItemTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		tendCropsItemTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		tendCropsItemTableTitle.setBounds(539, 255, 61, 13);
-		tendCropsTab.add(tendCropsItemTableTitle);
-		
 		JPanel feedAnimalsTab = new JPanel();
 		actionTabs.addTab("Feed Animals", null, feedAnimalsTab, null);
 		
@@ -225,16 +163,13 @@ public class MainScreen {
 		animalFoodTableContainer.setViewportView(animalFoodTable);
 		
 		JButton feedAnimalsBtn = new JButton("Feed Animals");
-		if(game.getFarm().getAnimals().size() == 0) feedAnimalsBtn.setEnabled(false);
-		else feedAnimalsBtn.setEnabled(true);
+		feedAnimalsBtn.setEnabled(false);
 		feedAnimalsTab.add(feedAnimalsBtn);
-		
 		JPanel playAnimalsTab = new JPanel();
 		actionTabs.addTab("Play with Animals", null, playAnimalsTab, null);
 		
 		JButton playAnimalsBtn = new JButton("Play with Animals");
 		playAnimalsTab.add(playAnimalsBtn);
-		
 		JPanel harvestCropsTab = new JPanel();
 		actionTabs.addTab("Harvest Crops", null, harvestCropsTab, null);
 		
@@ -246,18 +181,13 @@ public class MainScreen {
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
 		JButton harvestCropsBtn = new JButton("Harvest Crops");
-		if(game.getFarm().getCrops().size() == 0) harvestCropsBtn.setEnabled(false);
-		else harvestCropsBtn.setEnabled(true);
 		harvestCropsTab.add(harvestCropsBtn);
-		
 		JPanel tendFarmTab = new JPanel();
 		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
 		
 		JButton tendFarmBtn = new JButton("Tend the Farm");
 		tendFarmTab.add(tendFarmBtn);
 		
-		//-------------------------------------------------------------
-		//set up store tab
 		JPanel storePanel = new JPanel();
 		mainTabs.addTab("County Store", null, storePanel, null);
 		storePanel.setLayout(null);
@@ -301,6 +231,12 @@ public class MainScreen {
 		
 		storeItemsTable = new JTable();
 		storeItemsTableContainer.setViewportView(storeItemsTable);
+		
+		JLabel farmNameLabel = new JLabel(game.getFarm().getName());
+		farmNameLabel.setBounds(0, 6, 800, 30);
+		screen.getContentPane().add(farmNameLabel);
+		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		farmNameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		
 	}
 }
