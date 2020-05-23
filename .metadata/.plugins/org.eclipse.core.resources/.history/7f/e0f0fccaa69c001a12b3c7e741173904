@@ -93,7 +93,7 @@ public class Game {
 		for(int i = 0; i < cropSpecies.size(); i++) {
 			int amountCrops = (int) (Math.random() * range) + 1;
 			for(int j = 0; j < amountCrops; j++) {
-				Crop newCrop = cropSpecies.get(i);
+				Crop newCrop = cropSpecies.get(j);
 				String species = newCrop.getSpecies();
 				double purchasePrice = newCrop.getPurchasePrice();
 				double sellingPrice = newCrop.getSellingPrice();
@@ -107,7 +107,7 @@ public class Game {
 		for(int i = 0; i < animalSpecies.size(); i++) {
 			int amountAnimals = (int) (Math.random() * range) + 1;
 			for(int j = 0; j < amountAnimals; j++) {
-				Animal newAnimal = animalSpecies.get(i);
+				Animal newAnimal = animalSpecies.get(j);
 				String species = newAnimal.getSpecies();
 				double purchasePrice = newAnimal.getPurchasePrice();
 				double health = newAnimal.getHealth();
@@ -121,7 +121,7 @@ public class Game {
 		for(int i = 0; i < foodItems.size(); i++) {
 			int amountFoodItems = (int) (Math.random() * range) + 1;
 			for(int j = 0; j < amountFoodItems; j++) {
-				FoodItem newFoodItem = (FoodItem) foodItems.get(i);
+				FoodItem newFoodItem = (FoodItem) foodItems.get(j);
 				String name = newFoodItem.getName();
 				double healthPoints = newFoodItem.getHealthPoints();
 				double purchasePrice = newFoodItem.getPrice();
@@ -133,7 +133,7 @@ public class Game {
 		for(int i = 0; i < cropItems.size(); i++) {
 			int amountCropItems = (int) (Math.random() * range) + 1;
 			for(int j = 0; j < amountCropItems; j++) {
-				CropItem newCropItem = (CropItem) cropItems.get(i);
+				CropItem newCropItem = (CropItem) cropItems.get(j);
 				String name = newCropItem.getName();
 				int growthEnhancement = newCropItem.getGrowthEnhancement();
 				double purchasePrice = newCropItem.getPrice();
