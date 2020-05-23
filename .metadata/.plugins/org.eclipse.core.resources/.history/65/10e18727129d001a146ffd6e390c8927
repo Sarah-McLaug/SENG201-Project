@@ -114,16 +114,6 @@ public class MainScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//set up data models
-		//set up farm animal table model
-		String[] farmAnimalsColumnNames = {"Species", "Health", "Happiness"};
-		DefaultTableModel farmAnimalsModel = new DefaultTableModel(0, 0);
-		farmAnimalsModel.setColumnIdentifiers(farmAnimalsColumnNames);
-		for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-			Animal a = game.getFarm().getAnimals().get(i);
-			farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-		}
-		
 		//set up frame
 		screen = new JFrame();
 		screen.setResizable(false);
@@ -238,9 +228,16 @@ public class MainScreen {
 		JScrollPane feedAnimalsTableContainer = new JScrollPane();
 		feedAnimalsTableContainer.setBounds(5, 5, 370, 250);
 		feedAnimalsTab.add(feedAnimalsTableContainer);
+		
+		String[] feedAnimalsColumnNames = {"Species", "Health"};
+		Object[][] feedAnimalsData = new Object[game.getFarm().getAnimals().size()][2];
+		for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
+			Animal a = game.getFarm().getAnimals().get(i);
+			Object[] tableRow = {a.getSpecies(), a.getHealth() + "/10.0"};
+			feedAnimalsData[i] = tableRow;
+		}
 			
-		feedAnimalsTable = new JTable();
-		feedAnimalsTable.setModel(farmAnimalsModel);
+		feedAnimalsTable = new JTable(feedAnimalsData, feedAnimalsColumnNames);
 		feedAnimalsTable.setRowSelectionAllowed(false);
 		feedAnimalsTableContainer.setViewportView(feedAnimalsTable);
 		
@@ -276,7 +273,14 @@ public class MainScreen {
 		playAnimalsTab.add(playAnimalsTableContainer);
 		
 		playAnimalsTable = new JTable();
-		playAnimalsTable.setModel(farmAnimalsModel);
+		String[] playAnimalsColumnNames = {"Species", "Happiness"};
+		DefaultTableModel playAnimalsModel = new DefaultTableModel(0, 0);
+		playAnimalsModel.setColumnIdentifiers(playAnimalsColumnNames);
+		playAnimalsTable.setModel(playAnimalsModel);
+		for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
+			Animal a = game.getFarm().getAnimals().get(i);
+			playAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHappiness()});
+		}
 		playAnimalsTable.setRowSelectionAllowed(false);
 		playAnimalsTableContainer.setViewportView(playAnimalsTable);
 		
@@ -397,7 +401,7 @@ public class MainScreen {
 						if((int) storeAnimalsModel.getValueAt(i, 0) == a.getId()) index = i;
 					}
 					storeAnimalsModel.removeRow(index);
-					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
+					playAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHappiness()});
 					playAnimalsBtn.setEnabled(true);
 					game.getStore().sellAnimal(a.getId());
 					game.getFarm().addAnimal(a);

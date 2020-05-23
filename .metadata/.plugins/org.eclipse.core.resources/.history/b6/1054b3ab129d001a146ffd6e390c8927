@@ -397,7 +397,7 @@ public class MainScreen {
 						if((int) storeAnimalsModel.getValueAt(i, 0) == a.getId()) index = i;
 					}
 					storeAnimalsModel.removeRow(index);
-					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
+					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHappiness()});
 					playAnimalsBtn.setEnabled(true);
 					game.getStore().sellAnimal(a.getId());
 					game.getFarm().addAnimal(a);
