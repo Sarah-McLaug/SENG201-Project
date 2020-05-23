@@ -419,9 +419,8 @@ public class MainScreen {
 				tableRow[1] = "Crop item";
 				tableRow[2] = item.getBenefit() + " Day Growth Enhancement";
 			}
-			storeItemsData[i] = tableRow;
 		}
-		storeItemsTable = new JTable(storeItemsData, storeItemsColumnNames);
+		storeItemsTable = new JTable();
 		storeItemsTableContainer.setViewportView(storeItemsTable);
 		
 		JButton buyItemsBtn = new JButton("Purchase");
