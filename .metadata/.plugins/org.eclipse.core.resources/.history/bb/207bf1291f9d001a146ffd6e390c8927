@@ -451,7 +451,7 @@ public class MainScreen {
 					game.getFarm().addCrop(c, game.getDay());
 					game.getFarm().updateBalance(-c.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
+					//TODO: update farmcrop model
 					tendCropsBtn.setEnabled(true);
 					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
 				}

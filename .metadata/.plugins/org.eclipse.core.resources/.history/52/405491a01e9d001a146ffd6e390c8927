@@ -191,9 +191,15 @@ public class MainScreen {
 		tendCropsTableContainer.setBounds(5, 5, 370, 250);
 		tendCropsTab.add(tendCropsTableContainer);
 		
+		String[] tendCropsColumnNames = {"Species", "Days Until Mature", "Age"};
+		Object[][] cropsData = new Object[game.getFarm().getCrops().size()][3];
+		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
+			Crop c = game.getFarm().getCrops().get(i);
+			Object[] tableRow = {c.getSpecies(), c.getDaysUntilMature(), c.getAge(5)};
+			cropsData[i] = tableRow;
+		}
 		
-		tendCropsTable = new JTable();
-		tendCropsTable.setModel(farmCropsModel);
+		tendCropsTable = new JTable(cropsData, tendCropsColumnNames);
 		tendCropsTableContainer.setViewportView(tendCropsTable);
 		
 		JScrollPane tendCropsItemTableContainer = new JScrollPane();
@@ -451,7 +457,7 @@ public class MainScreen {
 					game.getFarm().addCrop(c, game.getDay());
 					game.getFarm().updateBalance(-c.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
+					//TODO: update farmcrop model
 					tendCropsBtn.setEnabled(true);
 					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
 				}
