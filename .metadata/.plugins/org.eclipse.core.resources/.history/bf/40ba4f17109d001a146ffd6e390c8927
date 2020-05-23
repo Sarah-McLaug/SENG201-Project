@@ -405,7 +405,6 @@ public class MainScreen {
 					game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}
 			}
 		});

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -38,6 +37,7 @@ public class MainScreen {
 	private JTable tendCropsItemTable;
 	private JTable feedAnimalsItemTable;
 	private JTable playAnimalsTable;
+	private String balance;
 
 	/**
 	 * Launch the application.
@@ -332,7 +332,7 @@ public class MainScreen {
 		mainTabs.addTab("County Store", null, storePanel, null);
 		storePanel.setLayout(null);
 		
-		JLabel farmBalance = new JLabel("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
+		JLabel farmBalance = new JLabel("Cash Remaining: $" + game.getFarm().getBalance());
 		farmBalance.setHorizontalAlignment(SwingConstants.CENTER);
 		farmBalance.setBounds(0, 12, 778, 16);
 		storePanel.add(farmBalance);
@@ -374,38 +374,36 @@ public class MainScreen {
 		storeAnimalsTableContainer.setBounds(5, 5, 500, 272);
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
-		//set up table of animals user is able to buy
-		storeAnimalsTable = new JTable();
 		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
-		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0);
-		storeAnimalsModel.setColumnIdentifiers(storeAnimalsColumnNames);
-		storeAnimalsTable.setModel(storeAnimalsModel);
+		Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][3];
 		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
 			Animal a = game.getStore().getAnimals().get(i);
-			storeAnimalsModel.addRow(new Object[] {a.getId(), a.getSpecies(), a.getPurchasePrice()});
+			Object[] tableRow = {a.getId(), a.getSpecies(), a.getPurchasePrice()};
+			storeAnimalsData[i] = tableRow;
 		}
+		storeAnimalsTable = new JTable(storeAnimalsData, storeAnimalsColumnNames);
 		storeAnimalsTableContainer.setViewportView(storeAnimalsTable);
 		
 		JButton buyAnimalsBtn = new JButton("Purchase");
 		buyAnimalsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] animalIds = new Object[storeAnimalsModel.getRowCount()];
-				for(int i = 0; i < animalIds.length; i++) {
-					animalIds[i] = storeAnimalsModel.getValueAt(i, 0);
+				Object[] animals = new Object[storeAnimalsData.length];
+				for(int i = 0; i < animals.length; i++) {
+					animals[i] = storeAnimalsData[i][0];
 				}
-				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Confirmation", JOptionPane.PLAIN_MESSAGE, null, animalIds, animalIds[0]);
+				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Confirmation", JOptionPane.PLAIN_MESSAGE, null, animals, animals[0]);
 				if(purchase != null && purchase.intValue() != 0 && game.getStore().animalExists(purchase.intValue()) == true) {
 					Animal a = game.getStore().fetchAnimal(purchase.intValue());
-					int index = -1;
-					for(int i = 0; i < storeAnimalsModel.getRowCount(); i++) {
-						if((int) storeAnimalsModel.getValueAt(i, 0) == a.getId()) index = i;
-					}
-					storeAnimalsModel.removeRow(index);
 					game.getStore().sellAnimal(a.getId());
 					game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
-					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
+					farmBalance.setText("Cash Remaining: $" + format("%.2f", game.getFarm().getBalance()));
+					//Used to test that user was purchasing animals
+					/*String printAnimalsinFarm = ""; 
+					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
+						printAnimalsinFarm += game.getFarm().getAnimals().get(i).getSpecies() + "\n";
+					}
+					JOptionPane.showMessageDialog(screen, printAnimalsinFarm);*/
 				}
 			}
 		});

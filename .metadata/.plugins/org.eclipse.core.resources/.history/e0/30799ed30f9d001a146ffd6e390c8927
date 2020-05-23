@@ -374,7 +374,6 @@ public class MainScreen {
 		storeAnimalsTableContainer.setBounds(5, 5, 500, 272);
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
-		//set up table of animals user is able to buy
 		storeAnimalsTable = new JTable();
 		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
 		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0);
@@ -384,6 +383,14 @@ public class MainScreen {
 			Animal a = game.getStore().getAnimals().get(i);
 			storeAnimalsModel.addRow(new Object[] {a.getId(), a.getSpecies(), a.getPurchasePrice()});
 		}
+		
+		/*Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][3];
+		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
+			Animal a = game.getStore().getAnimals().get(i);
+			Object[] tableRow = {a.getId(), a.getSpecies(), a.getPurchasePrice()};
+			storeAnimalsData[i] = tableRow;
+		}*/
+		//storeAnimalsTable = new JTable(storeAnimalsData, storeAnimalsColumnNames);
 		storeAnimalsTableContainer.setViewportView(storeAnimalsTable);
 		
 		JButton buyAnimalsBtn = new JButton("Purchase");
@@ -400,12 +407,17 @@ public class MainScreen {
 					for(int i = 0; i < storeAnimalsModel.getRowCount(); i++) {
 						if((int) storeAnimalsModel.getValueAt(i, 0) == a.getId()) index = i;
 					}
-					storeAnimalsModel.removeRow(index);
+					storeAnimalsModel.removeRow(purchase.intValue());
 					game.getStore().sellAnimal(a.getId());
 					game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
+					//Used to test that user was purchasing animals
+					/*String printAnimalsinFarm = ""; 
+					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
+						printAnimalsinFarm += game.getFarm().getAnimals().get(i).getSpecies() + "\n";
+					}
+					JOptionPane.showMessageDialog(screen, printAnimalsinFarm);*/
 				}
 			}
 		});
