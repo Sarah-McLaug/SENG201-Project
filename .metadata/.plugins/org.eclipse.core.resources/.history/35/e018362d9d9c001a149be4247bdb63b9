@@ -85,7 +85,7 @@ public class MainScreen {
 				Game dummyGame = new Game();
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
-				dummyGame.setActionCount(actionsRemaining);
+				dummyGame.setActionCount(2);
 				dummyGame.populateStore(animalSpecies, cropSpecies, foodItems, cropItems);
 				
 		EventQueue.invokeLater(new Runnable() {
@@ -386,12 +386,12 @@ public class MainScreen {
 					animals[i] = storeAnimalsData[i][0];
 				}
 				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Confirmation", JOptionPane.PLAIN_MESSAGE, null, animals, animals[0]);
-				/*if(purchase != null && purchase.intValue() != 0 && game.getStore().animalExists(purchase.intValue()) == true) {
+				if(purchase != null && purchase.intValue() != 0 && game.getStore().animalExists(purchase.intValue()) == true) {
 					Animal a = game.getStore().fetchAnimal(purchase.intValue());
-					//game.getStore().sellAnimal(a.getId());
+					game.getStore().sellAnimal(a.getId());
 					//game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
-				}*/
+				}
 			}
 		});
 		buyAnimalsBtn.setBounds(552, 119, 155, 60);
