@@ -79,7 +79,7 @@ public class MainScreen {
 				
 				final ArrayList <Item> cropItems = new ArrayList <Item>();
 				cropItems.add(new CropItem("fertilizer", 1, 1));
-				cropItems.add(new CropItem("pestiside", 2, 2));
+				cropItems.add(new CropItem("pestiside", 1, 1));
 				//-------------------------------------------------------------------------
 				
 
@@ -475,16 +475,9 @@ public class MainScreen {
 		storeItemsTable.setModel(storeItemsModel);
 		for(int i = 0; i < game.getStore().getItems().size(); i++) {
 			Item item = game.getStore().getItems().get(i);
-			Object[] tableRow = new Object[] {item.getId(), item.getName(), null, null, item.getPrice()};
-			if(item.isFoodItem()) {
-				tableRow[2] = "Food Item";
-				tableRow[3] = item.getBenefit() + " Health Points";
-			}
-			else {
-				tableRow[2] = "Crop Item";
-				if(item.getBenefit() == 1) tableRow[3] = item.getBenefit() + " Day Growth Enhancement";
-				else tableRow[3] = item.getBenefit() + " Days Growth Enhancement";
-			}
+			Object[] tableRow = new Object[] {item.getId(), item.getName(), null, item.getBenefit(), item.getPrice()};
+			if(item.isFoodItem()) tableRow[2] = "Food Item";
+			else tableRow[2] = "Crop Item";
 			storeItemsModel.addRow(tableRow);
 		}
 		storeItemsTableContainer.setViewportView(storeItemsTable);

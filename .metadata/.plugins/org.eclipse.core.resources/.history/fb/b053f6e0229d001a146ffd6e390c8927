@@ -79,7 +79,7 @@ public class MainScreen {
 				
 				final ArrayList <Item> cropItems = new ArrayList <Item>();
 				cropItems.add(new CropItem("fertilizer", 1, 1));
-				cropItems.add(new CropItem("pestiside", 2, 2));
+				cropItems.add(new CropItem("pestiside", 1, 1));
 				//-------------------------------------------------------------------------
 				
 
