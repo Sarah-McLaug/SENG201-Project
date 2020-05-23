@@ -13,7 +13,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -368,11 +367,11 @@ public class MainScreen {
 		storeAnimalsTableContainer.setBounds(5, 5, 500, 292);
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
-		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
-		Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][3];
+		String[] storeAnimalsColumnNames = {"Species", "Price"};
+		Object[][] storeAnimalsData = new Object[game.getStore().getAnimals().size()][2];
 		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
 			Animal a = game.getStore().getAnimals().get(i);
-			Object[] tableRow = {a.getId(), a.getSpecies(), a.getPurchasePrice()};
+			Object[] tableRow = {a.getSpecies(), a.getPurchasePrice()};
 			storeAnimalsData[i] = tableRow;
 		}
 		storeAnimalsTable = new JTable(storeAnimalsData, storeAnimalsColumnNames);
@@ -381,19 +380,10 @@ public class MainScreen {
 		JButton buyAnimalsBtn = new JButton("Purchase");
 		buyAnimalsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] animals = new Object[storeAnimalsData.length];
-				for(int i = 0; i < animals.length; i++) {
-					animals[i] = storeAnimalsData[i][0];
-				}
-				Integer s = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Confirmation", JOptionPane.PLAIN_MESSAGE, null, animals, animals[0]);
-				if(s != null) {
-					//buy animals
-				}
+				JOptionPane.showMessageDialog(screen, "Are you sure you want to buy \nthis?", "Confirmation", JOptionPane.OK_CANCEL_OPTION);
 			}
 		});
 		buyAnimalsBtn.setBounds(552, 119, 155, 60);
-		if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
-		else buyAnimalsBtn.setEnabled(true);
 		buyAnimalsTab.add(buyAnimalsBtn);
 		
 		JPanel buyCropsTab = new JPanel();
@@ -404,11 +394,11 @@ public class MainScreen {
 		storeCropsTableContainer.setBounds(5, 5, 500, 292);
 		buyCropsTab.add(storeCropsTableContainer);
 		
-		String[] storeCropsColumnNames = {"ID", "Species", "Days Until Mature", "Price"};
-		Object[][] storeCropsData = new Object[game.getStore().getCrops().size()][4];
+		String[] storeCropsColumnNames = {"Species", "Days Until Mature", "Price"};
+		Object[][] storeCropsData = new Object[game.getStore().getCrops().size()][3];
 		for(int i = 0; i < game.getStore().getCrops().size(); i++) {
 			Crop c = game.getStore().getCrops().get(i);
-			Object[] tableRow = {c.getId(), c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice()};
+			Object[] tableRow = {c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice()};
 			storeCropsData[i] = tableRow;
 		}
 		storeCropsTable = new JTable(storeCropsData, storeCropsColumnNames);
@@ -426,17 +416,17 @@ public class MainScreen {
 		storeItemsTableContainer.setBounds(5, 5, 500, 292);
 		buyItemsTab.add(storeItemsTableContainer);
 		
-		String[] storeItemsColumnNames = {"ID", "Name", "Type", "Benefit", "Price"};
-		Object[][] storeItemsData = new Object[game.getStore().getItems().size()][5];
+		String[] storeItemsColumnNames = {"Name", "Type", "Benefit", "Price"};
+		Object[][] storeItemsData = new Object[game.getStore().getItems().size()][4];
 		for(int i = 0; i < game.getStore().getItems().size(); i++) {
 			Item item = game.getStore().getItems().get(i);
-			Object[] tableRow = {item.getId(), item.getName(), null, null, item.getPrice()};
+			Object[] tableRow = {item.getName(), null, null, item.getPrice()};
 			if(item.isFoodItem()) {
-				tableRow[2] = "Food Item";
-				tableRow[3] = item.getBenefit() + " Health Points";
+				tableRow[1] = "Food Item";
+				tableRow[2] = item.getBenefit() + " Health Points";
 			} else {
-				tableRow[2] = "Crop item";
-				tableRow[3] = item.getBenefit() + " Day Growth Enhancement";
+				tableRow[1] = "Crop item";
+				tableRow[2] = item.getBenefit() + " Day Growth Enhancement";
 			}
 			storeItemsData[i] = tableRow;
 		}
