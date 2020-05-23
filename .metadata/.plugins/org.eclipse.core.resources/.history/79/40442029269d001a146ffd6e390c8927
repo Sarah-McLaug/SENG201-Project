@@ -369,8 +369,16 @@ public class MainScreen {
 		ownedItemsTableContainer.setBounds(146, 5, 454, 272);
 		viewItemsTab.add(ownedItemsTableContainer);
 		
-		ownedItemsTable = new JTable();
-		ownedItemsTable.setModel(farmItemsModel);
+		String[] ownedItemsColumnNames = {"Name", "Type"};
+		Object[][] ownedItemsData = new Object[game.getFarm().getInventory().size()][2];
+		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
+			Item item = game.getFarm().getInventory().get(i);
+			Object[] tableRow = {item.getName(), null};
+			if(item.isFoodItem()) tableRow[1] = "Food Item";
+			else tableRow[1] = "Crop Item";
+			ownedItemsData[i] = tableRow;
+		}
+		ownedItemsTable = new JTable(ownedItemsData, ownedItemsColumnNames);
 		ownedItemsTableContainer.setViewportView(ownedItemsTable);
 		
 		JLabel inventoryLabel = new JLabel("Inventory");
@@ -417,7 +425,6 @@ public class MainScreen {
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					if(farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
 					playAnimalsBtn.setEnabled(true);
 					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}
@@ -521,24 +528,8 @@ public class MainScreen {
 					game.getFarm().addItem(item);
 					game.getFarm().updateBalance(-item.getPrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					//update all item models
-					if(item.isFoodItem()) {
-						farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
-						farmFoodItemsModel.addRow(new Object[] {item.getName(), item.getBenefit()});
-						if(game.getFarm().getAnimals().size() > 0) feedAnimalsBtn.setEnabled(true);
-					}
-					else {
-						String enhancement = "";
-						if(item.getBenefit() == 1) {
-							enhancement += item.getBenefit() + " Day Growth Enhancement";
-							farmCropItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Day"});
-						}
-						else {
-							enhancement += item.getBenefit() + " Days Growth Enhancement";
-							farmCropItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Days"});
-						}
-						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
-					}
+					//TODO: update farm items model
+					//items button updating
 					if(game.getStore().getItems().size() == 0) buyItemsBtn.setEnabled(false);
 				}
 			}

@@ -417,7 +417,6 @@ public class MainScreen {
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					if(farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
 					playAnimalsBtn.setEnabled(true);
 					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}

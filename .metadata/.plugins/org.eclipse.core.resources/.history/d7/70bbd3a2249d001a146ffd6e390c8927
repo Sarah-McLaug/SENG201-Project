@@ -149,27 +149,8 @@ public class MainScreen {
 		}
 		
 		//set up farm food item table model
-		String[] farmFoodItemsColumnNames = {"Name", "Health Points"};
-		DefaultTableModel farmFoodItemsModel = new DefaultTableModel(0, 0);
-		farmFoodItemsModel.setColumnIdentifiers(farmFoodItemsColumnNames);
-		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
-			Item item = game.getFarm().getInventory().get(i);
-			if(item.isFoodItem()) {
-				farmFoodItemsModel.addRow(new Object[] {item.getName(), item.getBenefit()});
-			}
-		}
 		
 		//set up farm crop item table model
-		String[] farmCropItemsColumnNames = {"Name","Growth Enhancement"};
-		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
-		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
-		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
-			Item item = game.getFarm().getInventory().get(i);
-			if(!item.isFoodItem()) {
-				if(item.getBenefit() == 1)  farmItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Day"});
-				else farmItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Days"});
-			}
-		}
 		
 		//set up frame
 		screen = new JFrame();
@@ -221,8 +202,6 @@ public class MainScreen {
 		actionTabs.setBounds(0, 38, 780, 350);
 		actionsPanel.add(actionTabs);
 		
-		//set up specific actions
-		//tend crops
 		JPanel tendCropsTab = new JPanel();
 		actionTabs.addTab("Tend Crops", null, tendCropsTab, null);
 		tendCropsTab.setLayout(null);
@@ -230,6 +209,7 @@ public class MainScreen {
 		JScrollPane tendCropsTableContainer = new JScrollPane();
 		tendCropsTableContainer.setBounds(5, 5, 370, 250);
 		tendCropsTab.add(tendCropsTableContainer);
+		
 		
 		tendCropsTable = new JTable();
 		tendCropsTable.setModel(farmCropsModel);
@@ -239,8 +219,19 @@ public class MainScreen {
 		tendCropsItemTableContainer.setBounds(385, 5, 370, 250);
 		tendCropsTab.add(tendCropsItemTableContainer);
 		
-		tendCropsItemTable = new JTable();
-		tendCropsItemTable.setModel(farmCropItemsModel);
+		String[] cropItemsColumnNames = {"Name", "Growth Enhancement"};
+		Object[][] cropItemsData = new Object[game.getFarm().getInventory().size()+1][2];
+		Object[] waterRow = {"Water", "1 Day"};
+		cropItemsData[0] = waterRow;
+		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
+			Item item = game.getFarm().getInventory().get(i);
+			if(!item.isFoodItem()) {
+				Object[] tableRow = {item.getName(), item.getBenefit()};
+				cropItemsData[i+1] = tableRow;
+			}
+		}
+		
+		tendCropsItemTable = new JTable(cropItemsData, cropItemsColumnNames);
 		tendCropsItemTableContainer.setViewportView(tendCropsItemTable);
 		
 		JButton tendCropsBtn = new JButton("Tend Crops");
@@ -262,7 +253,6 @@ public class MainScreen {
 		tendCropsItemTableTitle.setBounds(539, 255, 61, 13);
 		tendCropsTab.add(tendCropsItemTableTitle);
 		
-		//feed animals
 		JPanel feedAnimalsTab = new JPanel();
 		actionTabs.addTab("Feed Animals", null, feedAnimalsTab, null);
 		feedAnimalsTab.setLayout(null);
@@ -280,9 +270,17 @@ public class MainScreen {
 		feedAnimalsItemTableContainer.setBounds(385, 5, 370, 250);
 		feedAnimalsTab.add(feedAnimalsItemTableContainer);
 		
-		feedAnimalsItemTable = new JTable();
-		feedAnimalsItemTable.setModel(farmFoodItemsModel);
-		feedAnimalsTable.setRowSelectionAllowed(false);
+		String[] feedAnimalsItemColumnNames = {"Name", "Health Points"};
+		Object[][] feedAnimalsItemData = new Object[game.getFarm().getInventory().size()][2];
+		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
+			Item item = game.getFarm().getInventory().get(i);
+			if(item.isFoodItem()) {
+				Object[] tableRow = {item.getName(), item.getBenefit()};
+				feedAnimalsItemData[i] = tableRow;
+			}
+		}
+		
+		feedAnimalsItemTable = new JTable(feedAnimalsItemData, feedAnimalsItemColumnNames);
 		feedAnimalsItemTableContainer.setViewportView(feedAnimalsItemTable);
 		
 		JButton feedAnimalsBtn = new JButton("Feed Animals");
@@ -369,8 +367,16 @@ public class MainScreen {
 		ownedItemsTableContainer.setBounds(146, 5, 454, 272);
 		viewItemsTab.add(ownedItemsTableContainer);
 		
-		ownedItemsTable = new JTable();
-		ownedItemsTable.setModel(farmItemsModel);
+		String[] ownedItemsColumnNames = {"Name", "Type"};
+		Object[][] ownedItemsData = new Object[game.getFarm().getInventory().size()][2];
+		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
+			Item item = game.getFarm().getInventory().get(i);
+			Object[] tableRow = {item.getName(), null};
+			if(item.isFoodItem()) tableRow[1] = "Food Item";
+			else tableRow[1] = "Crop Item";
+			ownedItemsData[i] = tableRow;
+		}
+		ownedItemsTable = new JTable(ownedItemsData, ownedItemsColumnNames);
 		ownedItemsTableContainer.setViewportView(ownedItemsTable);
 		
 		JLabel inventoryLabel = new JLabel("Inventory");
@@ -417,7 +423,6 @@ public class MainScreen {
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					if(farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
 					playAnimalsBtn.setEnabled(true);
 					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}
@@ -521,24 +526,8 @@ public class MainScreen {
 					game.getFarm().addItem(item);
 					game.getFarm().updateBalance(-item.getPrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					//update all item models
-					if(item.isFoodItem()) {
-						farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
-						farmFoodItemsModel.addRow(new Object[] {item.getName(), item.getBenefit()});
-						if(game.getFarm().getAnimals().size() > 0) feedAnimalsBtn.setEnabled(true);
-					}
-					else {
-						String enhancement = "";
-						if(item.getBenefit() == 1) {
-							enhancement += item.getBenefit() + " Day Growth Enhancement";
-							farmCropItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Day"});
-						}
-						else {
-							enhancement += item.getBenefit() + " Days Growth Enhancement";
-							farmCropItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Days"});
-						}
-						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
-					}
+					//TODO: update farm items model
+					//items button updating
 					if(game.getStore().getItems().size() == 0) buyItemsBtn.setEnabled(false);
 				}
 			}
