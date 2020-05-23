@@ -391,12 +391,7 @@ public class MainScreen {
 					game.getStore().sellAnimal(a.getId());
 					game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
-					//Used to test that user was purchasing animals
-					/*String printAnimalsinFarm = ""; 
-					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-						printAnimalsinFarm += game.getFarm().getAnimals().get(i).getSpecies() + "\n";
-					}
-					JOptionPane.showMessageDialog(screen, printAnimalsinFarm);*/
+					JOptionPane.showMessageDialog(screen, "bought" + a.getSpecies());
 				}
 			}
 		});
