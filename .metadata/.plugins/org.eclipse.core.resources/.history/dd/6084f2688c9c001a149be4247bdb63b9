@@ -69,6 +69,10 @@ public class Game {
 	//-----------------------------------------------------------------------------------------------------------------
 	public void populateStore(ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
 			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
+		
+		ArrayList<Crop> testCrop = store.getCrops();
+		
+		/*
 		//remove remaining stock
 		//remove crops
 		if(store.getCrops().size() != 0) {
@@ -124,7 +128,7 @@ public class Game {
 				CropItem newCropItem = (CropItem) cropItems.get(i);
 				store.addItem(newCropItem);
 			}
-		}
+		}*/
 	}
 	
 	//Uses the predefined elements (see below) to populate the store with a random amount of each element
