@@ -38,11 +38,6 @@ public class MainScreen {
 	private JTable tendCropsItemTable;
 	private JTable feedAnimalsItemTable;
 	private JTable playAnimalsTable;
-	private JButton tendCropsBtn;
-	private JButton feedAnimalsBtn;
-	private JButton playAnimalsBtn;
-	private JButton harvestCropsBtn;
-	private JButton tendFarmBtn;
 
 	/**
 	 * Launch the application.
@@ -104,14 +99,6 @@ public class MainScreen {
 				}
 			}
 		});
-	}
-	
-	public void disableActions() {
-		tendCropsBtn.setEnabled(false);
-		feedAnimalsBtn.setEnabled(false);
-		playAnimalsBtn.setEnabled(false);
-		harvestCropsBtn.setEnabled(false);
-		tendFarmBtn.setEnabled(false);
 	}
 
 	/**
@@ -257,8 +244,8 @@ public class MainScreen {
 		tendCropsItemTable.setModel(farmCropItemsModel);
 		tendCropsItemTableContainer.setViewportView(tendCropsItemTable);
 		
-		tendCropsBtn = new JButton("Tend Crops");
-		if(tendCropsTable.getSelectionModel().isSelectionEmpty() || 
+		JButton tendCropsBtn = new JButton("Tend Crops");
+		if(game.getActionCount() == 0 || tendCropsTable.getSelectionModel().isSelectionEmpty() || 
 				tendCropsItemTable.getSelectionModel().isSelectionEmpty()) tendCropsBtn.setEnabled(false);
 		else tendCropsBtn.setEnabled(true);
 		tendCropsBtn.setBounds(315, 268, 120, 30);
@@ -299,9 +286,9 @@ public class MainScreen {
 		feedAnimalsTable.setRowSelectionAllowed(false);
 		feedAnimalsItemTableContainer.setViewportView(feedAnimalsItemTable);
 		
-		feedAnimalsBtn = new JButton("Feed Animals");
+		JButton feedAnimalsBtn = new JButton("Feed Animals");
 		feedAnimalsBtn.setBounds(315, 268, 120, 30);
-		if(feedAnimalsItemTable.getSelectionModel().isSelectionEmpty()) feedAnimalsBtn.setEnabled(false);
+		if(game.getActionCount() == 0 || feedAnimalsItemTable.getSelectionModel().isSelectionEmpty()) feedAnimalsBtn.setEnabled(false);
 		else feedAnimalsBtn.setEnabled(true);
 		feedAnimalsTab.add(feedAnimalsBtn);
 		
@@ -318,7 +305,7 @@ public class MainScreen {
 		playAnimalsTable.setRowSelectionAllowed(false);
 		playAnimalsTableContainer.setViewportView(playAnimalsTable);
 		
-		playAnimalsBtn = new JButton("Play with Animals");
+		JButton playAnimalsBtn = new JButton("Play with Animals");
 		playAnimalsBtn.setBounds(552, 119, 155, 60);
 		if(game.getFarm().getAnimals().size() > 0) playAnimalsBtn.setEnabled(true);
 		else playAnimalsBtn.setEnabled(false);
@@ -346,7 +333,7 @@ public class MainScreen {
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
-		harvestCropsBtn = new JButton("Harvest Crops");
+		JButton harvestCropsBtn = new JButton("Harvest Crops");
 		harvestCropsBtn.setBounds(552, 119, 155, 60);
 		if(game.getFarm().getCrops().size() == 0) harvestCropsBtn.setEnabled(false);
 		else harvestCropsBtn.setEnabled(true);
@@ -356,7 +343,7 @@ public class MainScreen {
 		actionTabs.addTab("Tend Farm", null, tendFarmTab, null);
 		tendFarmTab.setLayout(null);
 		
-		tendFarmBtn = new JButton("Tend the Farm");
+		JButton tendFarmBtn = new JButton("Tend the Farm");
 		tendFarmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Integer input = JOptionPane.showConfirmDialog(screen, "This will take one action. \n Are you sure?", "Confirmation", 
@@ -365,7 +352,6 @@ public class MainScreen {
 					game.getFarm().tendFarm();
 					game.setActionCount(game.getActionCount() - 1);
 					actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
-					if(game.getActionCount() == 0) disableActions();
 				}
 			}
 		});

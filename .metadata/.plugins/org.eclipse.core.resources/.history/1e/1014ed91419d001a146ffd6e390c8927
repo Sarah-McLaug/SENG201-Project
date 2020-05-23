@@ -204,8 +204,8 @@ public class Farm {
 	
 	
 	//TODO: Review to make sure these are okay
-	public void tendFarm() {
-		cropYieldFactor += 0.1;
+	public void tendAnimal() {
+		//cropGrowthFactor += 0.1;
 		animalHappinessFactor += 0.5;
 	}
 	
