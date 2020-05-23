@@ -386,10 +386,11 @@ public class MainScreen {
 		buyAnimalsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] animalIds = new Object[storeAnimalsModel.getRowCount()];
-				for(int i = 0; i < animalIds.length; i++) animalIds[i] = storeAnimalsModel.getValueAt(i, 0);
-				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Selection", 
-						JOptionPane.PLAIN_MESSAGE, null, animalIds, animalIds[0]);
-				if(purchase != null && purchase.intValue() != 0 && game.getStore().animalExists(purchase.intValue())) {
+				for(int i = 0; i < animalIds.length; i++) {
+					animalIds[i] = storeAnimalsModel.getValueAt(i, 0);
+				}
+				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the animal you would like to purcase", "Confirmation", JOptionPane.PLAIN_MESSAGE, null, animalIds, animalIds[0]);
+				if(purchase != null && purchase.intValue() != 0 && game.getStore().animalExists(purchase.intValue()) == true) {
 					Animal a = game.getStore().fetchAnimal(purchase.intValue());
 					int index = -1;
 					for(int i = 0; i < storeAnimalsModel.getRowCount(); i++) {
@@ -431,29 +432,6 @@ public class MainScreen {
 		storeCropsTableContainer.setViewportView(storeCropsTable);
 		
 		JButton buyCropsBtn = new JButton("Purchase");
-		buyCropsBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object[] cropIds = new Object[storeCropsModel.getRowCount()];
-				for(int i = 0; i < cropIds.length; i++) cropIds[i] = storeCropsModel.getValueAt(i,  0);
-				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the crop you would like to purcase", "Selection",
-						JOptionPane.PLAIN_MESSAGE, null, cropIds, cropIds[0]);
-				if(purchase != null && purchase.intValue() != 0 && game.getStore().cropExists(purchase.intValue())) {
-					Crop c = game.getStore().fetchCrop(purchase.intValue());
-					int index = -1;
-					for(int i = 0; i < storeCropsModel.getRowCount(); i++) {
-						if((int) storeCropsModel.getValueAt(i,  0) == c.getId()) index = i;
-					}
-					storeCropsModel.removeRow(index);
-					game.getStore().sellCrop(c.getId());
-					game.getFarm().addCrop(c, game.getDay());
-					game.getFarm().updateBalance(-c.getPurchasePrice());
-					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					//TODO: update farmcrop model
-					tendCropsBtn.setEnabled(true);
-					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
-				}
-			}
-		});
 		buyCropsBtn.setBounds(552, 119, 155, 60);
 		buyCropsTab.add(buyCropsBtn);
 		
