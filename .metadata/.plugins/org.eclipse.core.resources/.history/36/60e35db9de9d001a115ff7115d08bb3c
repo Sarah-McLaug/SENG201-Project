@@ -376,7 +376,6 @@ public class MainScreen {
 				if(farmAnimalsModel.getRowCount() > 0) playAnimalsBtn.setEnabled(true);
 				if(harvestableCropsModel.getRowCount() > 0) harvestCropsBtn.setEnabled(true);
 				tendFarmBtn.setEnabled(true);
-				actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
 			}
 		});
 		nextDayButton.setBounds(617, 335, 150, 45);

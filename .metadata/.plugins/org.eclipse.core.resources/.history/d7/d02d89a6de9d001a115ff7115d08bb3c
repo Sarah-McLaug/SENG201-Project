@@ -370,13 +370,8 @@ public class MainScreen {
 					}
 					storeItemsModel.addRow(tableRow);
 				}
-				//update action button enabled
-				if(farmCropsModel.getRowCount() > 0) tendCropsBtn.setEnabled(true);
-				if(farmAnimalsModel.getRowCount() > 0 && farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
-				if(farmAnimalsModel.getRowCount() > 0) playAnimalsBtn.setEnabled(true);
-				if(harvestableCropsModel.getRowCount() > 0) harvestCropsBtn.setEnabled(true);
-				tendFarmBtn.setEnabled(true);
-				actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
+				//update harvestable crop button
+				if(game.getActionCount() > 0 && harvestableCropsModel.getRowCount() > 0) harvestCropsBtn.setEnabled(true);
 			}
 		});
 		nextDayButton.setBounds(617, 335, 150, 45);
