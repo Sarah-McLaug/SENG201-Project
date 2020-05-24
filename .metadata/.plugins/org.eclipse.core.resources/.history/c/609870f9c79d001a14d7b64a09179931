@@ -45,35 +45,30 @@ public class Farm {
 			animalHappinessFactor = 1.25;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
-			break;
 		case "fast":
 			balance = 10000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
-			break;
 		case "fertile":
 			balance = 10000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.25;
-			break;
 		case "rich":
 			balance = 15000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
-			break;
 		default:
 			balance = 12000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
-			break;
 		}
 	}
 	
