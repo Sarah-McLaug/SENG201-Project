@@ -1,0 +1,23 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import main.Animal;
+
+class AnimalTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void updateHappinessTest() {
+		Animal animal = new Animal("Baboon", 100, 30, 7, 7);
+		animal.updateHappiness(4);
+		assertEquals(10, animal.getHappiness());
+	}
+
+}

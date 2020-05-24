@@ -24,15 +24,5 @@ class AnimalTest {
 		testAnimal.updateHappiness(6);
 		assertEquals(7, testAnimal.getHappiness());
 	}
-	
-	@Test
-	public void updateHealthTest() {
-		testAnimal.updateHealth(4);
-		assertEquals(10, testAnimal.getHealth());
-		testAnimal.updateHealth(-20);
-		assertEquals(1, testAnimal.getHealth());
-		testAnimal.updateHealth(6);
-		assertEquals(7, testAnimal.getHealth());
-	}
 
 }
