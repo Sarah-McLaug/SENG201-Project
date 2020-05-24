@@ -14,101 +14,50 @@ public class Game {
 	private ArrayList<Item> foodItems = new ArrayList<Item>();
 	private ArrayList<Item> cropItems = new ArrayList<Item>();
 	
-	/**
-	 * 
-	 * @return instance of farm in the game
-	 */
 	public Farm getFarm() {
 		return farm;
 	}
 	
-	/**
-	 * 
-	 * @param farm - farm to be set
-	 */
 	public void setFarm(Farm farm) {
 		this.farm = farm;
 	}
 	
-	/**
-	 * 
-	 * @return instance of store in the game
-	 */
 	public Store getStore() {
 		return store;
 	}
 	
-	/**
-	 * 
-	 * @param store - store to be set
-	 */
 	public void setStore(Store store) {
 		this.store = store;
 	}
 	
-	/**
-	 * 
-	 * @return length of the game
-	 */
 	public int getDuration() {
 		return duration;
 	}
 	
-	/**
-	 * 
-	 * @param duration - duration to be set
-	 */
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 	
-	/**
-	 * 
-	 * @return amount of actions the user can take
-	 */
 	public int getActionCount() {
 		return actionCount;
 	}
 	
-	/**
-	 * 
-	 * @param actionCount - amount of action to set
-	 */
 	public void setActionCount(int actionCount) {
 		this.actionCount = actionCount;
 	}
 	
-	/**
-	 * 
-	 * @return current day of the game
-	 */
 	public int getDay() {
 		return day;
 	}
 	
-	/**
-	 * 
-	 * @param day - day to be set
-	 */
 	public void setDay(int day) {
 		this.day = day;
 	}
 	
-	/**
-	 * 
-	 * @return the list of the crop species in this game
-	 */
 	public ArrayList<Crop> getCropSpecies(){
 		return cropSpecies;
 	}
 	
-	/**
-	 * Set the species and types of items for this game
-	 * @param animalSpecies - animal species to set
-	 * @param cropSpecies - crop species to set
-	 * @param foodItems - types of food items to set
-	 * @param cropItems - types of crop item to set
-	 */
 	public void setSpecies(ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
 			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
 		this.animalSpecies = animalSpecies;
@@ -117,10 +66,6 @@ public class Game {
 		this.cropItems = cropItems;
 	}
 	
-	/**
-	 * 
-	 * @return score the user received
-	 */
 	public double score() {
 		double profit = profit();
 		if (profit >= 0 ) {
@@ -130,17 +75,10 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return money the user made, in dollars
-	 */
 	public double profit() {
 		return farm.getBalance() - farm.getCapital();
 	}
 	
-	/**
-	 * Re-stock the store
-	 */
 	public void populateStore() {
 		//remove crops
 		if(store.getCrops().size() != 0) {
@@ -215,9 +153,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Move to the next day
-	 */
 	public void advanceDay() {
 		if(day - 1 > 0) {
 			day--;
@@ -242,62 +177,33 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Launch the end screen
-	 */
 	public void launchEndScreen() {
 		EndScreen endScreen = new EndScreen(this);
 	}
 	
-	/**
-	 * Close the end screen
-	 * @param endWindow - end screen to close
-	 */
 	public void closeEndScreen(EndScreen endWindow) {
 		endWindow.closeWindow();
 	}
 	
-	/**
-	 * Launch the main screen
-	 */
 	public void launchMainScreen() {
 		MainScreen mainWindow = new MainScreen(this);
 	}
 	
-	/**
-	 * Close the main screen
-	 * @param mainWindow - main screen to close
-	 */
 	public void closeMainScreen(MainScreen mainWindow) {
 		mainWindow.closeWindow();
 		launchEndScreen();
 	}
 	
-	/**
-	 * Launch the start screen
-	 */
 	public void launchStartScreen() {
 		StartScreen startWindow = new StartScreen(this);
 	}
 	
-	/**
-	 * Close the start screen
-	 * @param startWindow - start screen to close
-	 */
 	public void closeStartScreen(StartScreen startWindow) {
 		startWindow.closeWindow();
 		launchMainScreen();
 	}
 	
-	/**
-	 * Uses the predefined elements (see below) to populate the store with a random amount of each element
-	 * @param store - store to populate
-	 * @param animalSpecies - animal species in the game
-	 * @param cropSpecies - crop species in the game
-	 * @param foodItems - food items in the game
-	 * @param cropItems - crop items in the game
-	 * @param day - current day
-	 */
+	//Uses the predefined elements (see below) to populate the store with a random amount of each element
 	public static void populateStore(Store store, ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
 			ArrayList<Item> foodItems, ArrayList<Item> cropItems, int day) {
 		
@@ -408,10 +314,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Run the game
-	 * @param args - supplies command-line arguments as an array of String objects
-	 */
 	public static void main(String[] args) {
 		Game game = new Game();
 		ArrayList <Crop> cropSpecies = new ArrayList <Crop>();

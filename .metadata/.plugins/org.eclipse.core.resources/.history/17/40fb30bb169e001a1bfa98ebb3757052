@@ -215,9 +215,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Move to the next day
-	 */
 	public void advanceDay() {
 		if(day - 1 > 0) {
 			day--;
@@ -242,62 +239,33 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Launch the end screen
-	 */
 	public void launchEndScreen() {
 		EndScreen endScreen = new EndScreen(this);
 	}
 	
-	/**
-	 * Close the end screen
-	 * @param endWindow - end screen to close
-	 */
 	public void closeEndScreen(EndScreen endWindow) {
 		endWindow.closeWindow();
 	}
 	
-	/**
-	 * Launch the main screen
-	 */
 	public void launchMainScreen() {
 		MainScreen mainWindow = new MainScreen(this);
 	}
 	
-	/**
-	 * Close the main screen
-	 * @param mainWindow - main screen to close
-	 */
 	public void closeMainScreen(MainScreen mainWindow) {
 		mainWindow.closeWindow();
 		launchEndScreen();
 	}
 	
-	/**
-	 * Launch the start screen
-	 */
 	public void launchStartScreen() {
 		StartScreen startWindow = new StartScreen(this);
 	}
 	
-	/**
-	 * Close the start screen
-	 * @param startWindow - start screen to close
-	 */
 	public void closeStartScreen(StartScreen startWindow) {
 		startWindow.closeWindow();
 		launchMainScreen();
 	}
 	
-	/**
-	 * Uses the predefined elements (see below) to populate the store with a random amount of each element
-	 * @param store - store to populate
-	 * @param animalSpecies - animal species in the game
-	 * @param cropSpecies - crop species in the game
-	 * @param foodItems - food items in the game
-	 * @param cropItems - crop items in the game
-	 * @param day - current day
-	 */
+	//Uses the predefined elements (see below) to populate the store with a random amount of each element
 	public static void populateStore(Store store, ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
 			ArrayList<Item> foodItems, ArrayList<Item> cropItems, int day) {
 		
@@ -408,10 +376,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Run the game
-	 * @param args - supplies command-line arguments as an array of String objects
-	 */
 	public static void main(String[] args) {
 		Game game = new Game();
 		ArrayList <Crop> cropSpecies = new ArrayList <Crop>();

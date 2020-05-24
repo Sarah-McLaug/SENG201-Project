@@ -79,8 +79,7 @@ public class MainScreen {
 	}
 
 	/**
-	 * Create the window
-	 * @param incomingGame - state of the game when the window opens
+	 * Create the application.
 	 */
 	public MainScreen(Game incomingGame) {
 		game = incomingGame;
@@ -95,15 +94,12 @@ public class MainScreen {
 		screen.dispose();
 	}
 	
-	/**
-	 * Tells the game the window is ready to be closed
-	 */
 	public void finishedWindow() {
 		game.closeMainScreen(this);
 	}
 
 	/**
-	 * Initialize the contents of the frame
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		//set up data models
@@ -113,7 +109,7 @@ public class MainScreen {
 		{
 		    public boolean isCellEditable(int row, int column)
 		    {
-		      return false; //This causes all cells to be not editable
+		      return false;//This causes all cells to be not editable
 		    }
 		};
 		
@@ -634,6 +630,7 @@ public class MainScreen {
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
+		//TODO: test, need to move thru days or tend crops in order to test
 		harvestCropsBtn = new JButton("Harvest Crops");
 		harvestCropsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

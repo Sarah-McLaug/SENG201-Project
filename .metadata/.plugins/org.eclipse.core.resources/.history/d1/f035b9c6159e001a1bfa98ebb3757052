@@ -634,6 +634,7 @@ public class MainScreen {
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
+		//TODO: test, need to move thru days or tend crops in order to test
 		harvestCropsBtn = new JButton("Harvest Crops");
 		harvestCropsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
