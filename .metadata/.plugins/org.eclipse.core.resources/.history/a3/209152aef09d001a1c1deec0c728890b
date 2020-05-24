@@ -61,7 +61,6 @@ public class StartScreen {
 
 	/**
 	 * Create the window
-	 * @param incomingGame - state of the game when the window is launched
 	 */
 	public StartScreen(Game incomingGame) {
 		game = incomingGame;
@@ -76,15 +75,12 @@ public class StartScreen {
 		screen.dispose();
 	}
 	
-	/**
-	 * Tells the game the window can be closed
-	 */
 	public void finishedWindow() {
 		game.closeStartScreen(this);
 	}
 
 	/**
-	 * Initialize the contents of the frame
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		screen = new JFrame();

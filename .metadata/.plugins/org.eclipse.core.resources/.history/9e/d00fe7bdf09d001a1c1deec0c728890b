@@ -84,7 +84,7 @@ public class StartScreen {
 	}
 
 	/**
-	 * Initialize the contents of the frame
+	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		screen = new JFrame();
