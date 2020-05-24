@@ -309,11 +309,9 @@ public class MainScreen {
 						}
 						farmCropItemsModel.removeRow(index);
 						farmCropsModel.setRowCount(0);
-						harvestableCropsModel.setRowCount(0);
 						for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
 							Crop c = game.getFarm().getCrops().get(i);
 							farmCropsModel.addRow(new Object[]{c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-							if(c.getDaysUntilMature() == 0) harvestableCropsModel.addRow(new Object[] {c.getSpecies(), c.getSellingPrice()});
 						}
 						game.setActionCount(game.getActionCount() - 1);
 						actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
