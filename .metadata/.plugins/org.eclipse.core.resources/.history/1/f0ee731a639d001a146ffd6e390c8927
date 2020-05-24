@@ -91,7 +91,6 @@ public class MainScreen {
 				
 
 				Game dummyGame = new Game();
-				dummyGame.setDay(day);
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(actionsRemaining);

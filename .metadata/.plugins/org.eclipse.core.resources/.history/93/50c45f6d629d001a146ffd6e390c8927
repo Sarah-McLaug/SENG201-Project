@@ -91,7 +91,6 @@ public class MainScreen {
 				
 
 				Game dummyGame = new Game();
-				dummyGame.setDay(day);
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(actionsRemaining);
@@ -242,13 +241,6 @@ public class MainScreen {
 		mainPanel.add(viewFarmStatusButton);
 		
 		JButton nextDayButton = new JButton("Move to Next Day");
-		nextDayButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				game.advanceDay();
-				JOptionPane.showMessageDialog(screen, "You have " + game.getDay() + " days left!", "Notification", JOptionPane.ERROR_MESSAGE);
-				//TODO: update table models
-			}
-		});
 		nextDayButton.setBounds(612, 330, 150, 45);
 		mainPanel.add(nextDayButton);
 		
@@ -447,7 +439,7 @@ public class MainScreen {
 		harvestableCropsTable.setRowSelectionAllowed(false);
 		harvestableCropsTableContainer.setViewportView(harvestableCropsTable);
 		
-		//TODO: test, need to move thru days or tend crops in order to test
+		//TODO: test, need to move thru days in order to test
 		harvestCropsBtn = new JButton("Harvest Crops");
 		harvestCropsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

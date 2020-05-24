@@ -10,19 +10,18 @@ public class Crop {
 	private static int count = 1;
 	private int id;
 	
-	public Crop(String species, double purchasePrice, double sellingPrice, int daysUntilMature, double health, int dayPlanted) {
+	public Crop(String species, double purchasePrice, double sellingPrice, int daysUntilMature, double health, int growthBonus) {
 		this.species = species;
 		this.purchasePrice = purchasePrice;
 		this.sellingPrice = sellingPrice;
 		//ensure days to mature is not negative
-		if (daysUntilMature <= 0) {
+		if (daysUntilMature - growthBonus < 0) {
 			//the minimum time for a crop to mature
 			this.daysUntilMature = 1;
 		} else {
-			this.daysUntilMature = daysUntilMature;
+			this.daysUntilMature = daysUntilMature - growthBonus;
 		}
 		this.health = health;
-		this.dayPlanted = dayPlanted;
 		this.id = count++;
 	}
 

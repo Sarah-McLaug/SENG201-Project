@@ -147,8 +147,8 @@ public class Game {
 	}
 	
 	public void advanceDay() {
-		if(day - 1 > 0) {
-			day--;
+		day--;
+		if(day > 0) {
 			actionCount = 2;
 			//give animal money TODO: decide threshold for happy animal bonus
 			for(int i = 0; i < farm.getAnimals().size(); i++) {
@@ -173,7 +173,7 @@ public class Game {
 			//populateStore requires day because it creates new crop items which require a birthday
 			populateStore(animalSpecies, cropSpecies, foodItems, cropItems);
 		} else {
-			//end game
+			playingGame = false;
 		}
 	}
 	

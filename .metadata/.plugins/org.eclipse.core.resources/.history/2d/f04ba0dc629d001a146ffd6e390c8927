@@ -91,7 +91,6 @@ public class MainScreen {
 				
 
 				Game dummyGame = new Game();
-				dummyGame.setDay(day);
 				dummyGame.setFarm(farm);
 				dummyGame.setDuration(5);
 				dummyGame.setActionCount(actionsRemaining);
@@ -245,7 +244,6 @@ public class MainScreen {
 		nextDayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.advanceDay();
-				JOptionPane.showMessageDialog(screen, "You have " + game.getDay() + " days left!", "Notification", JOptionPane.ERROR_MESSAGE);
 				//TODO: update table models
 			}
 		});

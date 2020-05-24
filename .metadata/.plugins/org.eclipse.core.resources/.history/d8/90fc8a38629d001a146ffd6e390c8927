@@ -103,7 +103,7 @@ public class Game {
 				double sellingPrice = newCrop.getSellingPrice();
 				int daysUntilMature = newCrop.getDaysUntilMature();
 				double health = newCrop.getHealth();
-				store.addCrop(new Crop(species, purchasePrice, sellingPrice, daysUntilMature, health, day));
+				store.addCrop(new Crop(species, purchasePrice, sellingPrice, daysUntilMature, health, farm.getCropGrowthBonus()));
 			}
 		}
 		
@@ -143,37 +143,6 @@ public class Game {
 				double purchasePrice = newCropItem.getPrice();
 				store.addItem(new CropItem(name, purchasePrice, growthEnhancement));
 			}
-		}
-	}
-	
-	public void advanceDay() {
-		if(day - 1 > 0) {
-			day--;
-			actionCount = 2;
-			//give animal money TODO: decide threshold for happy animal bonus
-			for(int i = 0; i < farm.getAnimals().size(); i++) {
-				if(farm.getAnimals().get(i).getHappiness() >= 8) {
-					farm.updateBalance(farm.getAnimals().get(i).getDailyBonus());
-				}
-			}
-			//lower animal happiness & health TODO: decide health/happiness lowering factor
-			/*
-			 * Note: 
-			 * When a farmer plays with an animal it's happiness is increased by it's the farms animalHappinessFactor 
-			 */
-			for(int i = 0; i < farm.getAnimals().size(); i++) {
-				farm.getAnimals().get(i).updateHealth(-1);
-				farm.getAnimals().get(i).updateHappiness(-1);
-			}
-			//reduce days until mature for crops
-			for(int i = 0; i < farm.getCrops().size(); i++) {
-				if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
-			}
-			
-			//populateStore requires day because it creates new crop items which require a birthday
-			populateStore(animalSpecies, cropSpecies, foodItems, cropItems);
-		} else {
-			//end game
 		}
 	}
 	

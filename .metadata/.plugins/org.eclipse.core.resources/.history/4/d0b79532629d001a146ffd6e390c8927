@@ -22,7 +22,6 @@ public class Crop {
 			this.daysUntilMature = daysUntilMature;
 		}
 		this.health = health;
-		this.dayPlanted = dayPlanted;
 		this.id = count++;
 	}
 
