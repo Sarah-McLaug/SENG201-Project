@@ -76,6 +76,6 @@ class StoreTest {
 	@Test
 	public void testFetchAnimal() {
 		assertEquals(testStore.getAnimals().get(0).getId(), 
-				testStore.fetchAnimal(testStore.getAnimals().get(0).getId()).getId());
+				testStore.fetchItem(testStore.getAnimals().get(0).getId()).getId());
 	}
 }

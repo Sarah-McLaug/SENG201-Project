@@ -16,4 +16,5 @@ class ItemTest {
 		CropItem crop = new CropItem("dirt", 200, 2);
 		assertFalse(crop.isFoodItem());
 	}
+
 }

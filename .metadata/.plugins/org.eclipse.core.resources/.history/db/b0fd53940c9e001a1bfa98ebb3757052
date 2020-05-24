@@ -34,48 +34,27 @@ class StoreTest {
 		
 		testStore.addItem(new CropItem("fertilizer", 2000, 1));
 		testStore.addItem(new CropItem("pestiside", 4500, 3));
-		testStore.addItem(new CropItem("pestiside", 8000, 5));
+		testStore.addItem(new CropItem("unicorn dung", 8000, 5));
 	}
 
 	@Test
 	public void testGetItemStockCount() {
-		assertEquals(1, testStore.getItemStockCount("fertilizer"));
-		assertEquals(2, testStore.getItemStockCount("pestiside"));
+		
 	}
 	
 	@Test
 	public void testItemExists() {
-		assertFalse(testStore.itemExists(0));
-		assertTrue(testStore.itemExists(testStore.getItems().get(0).getId()));
+		
 	}
 	
 	@Test
 	public void testCropExists() {
-		assertFalse(testStore.cropExists(0));
-		assertTrue(testStore.cropExists(testStore.getCrops().get(0).getId()));
+		
 	}
 	
 	@Test
 	public void testAnimalExists() {
-		assertFalse(testStore.animalExists(0));
-		assertTrue(testStore.animalExists(testStore.getAnimals().get(0).getId()));
+		
 	}
-	
-	@Test
-	public void testFetchItem() {
-		assertEquals(testStore.getItems().get(0).getId(), 
-				testStore.fetchItem(testStore.getItems().get(0).getId()).getId());
-	}
-	
-	@Test
-	public void testFetchCrop() {
-		assertEquals(testStore.getCrops().get(0).getId(), 
-				testStore.fetchCrop(testStore.getCrops().get(0).getId()).getId());
-	}
-	
-	@Test
-	public void testFetchAnimal() {
-		assertEquals(testStore.getAnimals().get(0).getId(), 
-				testStore.fetchAnimal(testStore.getAnimals().get(0).getId()).getId());
-	}
+
 }

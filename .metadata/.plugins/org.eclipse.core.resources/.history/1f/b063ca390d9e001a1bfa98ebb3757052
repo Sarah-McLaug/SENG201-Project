@@ -64,18 +64,6 @@ class StoreTest {
 	@Test
 	public void testFetchItem() {
 		assertEquals(testStore.getItems().get(0).getId(), 
-				testStore.fetchItem(testStore.getItems().get(0).getId()).getId());
-	}
-	
-	@Test
-	public void testFetchCrop() {
-		assertEquals(testStore.getCrops().get(0).getId(), 
-				testStore.fetchCrop(testStore.getCrops().get(0).getId()).getId());
-	}
-	
-	@Test
-	public void testFetchAnimal() {
-		assertEquals(testStore.getAnimals().get(0).getId(), 
-				testStore.fetchAnimal(testStore.getAnimals().get(0).getId()).getId());
+				testStore.fetchItem(testStore.getItems().get(0).getId()));
 	}
 }

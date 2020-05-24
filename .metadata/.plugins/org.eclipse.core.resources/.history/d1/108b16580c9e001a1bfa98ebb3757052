@@ -1,0 +1,38 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import main.Store;
+
+class StoreTest {
+	private Store testStore;
+	
+	@BeforeEach
+	public void init() {
+		testStore = new Store();
+	}
+
+	@Test
+	public void testGetItemStockCount() {
+		
+	}
+	
+	@Test
+	public void testItemExists() {
+		
+	}
+	
+	@Test
+	public void testCropExists() {
+		
+	}
+	
+	@Test
+	public void testAnimalExists() {
+		
+	}
+
+}

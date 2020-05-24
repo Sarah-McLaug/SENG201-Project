@@ -1,0 +1,61 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import main.Animal;
+import main.Crop;
+import main.CropItem;
+import main.FoodItem;
+import main.Store;
+
+class StoreTest {
+	private Store testStore;
+	testStore.addCrop(new Crop("banana", 2000, 2, 4, 5, 0));
+	testStore.addCrop(new Crop("corn", 250, 1, 1, 5, 0));
+	testStore.addCrop(new Crop("kiwi", 3000, 1, 2, 5, 0));
+	testStore.addCrop(new Crop("kumera", 100, 150, 1, 5, 0));
+	testStore.addCrop(new Crop("mango", 5000, 10000, 5, 5, 0));
+	testStore.addCrop(new Crop("spinach", 450, 800, 1, 5, 0));
+	
+	testStore.addAnimal(new Animal("llama", 250, 100, 9, 10));
+	testStore.addAnimal(new Animal("koala", 5000, 300, 6, 1));
+	testStore.addAnimal(new Animal("panda", 9999, 5000, 1, 1));
+	
+	testStore.addItem(new FoodItem("sugar cane", 2, 2500));
+	testStore.addItem(new FoodItem("eucalyptus leaves", 4, 3000));
+	testStore.addItem(new FoodItem("brocooli", 1, 1500));
+	
+	testStore.addItem(new CropItem("fertilizer", 2000, 1));
+	testStore.addItem(new CropItem("pestiside", 4500, 3));
+	testStore.addItem(new CropItem("unicorn dung", 8000, 5));
+}
+	
+	@BeforeEach
+	public void init() {
+		testStore = new Store();
+	}
+
+	@Test
+	public void testGetItemStockCount() {
+		
+	}
+	
+	@Test
+	public void testItemExists() {
+		
+	}
+	
+	@Test
+	public void testCropExists() {
+		
+	}
+	
+	@Test
+	public void testAnimalExists() {
+		
+	}
+
+}

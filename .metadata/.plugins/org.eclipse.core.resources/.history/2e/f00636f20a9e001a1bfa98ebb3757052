@@ -1,0 +1,29 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import main.CropItem;
+import main.FoodItem;
+
+class ItemTest {
+
+	private FoodItem testFood;
+	private CropItem testCrop;
+	
+	@BeforeEach
+	public void init() {
+		testFood = new FoodItem("grapes", 10, 1);
+		testCrop = new CropItem("dirt", 200, 2);
+	}
+	
+	@Test
+	public void testIsFoodItem() {
+		assertTrue(testFood.isFoodItem());
+		assertFalse(testCrop.isFoodItem());
+	}
+	
+	
+
+}
