@@ -434,8 +434,6 @@ public class MainScreen {
 				if(harvestableCropsModel.getRowCount() > 0) harvestCropsBtn.setEnabled(true);
 				tendFarmBtn.setEnabled(true);
 				actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
-				farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-				viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 			}
 		});
 		nextDayButton.setBounds(617, 335, 150, 45);
