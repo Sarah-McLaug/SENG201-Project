@@ -64,7 +64,7 @@ public class Farm {
 			this.capital = 10000.00;
 			cropGrowthBonus = 0;
 			animalHappinessFactor = 1.25;
-			animalHealthFactor = 1.25;
+			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
 			break;
 		case "fast":

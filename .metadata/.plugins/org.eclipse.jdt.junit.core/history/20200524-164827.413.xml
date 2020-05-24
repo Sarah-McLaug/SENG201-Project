@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CropTest" project="SENG-201-Project" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="test.CropTest" time="0.038" displayname="CropTest" uniqueid="[engine:junit-jupiter]/[class:test.CropTest]">
+    <testcase name="testSetDaysUntilMature" classname="test.CropTest" time="0.024" displayname="testSetDaysUntilMature()" uniqueid="[engine:junit-jupiter]/[class:test.CropTest]/[method:testSetDaysUntilMature()]"/>
+    <testcase name="testDaysUntilMature" classname="test.CropTest" time="0.014" displayname="testDaysUntilMature()" uniqueid="[engine:junit-jupiter]/[class:test.CropTest]/[method:testDaysUntilMature()]"/>
+  </testsuite>
+</testrun>

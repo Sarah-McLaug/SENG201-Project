@@ -62,9 +62,9 @@ public class Farm {
 		case "friendly":
 			balance = 10000.00;
 			this.capital = 10000.00;
-			cropGrowthBonus = 0;
+			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.25;
-			animalHealthFactor = 1.25;
+			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
 			break;
 		case "fast":
@@ -78,7 +78,7 @@ public class Farm {
 		case "fertile":
 			balance = 10000.00;
 			this.capital = 10000.00;
-			cropGrowthBonus = 0;
+			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.25;
@@ -86,7 +86,7 @@ public class Farm {
 		case "rich":
 			balance = 15000.00;
 			this.capital = 15000.00;
-			cropGrowthBonus = 0;
+			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
@@ -94,7 +94,7 @@ public class Farm {
 		default:
 			balance = 12000.00;
 			this.capital = 12000.00;
-			cropGrowthBonus = 0;
+			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
@@ -215,14 +215,6 @@ public class Farm {
 	}
 	
 	/**
-	 * 
-	 * @return capital, the starting balance of the farm
-	 */
-	public double getCapital() {
-		return this.capital;
-	}
-	
-	/**
 	 * Add a crop to the farm
 	 * @param c - crop to add
 	 * @param currentDay - day the crop is purchased and planted
@@ -306,13 +298,13 @@ public class Farm {
 			if(crops.get(i).getDaysUntilMature() == 0) {
 				this.balance += crops.get(i).getSellingPrice()*cropYieldFactor;
 				crops.remove(i);
+				//i--;
 			}
 		}
 	}
 	
 	/**
-	 * Make the farm give more crops, increase the animal happiness factor, and 
-	 * increase animal happiness so they won't loose happiness the next day
+	 * Make the farm give more crops and increase the animal happiness factor
 	 */
 	public void tendFarm() {
 		cropYieldFactor += 0.1;
@@ -387,6 +379,10 @@ public class Farm {
 				break;
 			}
 		}
+	}
+	
+	public double getCapital() {
+		return this.capital;
 	}
 	
 }

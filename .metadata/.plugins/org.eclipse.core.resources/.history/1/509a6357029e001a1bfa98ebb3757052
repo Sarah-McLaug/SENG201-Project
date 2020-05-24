@@ -1,0 +1,24 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import main.Farm;
+import main.Farmer;
+
+class FarmTest {
+	private Farm testFarm;
+	
+	@BeforeEach
+	public void init() {
+		testFarm = new Farm("Billy Bob's Friendly Farm", "friendly", new Farmer("Billy Bob", 52));
+	}
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

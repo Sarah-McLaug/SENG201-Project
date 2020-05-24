@@ -22,23 +22,12 @@ class FarmTest {
 	public void init() {
 		testFarm = new Farm("Billy Bob's Friendly Farm", "friendly", new Farmer("Billy Bob", 52));
 		testFarm.addCrop(new Crop("banana", 2000, 2, 4, 5, 0), 0);
-		testFarm.addCrop(new Crop("corn", 250, 1, 1, 5, 0), 0);
-		testFarm.addCrop(new Crop("kiwi", 3000, 1, 2, 5, 0), 0);
-		testFarm.addCrop(new Crop("kumera", 100, 150, 1, 5, 0), 0);
-		testFarm.addCrop(new Crop("mango", 5000, 10000, 5, 5, 0), 0);
-		testFarm.addCrop(new Crop("spinach", 450, 800, 1, 5, 0), 0);
 		
 		testFarm.addAnimal(new Animal("llama", 250, 100, 9, 10));
-		testFarm.addAnimal(new Animal("koala", 5000, 300, 6, 1));
-		testFarm.addAnimal(new Animal("panda", 9999, 5000, 1, 1));
 		
 		testFarm.addItem(new FoodItem("sugar cane", 2, 2500));
-		testFarm.addItem(new FoodItem("eucalyptus leaves", 4, 3000));
-		testFarm.addItem(new FoodItem("brocooli", 1, 1500));
 		
 		testFarm.addItem(new CropItem("fertilizer", 2000, 1));
-		testFarm.addItem(new CropItem("pestiside", 4500, 3));
-		testFarm.addItem(new CropItem("unicorn dung", 8000, 5));
 	}
 	
 	@Test

@@ -28,17 +28,20 @@ class FarmTest {
 		testFarm.addCrop(new Crop("mango", 5000, 10000, 5, 5, 0), 0);
 		testFarm.addCrop(new Crop("spinach", 450, 800, 1, 5, 0), 0);
 		
-		testFarm.addAnimal(new Animal("llama", 250, 100, 9, 10));
-		testFarm.addAnimal(new Animal("koala", 5000, 300, 6, 1));
-		testFarm.addAnimal(new Animal("panda", 9999, 5000, 1, 1));
+		ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
+		animalSpecies.add(new Animal("llama", 250, 100, 9, 10));
+		animalSpecies.add(new Animal("koala", 5000, 300, 6, 1));
+		animalSpecies.add(new Animal("panda", 9999, 5000, 1, 1));
 		
-		testFarm.addItem(new FoodItem("sugar cane", 2, 2500));
-		testFarm.addItem(new FoodItem("eucalyptus leaves", 4, 3000));
-		testFarm.addItem(new FoodItem("brocooli", 1, 1500));
+		ArrayList <Item> foodItems = new ArrayList <Item>();
+		foodItems.add(new FoodItem("sugar cane", 2, 2500));
+		foodItems.add(new FoodItem("eucalyptus leaves", 4, 3000));
+		foodItems.add(new FoodItem("brocooli", 1, 1500));
 		
-		testFarm.addItem(new CropItem("fertilizer", 2000, 1));
-		testFarm.addItem(new CropItem("pestiside", 4500, 3));
-		testFarm.addItem(new CropItem("unicorn dung", 8000, 5));
+		ArrayList <Item> cropItems = new ArrayList <Item>();
+		cropItems.add(new CropItem("fertilizer", 2000, 1));
+		cropItems.add(new CropItem("pestiside", 4500, 3));
+		cropItems.add(new CropItem("unicorn dung", 8000, 5));
 	}
 	
 	@Test

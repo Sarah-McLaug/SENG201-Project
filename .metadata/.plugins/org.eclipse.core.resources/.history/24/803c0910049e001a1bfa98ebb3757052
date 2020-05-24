@@ -64,7 +64,7 @@ public class Farm {
 			this.capital = 10000.00;
 			cropGrowthBonus = 0;
 			animalHappinessFactor = 1.25;
-			animalHealthFactor = 1.25;
+			animalHealthFactor = 1;
 			cropYieldFactor = 1.0;
 			break;
 		case "fast":
@@ -311,8 +311,7 @@ public class Farm {
 	}
 	
 	/**
-	 * Make the farm give more crops, increase the animal happiness factor, and 
-	 * increase animal happiness so they won't loose happiness the next day
+	 * Make the farm give more crops and increase the animal happiness factor
 	 */
 	public void tendFarm() {
 		cropYieldFactor += 0.1;
