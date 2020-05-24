@@ -7,7 +7,8 @@
 <listEntry value="1"/>
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="main.MainScreen"/>
-<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="SENG-201-Project"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="SENG-201-Project"/>
 </launchConfiguration>

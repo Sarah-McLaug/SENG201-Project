@@ -177,6 +177,7 @@ public class Game {
 				if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
 			}
 			
+			//populateStore requires day because it creates new crop items which require a birthday
 			populateStore();
 		} else {
 			//end game

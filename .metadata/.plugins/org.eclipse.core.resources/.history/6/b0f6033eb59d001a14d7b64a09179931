@@ -12,10 +12,10 @@ public class Game {
 	private int actionCount;
 	private int day;
 	
-	private ArrayList<Animal> animalSpecies = new ArrayList<Animal>();
-	private ArrayList<Crop> cropSpecies = new ArrayList<Crop>();
-	private ArrayList<Item> foodItems = new ArrayList<Item>();
-	private ArrayList<Item> cropItems = new ArrayList<Item>();
+	private final ArrayList<Animal> animalSpecies = new ArrayList<Animal>();
+	private final ArrayList<Crop> cropSpecies = new ArrayList<Crop>();
+	private final ArrayList<Item> foodItems = new ArrayList<Item>();
+	private final ArrayList<Item> cropItems = new ArrayList<Item>();
 	
 	public Farm getFarm() {
 		return farm;
@@ -60,14 +60,6 @@ public class Game {
 	public ArrayList<Crop> getCropSpecies(){
 		return cropSpecies;
 	}
-	
-	public void setSpecies(ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
-			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
-		this.animalSpecies = animalSpecies;
-		this.cropSpecies = cropSpecies;
-		this.foodItems = foodItems;
-		this.cropItems = cropItems;
-	}
 	//*********************************************
 	// - Do we actually need these?
 	
@@ -79,7 +71,8 @@ public class Game {
 	
 	//BEGIN methods
 	//-----------------------------------------------------------------------------------------------------------------
-	public void populateStore() {
+	public void populateStore(ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
+			ArrayList<Item> foodItems, ArrayList<Item> cropItems) {
 		//remove remaining stock
 		//remove crops
 		if(store.getCrops().size() != 0) {
@@ -177,7 +170,8 @@ public class Game {
 				if(farm.getCrops().get(i).getDaysUntilMature() > 0) farm.getCrops().get(i).reduceDaysUntilMature(1);
 			}
 			
-			populateStore();
+			//populateStore requires day because it creates new crop items which require a birthday
+			populateStore(animalSpecies, cropSpecies, foodItems, cropItems);
 		} else {
 			//end game
 		}

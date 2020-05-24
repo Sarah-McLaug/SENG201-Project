@@ -336,6 +336,7 @@ public class MainScreen {
 				for(int i = 0; i < game.getCropSpecies().size(); i++) {
 					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) numCropSpeciesOwned++;
 				}
+				JOptionPane.showMessageDialog(screen, "There are " + numCropSpeciesOwned + " species owned.", "Debugging", JOptionPane.ERROR_MESSAGE);
 				Object[] cropSpeciesOwned = new Object[numCropSpeciesOwned];
 				for(int i = 0; i < game.getCropSpecies().size(); i++) {
 					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) {
@@ -344,7 +345,7 @@ public class MainScreen {
 				}
 				String speciesSelection = (String) JOptionPane.showInputDialog(screen, "Select the species you want to tend", "Selection",
 						JOptionPane.PLAIN_MESSAGE, null, cropSpeciesOwned, cropSpeciesOwned[0]);
-				if(speciesSelection != null) {
+				/*if(speciesSelection != null) {
 					Integer cropItemSelection = (Integer) JOptionPane.showInputDialog(screen, "Select the crop item you would like to use", "Selection", 
 							JOptionPane.PLAIN_MESSAGE, null, cropItemIds, cropItemIds[0]);
 					if(cropItemSelection != null && cropItemSelection.intValue() != 0) {
@@ -367,7 +368,7 @@ public class MainScreen {
 						actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
 						if(game.getActionCount() == 0) disableActions();
 					}
-				}
+				}*/
 			}
 		});
 		if(tendCropsTable.getSelectionModel().isSelectionEmpty() || 

@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="sellAn"/>
+		<item key="selection" value="day"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="day"/>
+			<item value="advance"/>
+			<item value="move"/>
+			<item value="farmCropModel"/>
+			<item value="farmCropItemsModel.setRowCount"/>
+			<item value="farmCropItemsModel.set"/>
+			<item value="farmCropItemsModel.setColu"/>
+			<item value="playAnimalsBtn.setEnabled(true)"/>
+			<item value="setEnabled(true)"/>
+			<item value="farmFoodItemsModel"/>
+			<item value="farmCropsModel"/>
+			<item value="actionsRemainingLabel"/>
+			<item value="stock"/>
 			<item value="sellAn"/>
 			<item value="add"/>
-			<item value="animalEx"/>
-			<item value="sellCrop"/>
-			<item value="actionListener"/>
-			<item value="store"/>
-			<item value="actions"/>
-			<item value="addItem"/>
 		</list>
 		<list key="replacehistory">
 			<item value="option"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="687"/>
-		<item key="DIALOG_Y_ORIGIN" value="77"/>
+		<item key="DIALOG_X_ORIGIN" value="670"/>
+		<item key="DIALOG_Y_ORIGIN" value="331"/>
 		<item key="DIALOG_WIDTH" value="294"/>
 		<item key="DIALOG_HEIGHT" value="408"/>
 		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
