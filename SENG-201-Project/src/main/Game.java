@@ -77,6 +77,7 @@ public class Game {
 	}
 	
 	public double profit() {
+		/*
 		if(farm.getType().equals("friendly") || 
 				farm.getType().equals("fast") ||
 				farm.getType().equals("fertile")){
@@ -86,6 +87,8 @@ public class Game {
 		} else {
 			return farm.getBalance() - 12000.00;
 		}
+		*/
+		return farm.getBalance() - farm.getCapital();
 	}
 	
 	public void populateStore() {

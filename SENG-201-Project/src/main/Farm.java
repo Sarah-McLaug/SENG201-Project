@@ -13,6 +13,7 @@ public class Farm {
 	private double animalHappinessFactor;
 	private double animalHealthFactor;
 	private double cropYieldFactor;
+	private double capital;
 
 	/**
 	 * Farm constructor
@@ -60,6 +61,7 @@ public class Farm {
 		switch(this.type) {
 		case "friendly":
 			balance = 10000.00;
+			this.capital = 10000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.25;
 			animalHealthFactor = 1;
@@ -67,6 +69,7 @@ public class Farm {
 			break;
 		case "fast":
 			balance = 10000.00;
+			this.capital = 10000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
@@ -74,6 +77,7 @@ public class Farm {
 			break;
 		case "fertile":
 			balance = 10000.00;
+			this.capital = 10000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
@@ -81,6 +85,7 @@ public class Farm {
 			break;
 		case "rich":
 			balance = 15000.00;
+			this.capital = 15000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
@@ -88,6 +93,7 @@ public class Farm {
 			break;
 		default:
 			balance = 12000.00;
+			this.capital = 12000.00;
 			cropGrowthBonus = 1;
 			animalHappinessFactor = 1.0;
 			animalHealthFactor = 1;
@@ -303,6 +309,9 @@ public class Farm {
 	public void tendFarm() {
 		cropYieldFactor += 0.1;
 		animalHappinessFactor += 0.1;
+		for (int j = 0; j < animals.size(); j++) {
+			this.animals.get(j).updateHappiness(1);
+		}
 	}
 	
 	/**
@@ -370,6 +379,10 @@ public class Farm {
 				break;
 			}
 		}
+	}
+	
+	public double getCapital() {
+		return this.capital;
 	}
 	
 }
