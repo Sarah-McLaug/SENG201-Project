@@ -680,6 +680,9 @@ public class Game {
 		//an error message will be displayed.
 		String species = "";
 		
+		//For detecting if a farmer owns a crop
+		//boolean farmerOwnsCrop = false;
+		
 		//Begin game logic
 		while(playingGame) {
 			
@@ -1386,5 +1389,6 @@ public class Game {
 			
 		}
 		sc.close();
+		//-----------------------------------------------------------------------------------------------------------------
 	}
 }

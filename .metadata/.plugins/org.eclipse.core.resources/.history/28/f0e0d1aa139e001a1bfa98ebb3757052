@@ -343,11 +343,11 @@ public class Game {
 		game.populateStore();
 		
 		game.launchStartScreen();
-		
-		//BEGIN CLI
+		//BEGIN Initialisation
 		//-----------------------------------------------------------------------------------------------------------------
 		//Variables for handling data input and input defence 
 		Scanner sc = new Scanner(System.in);
+		/* SKIP INITIALIZE QUESTIONS FOR EASY DEBUGGING, some defaults loaded below
 		String input = "";
 		int inputLength;
 		char character;
@@ -541,12 +541,46 @@ public class Game {
 				break;
 		}
 		//End user input
+		*/
+		
+		//Defaults for easy testing: (remove later)
+		//--------------------------------------------------------------------
+		String farmName = "Incognito Farms";
+		String farmType = "friendly";
+		String farmerName = "Lollipop Chainsaw";
+		int age = 22;
 		int day = 5;
+		//--------------------------------------------------------------------
 		
 		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
 		Store store = new Store();
 		int actionsRemaining = 2;
 		boolean playingGame = true;
+		
+		//Define game elements -- commented out, probably need to make a copy of this class
+		//-------------------------------------------------------------------------
+		/*final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
+		cropSpecies.add(new Crop("banana", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		
+		final ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
+		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
+		
+		final ArrayList <Item> foodItems = new ArrayList <Item>();
+		foodItems.add(new FoodItem("sugar cane", 1, 1));
+		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
+		foodItems.add(new FoodItem("brocooli", 1, 1));
+		
+		final ArrayList <Item> cropItems = new ArrayList <Item>();
+		cropItems.add(new CropItem("fertilizer", 1, 1));
+		cropItems.add(new CropItem("pestiside", 1, 1));*/
+		//-------------------------------------------------------------------------
 		
 		//Fill the store with the elements
 		populateStore(store, animalSpecies, cropSpecies, foodItems, cropItems, day);
@@ -679,6 +713,9 @@ public class Game {
 		//user try's to perform an action on a crop they do not possess,
 		//an error message will be displayed.
 		String species = "";
+		
+		//For detecting if a farmer owns a crop
+		boolean farmerOwnsCrop = false;
 		
 		//Begin game logic
 		while(playingGame) {
@@ -1354,13 +1391,17 @@ public class Game {
 				day--;
 				if(day > 0) {
 					actionsRemaining = 2;
-					//give animal money
+					//give animal money TODO: decide threshold for happy animal bonus
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
 						if(farm.getAnimals().get(i).getHappiness() >= 8) {
 							farm.updateBalance(farm.getAnimals().get(i).getDailyBonus());
 						}
 					}
-					//lower animal happiness & health
+					//lower animal happiness & health TODO: decide health/happiness lowering factor
+					/*
+					 * Note: 
+					 * When a farmer plays with an animal it's happiness is increased by it's the farms animalHappinessFactor 
+					 */
 					for(int i = 0; i < farm.getAnimals().size(); i++) {
 						farm.getAnimals().get(i).updateHealth(-1);
 						farm.getAnimals().get(i).updateHappiness(-1);
@@ -1386,5 +1427,7 @@ public class Game {
 			
 		}
 		sc.close();
+		//-----------------------------------------------------------------------------------------------------------------
+		//END game
 	}
 }
