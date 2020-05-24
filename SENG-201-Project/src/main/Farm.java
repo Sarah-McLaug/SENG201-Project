@@ -202,7 +202,7 @@ public class Farm {
 			if(crops.get(i).getDaysUntilMature() == 0) {
 				this.balance += crops.get(i).getSellingPrice()*cropYieldFactor;
 				crops.remove(i);
-				i--;
+				//i--;
 			}
 		}
 	}

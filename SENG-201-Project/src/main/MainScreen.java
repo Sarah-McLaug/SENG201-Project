@@ -697,7 +697,11 @@ public class MainScreen {
 					viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 					harvestableCropsModel.setRowCount(0);
 					for(int i = 0; i < farmCropsModel.getRowCount(); i++) {
-						if((int) farmCropsModel.getValueAt(i, 1) == 0) farmCropsModel.removeRow(i);
+						if((int) farmCropsModel.getValueAt(i, 1) == 0) { 
+							farmCropsModel.removeRow(i);
+							i--;
+						}
+						
 					}
 				}
 				
