@@ -440,13 +440,17 @@ public class MainScreen {
 			public void actionPerformed(ActionEvent e) {
 				Object[] cropItemIds = new Object[farmCropItemsModel.getRowCount()];
 				for(int i = 0; i < cropItemIds.length; i++) cropItemIds[i] = farmCropItemsModel.getValueAt(i, 0);
-				ArrayList<String> listCropSpeciesOwned = new ArrayList<String>();
+				ArrayList<String> speciesOwned = new ArrayList();
 				for(int i = 0; i < game.getCropSpecies().size(); i++) {
-					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) listCropSpeciesOwned.add(game.getCropSpecies().get(i).getSpecies());
+					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) speciesOwned.add(game.getCropSpecies().get(i).getSpecies());
 				}
-				Object[] cropSpeciesOwned = new Object[listCropSpeciesOwned.size()];
-				for(int i = 0; i < cropSpeciesOwned.length; i++) {
-					cropSpeciesOwned[i] = listCropSpeciesOwned.get(i);
+				Object[] cropSpeciesOwned = new Object[numCropSpeciesOwned];
+				for(int i = 0; i < game.getCropSpecies().size(); i++) {
+					boolean haveCrop = false;
+					for(int j = 0; j < farmCropsModel.getRowCount(); j++) {
+						if(game.getFarm().ownsCrop((String) farmCropsModel.getValueAt(j, 0))) haveCrop = true;
+						if(haveCrop) cropSpeciesOwned[i] = game.getCropSpecies().get(i).getSpecies();
+					}
 				}
 				String speciesSelection = (String) JOptionPane.showInputDialog(screen, "Select the species you want to tend", "Selection",
 						JOptionPane.PLAIN_MESSAGE, null, cropSpeciesOwned, cropSpeciesOwned[0]);
