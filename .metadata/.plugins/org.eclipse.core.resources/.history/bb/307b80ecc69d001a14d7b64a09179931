@@ -13,7 +13,7 @@ public class EndScreen {
 	private JFrame screen;
 	private Game game;
 
-	private final int windowHeight = 220;
+	private final int windowHeight = 400;
 	private final int windowWidth = 600;
 
 	/**

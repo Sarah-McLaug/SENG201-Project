@@ -1,0 +1,70 @@
+package main;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+
+public class EndScreen {
+
+	private JFrame frame;
+
+	private final int windowHeight = 400;
+	private final int windowWidth = 600;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EndScreen window = new EndScreen();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public EndScreen() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, windowWidth, windowHeight);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel farmNameLabel = new JLabel("New label");
+		farmNameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		farmNameLabel.setBounds(0, 6, 800, 30);
+		frame.getContentPane().add(farmNameLabel);
+		
+		JLabel durationLabel = new JLabel("New label");
+		durationLabel.setBounds(100, 63, 61, 16);
+		frame.getContentPane().add(durationLabel);
+		
+		JLabel profitLabel = new JLabel("New label");
+		profitLabel.setBounds(100, 93, 61, 16);
+		frame.getContentPane().add(profitLabel);
+		
+		JLabel scoreLabel = new JLabel("New label");
+		scoreLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scoreLabel.setBounds(0, 248, 800, 30);
+		frame.getContentPane().add(scoreLabel);
+	}
+
+}

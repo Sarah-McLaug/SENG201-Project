@@ -13,7 +13,7 @@ public class EndScreen {
 	private JFrame screen;
 	private Game game;
 
-	private final int windowHeight = 220;
+	private final int windowHeight = 400;
 	private final int windowWidth = 600;
 
 	/**
@@ -104,18 +104,18 @@ public class EndScreen {
 		farmNameLabel.setBounds(0, 20, windowWidth, 30);
 		screen.getContentPane().add(farmNameLabel);
 		
-		JLabel durationLabel = new JLabel("Duration: " + game.getDuration() + " days");
-		durationLabel.setBounds(100, 70, 200, 16);
+		JLabel durationLabel = new JLabel("Duration: " + game.getDuration());
+		durationLabel.setBounds(100, 70, 61, 16);
 		screen.getContentPane().add(durationLabel);
 		
-		JLabel profitLabel = new JLabel("Profit: $" + String.format("%.2f", game.profit()));
-		profitLabel.setBounds(100, 100, 200, 16);
+		JLabel profitLabel = new JLabel("New label");
+		profitLabel.setBounds(100, 100, 61, 16);
 		screen.getContentPane().add(profitLabel);
 		
-		JLabel scoreLabel = new JLabel("Score: " + game.score());
+		JLabel scoreLabel = new JLabel("New label");
 		scoreLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		scoreLabel.setBounds(0, 130, windowWidth, 30);
+		scoreLabel.setBounds(0, 248, windowWidth, 30);
 		screen.getContentPane().add(scoreLabel);
 	}
 

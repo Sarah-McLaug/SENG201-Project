@@ -81,7 +81,7 @@ public class Game {
 				farm.getType().equals("fast") ||
 				farm.getType().equals("fertile")){
 			return farm.getBalance() - 10000.00;
-		} else if(farm.getType().equals("rich")){
+		} else if(farm.getType().equals("rich")){{
 			return farm.getBalance() - 15000.00;
 		} else {
 			return farm.getBalance() - 12000.00;

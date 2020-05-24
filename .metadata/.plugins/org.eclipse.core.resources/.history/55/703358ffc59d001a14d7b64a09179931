@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 public class Game {
+	//Consider
 	//********************************************
 	private Farm farm;
 	private Store store = new Store();
@@ -68,26 +69,16 @@ public class Game {
 		this.cropItems = cropItems;
 	}
 	//*********************************************
+	// - Do we actually need these?
+	
+	/*
+	public double score(int numCrops, int numAnimals, double animalStatus, double moneyEarned) {
+		insert some func here
+	}
+	*/
+	
 	//BEGIN methods
 	//-----------------------------------------------------------------------------------------------------------------
-	
-	public double score() {
-		return 0.0;
-		//insert some func here
-	}
-	
-	public double profit() {
-		if(farm.getType().equals("friendly") || 
-				farm.getType().equals("fast") ||
-				farm.getType().equals("fertile")){
-			return farm.getBalance() - 10000.00;
-		} else if(farm.getType().equals("rich")){
-			return farm.getBalance() - 15000.00;
-		} else {
-			return farm.getBalance() - 12000.00;
-		}
-	}
-	
 	public void populateStore() {
 		//remove remaining stock
 		//remove crops
