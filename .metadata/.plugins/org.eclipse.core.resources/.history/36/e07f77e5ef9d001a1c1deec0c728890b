@@ -302,22 +302,17 @@ public class Farm {
 	 */
 	public void tendFarm() {
 		cropYieldFactor += 0.1;
-		animalHappinessFactor += 0.1;
+		animalHappinessFactor += 0.5;
 	}
 	
-	/**
-	 * Add item to farm
-	 * @param item - item to add
-	 */
+	
+	
 	public void addItem(Item item) {
 		inventory.add(item);
 	}
 	
-	/**
-	 * Figure out if the farm owns a crop
-	 * @param species - crop to see if farm owns
-	 * @return - true if the farm owns the crop, false if not
-	 */
+	
+	
 	public boolean ownsCrop(String species) {
 		boolean exists = false;
 		for (int j = 0; j < crops.size(); j++) {
@@ -329,10 +324,6 @@ public class Farm {
 		return exists;
 	}
 	
-	/**
-	 * Figure out if crops are ready to harvest
-	 * @return - true if crops are ready to harvest, false otherwise
-	 */
 	public boolean cropsReady() {
 		boolean cropsReady = false;
 		for(int i = 0; i < crops.size(); i++) {
@@ -343,11 +334,6 @@ public class Farm {
 		return cropsReady;
 	}
 	
-	/**
-	 * Get an item from the farm
-	 * @param id - id of the item to get from the farm
-	 * @return - item in the farm, null if it doesn't exist in the farm
-	 */
 	public Item fetchItem(int id) {
 		
 		for (int j = 0; j < inventory.size(); j++) {
@@ -358,10 +344,6 @@ public class Farm {
 		return null;
 	}
 	
-	/**
-	 * Remove an item in the farm
-	 * @param id - id of the item to remove
-	 */
 	public void removeItem(int id) {
 		for(int i = 0; i < inventory.size(); i++) {
 			if(inventory.get(i).getId() == id) {

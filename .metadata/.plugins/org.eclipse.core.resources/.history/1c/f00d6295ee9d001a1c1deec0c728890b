@@ -186,69 +186,41 @@ public class Farm {
 
 	/**
 	 * 
-	 * @return animal health factor of the farm
+	 * @return 
 	 */
 	public double getAnimalHealthFactor() {
 		return animalHealthFactor;
 	}
 	
-	/**
-	 * 
-	 * @return crop yield factor of the farm
-	 */
 	public double getCropYieldFactor() {
 		return cropYieldFactor;
 	}
 	
-	/**
-	 * 
-	 * @param factor - crop yield factor of the farm to set
-	 */
 	public void setCropYieldFactor(double factor) {
 		cropYieldFactor = factor;
 	}
 	
-	/**
-	 * Add a crop to the farm
-	 * @param c - crop to add
-	 * @param currentDay - day the crop is purchased and planted
-	 */
 	public void addCrop(Crop c, int currentDay) {
 		c.setDayPlanted(currentDay);
 		crops.add(c);
 	}
 	
-	/**
-	 * Add an animal to the farm
-	 * @param animal - animal to add
-	 */
 	public void addAnimal(Animal animal) {
 		animals.add(animal);
 	}
 	
-	/**
-	 * Feed the animals in the farm, increases their health
-	 * @param food - food used to feed the animal
-	 */
 	public void feedAnimals(FoodItem food) {
 		for(int i = 0; i < animals.size(); i++) {
 			animals.get(i).updateHealth(food.getHealthPoints());
 		}
 	}
 	
-	/**
-	 * Play with the animals in the farm, increases their happiness
-	 */
 	public void playAnimals() {
 		for(int i = 0; i < animals.size(); i++) {
 			animals.get(i).updateHappiness(this.animalHappinessFactor); //TODO decide how much to raise animal happiness by ---> by the happiness factor?
 		}
 	}
 	
-	/**
-	 * Tend to the farm's crops, decreasing their days until mature
-	 * @param species - species to tend to
-	 */
 	public void tendCrop(String species) {
 		for(int i = 0; i < crops.size(); i++) {
 			if(crops.get(i).getSpecies().equals(species)) {
@@ -257,10 +229,7 @@ public class Farm {
 		}
 	}
 	
-	/**
-	 * Tend to the farm's crops, decreasing their days until mature
-	 * @param targetSpecies - species to tend to
-	 */
+	
 	public void waterCrop(String targetSpecies) {
 		int cropQuantity = this.crops.size();
 		for (int j = 0; j < cropQuantity; j++) {
@@ -271,11 +240,7 @@ public class Farm {
 		}
 	}
 	
-	/**
-	 * Tend to the farm's crops, decreasing their days until mature
-	 * @param species - species to tend to
-	 * @param cropItem - item to use to decrease their days until mature
-	 */
+	
 	public void tendCrop(String species, CropItem cropItem) {
 		for(int i = 0; i < crops.size(); i++) {
 			if(crops.get(i).getSpecies().equals(species)) {
@@ -284,9 +249,7 @@ public class Farm {
 		}
 	}
 	
-	/**
-	 * Harvest the crop of the farm, removing all mature crops and giving the farm money when doing so
-	 */
+	//TODO: TEST THIS, I think i have to go back an index but i'm not sure
 	public void harvestCrop() {
 		for(int i = 0; i < crops.size(); i++) {
 			if(crops.get(i).getDaysUntilMature() == 0) {
@@ -297,27 +260,21 @@ public class Farm {
 		}
 	}
 	
-	/**
-	 * Make the farm give more crops and increase the animal happiness factor
-	 */
+	
+	//TODO: Review to make sure these are okay
 	public void tendFarm() {
 		cropYieldFactor += 0.1;
-		animalHappinessFactor += 0.1;
+		animalHappinessFactor += 0.5;
 	}
 	
-	/**
-	 * Add item to farm
-	 * @param item - item to add
-	 */
+	
+	
 	public void addItem(Item item) {
 		inventory.add(item);
 	}
 	
-	/**
-	 * Figure out if the farm owns a crop
-	 * @param species - crop to see if farm owns
-	 * @return - true if the farm owns the crop, false if not
-	 */
+	
+	
 	public boolean ownsCrop(String species) {
 		boolean exists = false;
 		for (int j = 0; j < crops.size(); j++) {
@@ -329,10 +286,6 @@ public class Farm {
 		return exists;
 	}
 	
-	/**
-	 * Figure out if crops are ready to harvest
-	 * @return - true if crops are ready to harvest, false otherwise
-	 */
 	public boolean cropsReady() {
 		boolean cropsReady = false;
 		for(int i = 0; i < crops.size(); i++) {
@@ -343,11 +296,6 @@ public class Farm {
 		return cropsReady;
 	}
 	
-	/**
-	 * Get an item from the farm
-	 * @param id - id of the item to get from the farm
-	 * @return - item in the farm, null if it doesn't exist in the farm
-	 */
 	public Item fetchItem(int id) {
 		
 		for (int j = 0; j < inventory.size(); j++) {
@@ -358,10 +306,6 @@ public class Farm {
 		return null;
 	}
 	
-	/**
-	 * Remove an item in the farm
-	 * @param id - id of the item to remove
-	 */
 	public void removeItem(int id) {
 		for(int i = 0; i < inventory.size(); i++) {
 			if(inventory.get(i).getId() == id) {
