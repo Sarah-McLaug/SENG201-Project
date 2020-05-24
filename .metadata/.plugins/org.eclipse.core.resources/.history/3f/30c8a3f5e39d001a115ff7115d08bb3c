@@ -101,46 +101,28 @@ public class Crop {
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
 	
-	/**
-	 * 
-	 * @param day - day the crop was planted in the farm
-	 */
 	public void setDayPlanted(int day) {
 		this.dayPlanted = day;
 	}
 	
-	/**
-	 * 
-	 * @param currentDay - what day the user is on in the game
-	 * @return - how much time the crop has been planted, in days
-	 */
 	public int getAge(int currentDay) {
 		//Days count down to 0
 		return this.dayPlanted - currentDay;
 	}
 	
-	/**
-	 * 
-	 * @return health of the crop, range 1-10 (inclusive)
-	 */
 	public double getHealth() {
 		return this.health;
 	}
 	
-	/**
-	 * 
-	 * @param health - health to set for the crop, range 1-10 (inclusive)
-	 */
 	public void setHealth(double health) {
 		this.health = health;
 	}
+	//END getters and setters
 	
-	/**
-	 * Reduction of days until mature
-	 * @param reduction - number of days to reduce days until mature by
-	 */
+	//BEGIN methods
 	public void reduceDaysUntilMature(int reduction) {
 		daysUntilMature -= reduction;
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
+	//END methods
 }

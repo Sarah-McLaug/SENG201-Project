@@ -143,4 +143,5 @@ public class Crop {
 		daysUntilMature -= reduction;
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
+	//END methods
 }
