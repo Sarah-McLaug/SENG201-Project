@@ -285,11 +285,8 @@ public class MainScreen {
 			public void actionPerformed(ActionEvent e) {
 				game.advanceDay();
 				JOptionPane.showMessageDialog(screen, "You have " + game.getDay() + " days left!", "Notification", JOptionPane.ERROR_MESSAGE);
-				if(game.getDay() - 1 == 0) {
+				if(game.getDay() == 0) {
 					nextDayButton.setVisible(false);
-					nextDayButton.setEnabled(false);
-					endGameButton.setVisible(true);
-					endGameButton.setEnabled(true);
 				}
 				//update table models
 				farmAnimalsModel.setRowCount(0);

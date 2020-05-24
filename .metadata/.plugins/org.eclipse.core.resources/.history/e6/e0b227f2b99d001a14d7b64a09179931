@@ -280,17 +280,10 @@ public class MainScreen {
 		mainPanel.add(viewFarmStatusButton);
 		
 		JButton nextDayButton = new JButton("Move to Next Day");
-		JButton endGameButton = new JButton("End Game");
 		nextDayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.advanceDay();
 				JOptionPane.showMessageDialog(screen, "You have " + game.getDay() + " days left!", "Notification", JOptionPane.ERROR_MESSAGE);
-				if(game.getDay() - 1 == 0) {
-					nextDayButton.setVisible(false);
-					nextDayButton.setEnabled(false);
-					endGameButton.setVisible(true);
-					endGameButton.setEnabled(true);
-				}
 				//update table models
 				farmAnimalsModel.setRowCount(0);
 				for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
@@ -362,11 +355,7 @@ public class MainScreen {
 			}
 		});
 		nextDayButton.setBounds(612, 330, 150, 45);
-		endGameButton.setBounds(612, 330, 150, 45);
-		endGameButton.setVisible(false);
-		endGameButton.setEnabled(false);
 		mainPanel.add(nextDayButton);
-		mainPanel.add(endGameButton);
 		
 		//-------------------------------------------------------------
 		//set up actions tab

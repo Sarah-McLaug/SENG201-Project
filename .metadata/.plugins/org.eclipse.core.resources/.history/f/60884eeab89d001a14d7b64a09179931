@@ -280,93 +280,15 @@ public class MainScreen {
 		mainPanel.add(viewFarmStatusButton);
 		
 		JButton nextDayButton = new JButton("Move to Next Day");
-		JButton endGameButton = new JButton("End Game");
 		nextDayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.advanceDay();
 				JOptionPane.showMessageDialog(screen, "You have " + game.getDay() + " days left!", "Notification", JOptionPane.ERROR_MESSAGE);
-				if(game.getDay() - 1 == 0) {
-					nextDayButton.setVisible(false);
-					nextDayButton.setEnabled(false);
-					endGameButton.setVisible(true);
-					endGameButton.setEnabled(true);
-				}
-				//update table models
-				farmAnimalsModel.setRowCount(0);
-				for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-					Animal a = game.getFarm().getAnimals().get(i);
-					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-				}
-				farmCropsModel.setRowCount(0);
-				for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-					Crop c = game.getFarm().getCrops().get(i);
-					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-				}
-				harvestableCropsModel.setRowCount(0);
-				for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-					Crop c = game.getFarm().getCrops().get(i);
-					if(c.getDaysUntilMature() == 0) harvestableCropsModel.addRow(new Object[] {c.getSpecies(), c.getSellingPrice()});
-				}
-				farmItemsModel.setRowCount(0);
-				for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
-					Item item = game.getFarm().getInventory().get(i);
-					if(item.isFoodItem()) farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
-					else {
-						String enhancement = "";
-						if(item.getBenefit() == 1) enhancement += item.getBenefit() + " Day Growth Enhancement";
-						else enhancement += item.getBenefit() + " Days Growth Enhancement";
-						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
-					}
-				}
-				farmFoodItemsModel.setRowCount(0);
-				for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
-					Item item = game.getFarm().getInventory().get(i);
-					if(item.isFoodItem()) {
-						farmFoodItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit()});
-					}
-				}
-				farmCropItemsModel.setRowCount(0);
-				farmCropItemsModel.addRow(new Object[] {1, "Water", "1 Day"});
-				for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
-					Item item = game.getFarm().getInventory().get(i);
-					if(!item.isFoodItem()) {
-						if(item.getBenefit() == 1)  farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Day"});
-						else farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Days"});
-					}
-				}
-				storeAnimalsModel.setRowCount(0);
-				for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
-					Animal a = game.getStore().getAnimals().get(i);
-					storeAnimalsModel.addRow(new Object[] {a.getId(), a.getSpecies(), a.getPurchasePrice()});
-				}
-				storeCropsModel.setRowCount(0);
-				for(int i = 0; i < game.getStore().getCrops().size(); i++) {
-					Crop c = game.getStore().getCrops().get(i);
-					storeCropsModel.addRow(new Object[] {c.getId(), c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice()});
-				}
-				storeItemsModel.setRowCount(0);
-				for(int i = 0; i < game.getStore().getItems().size(); i++) {
-					Item item = game.getStore().getItems().get(i);
-					Object[] tableRow = new Object[] {item.getId(), item.getName(), null, null, item.getPrice()};
-					if(item.isFoodItem()) {
-						tableRow[2] = "Food Item";
-						tableRow[3] = item.getBenefit() + " Health Points";
-					}
-					else {
-						tableRow[2] = "Crop Item";
-						if(item.getBenefit() == 1) tableRow[3] = item.getBenefit() + " Day Growth Enhancement";
-						else tableRow[3] = item.getBenefit() + " Days Growth Enhancement";
-					}
-					storeItemsModel.addRow(tableRow);
-				}
+				//TODO: update table models
 			}
 		});
 		nextDayButton.setBounds(612, 330, 150, 45);
-		endGameButton.setBounds(612, 330, 150, 45);
-		endGameButton.setVisible(false);
-		endGameButton.setEnabled(false);
 		mainPanel.add(nextDayButton);
-		mainPanel.add(endGameButton);
 		
 		//-------------------------------------------------------------
 		//set up actions tab
