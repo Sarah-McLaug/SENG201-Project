@@ -136,11 +136,9 @@ public class Store {
 		}
 	}
 	
-	/**
-	 * Detect if the store has a specific item
-	 * @param id - id of the item to search for
-	 * @return - true if the item is in the store, false otherwise
-	 */
+	
+	//Perhaps these methods can be implemented as an interface they do the same thing just with different types
+	//---------------------------------------------------------------------------------------------------------
 	public boolean itemExists(int id) {
 		boolean exists = false;
 		for (int j = 0; j < items.size(); j++) {
@@ -151,11 +149,6 @@ public class Store {
 		return exists;
 	}
 	
-	/**
-	 * Detect if the store has a specific crop
-	 * @param id - id of the crop to search for
-	 * @return - true if the crop is in the store, false otherwise
-	 */
 	public boolean cropExists(int id) {
 		boolean exists = false;
 		for (int j = 0; j < crops.size(); j++) {
@@ -165,12 +158,7 @@ public class Store {
 		}
 		return exists;
 	}
-
-	/**
-	 * Detect if the store has a specific animal
-	 * @param id - id of the animal to search for
-	 * @return - true if the animal is in the store, false otherwise
-	 */
+	
 	public boolean animalExists(int id) {
 		boolean exists = false;
 		for (int j = 0; j < animals.size(); j++) {
@@ -180,12 +168,10 @@ public class Store {
 		}
 		return exists;
 	}
-
-	/**
-	 * Retrieve an item from the store
-	 * @param id - id of the item to retrieve
-	 * @return - item retrieved, null if it doesn't exist in the store
-	 */
+	//---------------------------------------------------------------------------------------------------------
+	
+	//and with these...?
+	//---------------------------------------------------------------------------------------------------------
 	public Item fetchItem(int id) {
 		
 		for (int j = 0; j < items.size(); j++) {
@@ -196,11 +182,6 @@ public class Store {
 		return null;
 	}
 	
-	/**
-	 * Retrieve an animal from the store
-	 * @param id - id of the animal to retrieve
-	 * @return - animal retrieved, null if it doesn't exist in the store
-	 */
 	public Animal fetchAnimal(int id) {
 		for (int j = 0; j < animals.size(); j++) {
 			if (animals.get(j).getId() == id) {
@@ -210,11 +191,6 @@ public class Store {
 		return null;
 	}
 	
-	/**
-	 * Retrieve a crop from the store
-	 * @param id - id of the crop to retrieve
-	 * @return - crop retrieved, null if it doesn't exist in the store
-	 */
 	public Crop fetchCrop(int id) {
 		for (int j = 0; j < crops.size(); j++) {
 			if (crops.get(j).getId() == id) {
@@ -223,4 +199,5 @@ public class Store {
 		}
 		return null;
 	}
+	//---------------------------------------------------------------------------------------------------------
 }

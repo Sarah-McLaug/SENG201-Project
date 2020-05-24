@@ -149,7 +149,6 @@ public class StartScreen {
 		screen.getContentPane().add(farmTypeLabel);
 		
 		JRadioButton friendlyFarmButton = new JRadioButton("Friendly Farm");
-		friendlyFarmButton.setToolTipText("Start with $10,000, Animals stay happier and healthier for longer");
 		friendlyFarmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				farmTypeSet = true;
@@ -161,7 +160,6 @@ public class StartScreen {
 		screen.getContentPane().add(friendlyFarmButton);
 		
 		JRadioButton fertileFarmButton = new JRadioButton("Fertile Farm");
-		fertileFarmButton.setToolTipText("Start with $10,000, Higher yield for crops");
 		fertileFarmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				farmTypeSet = true;
@@ -173,7 +171,6 @@ public class StartScreen {
 		screen.getContentPane().add(fertileFarmButton);
 		
 		JRadioButton fastFarmButton = new JRadioButton("Fast Farm");
-		fastFarmButton.setToolTipText("Start with $10,000, Crops grow faster");
 		fastFarmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				farmTypeSet = true;
@@ -185,7 +182,6 @@ public class StartScreen {
 		screen.getContentPane().add(fastFarmButton);
 		
 		JRadioButton richFarmButton = new JRadioButton("Rich Farm");
-		richFarmButton.setToolTipText("Start with $15,000");
 		richFarmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				farmTypeSet = true;
