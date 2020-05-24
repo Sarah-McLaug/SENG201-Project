@@ -340,26 +340,27 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = new Game();
 		ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
-		cropSpecies.add(new Crop("banana", 2, 2, 2, 2, game.getDay()));
-		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, game.getDay()));
-		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, game.getDay()));
-		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, game.getDay()));
-		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, game.getDay()));
-		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, game.getDay()));
+		cropSpecies.add(new Crop("banana", 2000, 2, 4, 5, game.getDay()));
+		cropSpecies.add(new Crop("corn", 250, 1, 1, 5, game.getDay()));
+		cropSpecies.add(new Crop("kiwi", 3000, 1, 2, 5, game.getDay()));
+		cropSpecies.add(new Crop("kumera", 100, 150, 1, 5, game.getDay()));
+		cropSpecies.add(new Crop("mango", 5000, 10000, 5, 5, game.getDay()));
+		cropSpecies.add(new Crop("spinach", 450, 800, 1, 5, game.getDay()));
 		
 		ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
-		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
-		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
-		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("llama", 250, 100, 9, 10));
+		animalSpecies.add(new Animal("koala", 5000, 300, 6, 1));
+		animalSpecies.add(new Animal("panda", 9999, 5000, 1, 1));
 		
 		ArrayList <Item> foodItems = new ArrayList <Item>();
-		foodItems.add(new FoodItem("sugar cane", 1, 1));
-		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
-		foodItems.add(new FoodItem("brocooli", 1, 1));
+		foodItems.add(new FoodItem("sugar cane", 2500, 2));
+		foodItems.add(new FoodItem("eucalyptus leaves", 3000, 4));
+		foodItems.add(new FoodItem("brocooli", 1500, 1));
 		
 		ArrayList <Item> cropItems = new ArrayList <Item>();
-		cropItems.add(new CropItem("fertilizer", 1, 1));
-		cropItems.add(new CropItem("pestiside", 2, 2));
+		cropItems.add(new CropItem("fertilizer", 2000, 1));
+		cropItems.add(new CropItem("pestiside", 4500, 3));
+		cropItems.add(new CropItem("unicorn dung", 8000, 5));
 		
 		game.setSpecies(animalSpecies, cropSpecies, foodItems, cropItems);
 		game.populateStore();
