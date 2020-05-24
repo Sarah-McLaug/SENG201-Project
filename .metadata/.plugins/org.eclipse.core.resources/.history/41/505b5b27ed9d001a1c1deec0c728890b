@@ -52,17 +52,13 @@ public abstract class Item {
 		return this.purpose.equals("food");
 	}
 	
-	/**
-	 * 
-	 * @return unique ID of the item
-	 */
 	public int getId() {
 		return this.id;
 	}
-
-	/**
-	 * 
-	 * @return the specific benefit of the item when consumed
-	 */
+	//we need to implement an interface here for the case that it is growthEnhancment (int) or HP (double)
+	//for now HP is casted to int in the child class...
 	public abstract int getBenefit();
+	
+	//get HP/growth enhancement interface?
+	//END getters and setters
 }
