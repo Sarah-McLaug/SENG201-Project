@@ -17,13 +17,7 @@ class CropTest {
 	
 	@Test
 	public void testSetDaysUntilMature() {
-		testCrop.setDaysUntilMature(0, 1);
-		assertEquals(0, testCrop.getDaysUntilMature());
-	}
-	
-	@Test
-	public void testDaysUntilMature() {
-		testCrop.reduceDaysUntilMature(20);
+		testCrop.setDaysUntilMature(0, -1);
 		assertEquals(0, testCrop.getDaysUntilMature());
 	}
 }

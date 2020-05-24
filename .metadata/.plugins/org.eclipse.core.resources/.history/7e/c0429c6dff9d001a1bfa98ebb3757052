@@ -1,0 +1,25 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import main.Crop;
+
+
+class CropTest {
+
+	private Crop testCrop;
+
+	@BeforeAll
+	public void init() {
+		testCrop = new Crop("Wheat", 300, 400, 7, 10, 0);
+	}
+	
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

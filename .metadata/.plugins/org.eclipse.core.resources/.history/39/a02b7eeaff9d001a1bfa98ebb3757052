@@ -23,7 +23,7 @@ class CropTest {
 	
 	@Test
 	public void testDaysUntilMature() {
-		testCrop.reduceDaysUntilMature(20);
+		testCrop.reduceDaysUntilMature(-20);
 		assertEquals(0, testCrop.getDaysUntilMature());
 	}
 }

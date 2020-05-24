@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AnimalTest" project="SENG-201-Project" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="test.AnimalTest" time="0.058" displayname="AnimalTest" uniqueid="[engine:junit-jupiter]/[class:test.AnimalTest]">
+    <testcase name="updateHealthTest" classname="test.AnimalTest" time="0.043" displayname="updateHealthTest()" uniqueid="[engine:junit-jupiter]/[class:test.AnimalTest]/[method:updateHealthTest()]"/>
+    <testcase name="updateHappinessTest" classname="test.AnimalTest" time="0.015" displayname="updateHappinessTest()" uniqueid="[engine:junit-jupiter]/[class:test.AnimalTest]/[method:updateHappinessTest()]"/>
+  </testsuite>
+</testrun>
