@@ -9,7 +9,7 @@ public class Game {
 	private Store store = new Store();
 	private int duration;
 	private int actionCount;
-	private int day;
+	private int day = 0;
 	
 	private ArrayList<Animal> animalSpecies = new ArrayList<Animal>();
 	private ArrayList<Crop> cropSpecies = new ArrayList<Crop>();
@@ -192,6 +192,32 @@ public class Game {
 		}
 	}
 	
+	public void launchEndScreen() {
+		EndScreen endScreen = new EndScreen(this);
+	}
+	
+	public void closeEndScreen(EndScreen endWindow) {
+		endWindow.closeWindow();
+	}
+	
+	public void launchMainScreen() {
+		MainScreen mainWindow = new MainScreen(this);
+	}
+	
+	public void closeMainScreen(MainScreen mainWindow) {
+		mainWindow.closeWindow();
+		launchEndScreen();
+	}
+	
+	public void launchStartScreen() {
+		StartScreen startWindow = new StartScreen(this);
+	}
+	
+	public void closeStartScreen(StartScreen startWindow) {
+		startWindow.closeWindow();
+		launchMainScreen();
+	}
+	
 	//Uses the predefined elements (see below) to populate the store with a random amount of each element
 	public static void populateStore(Store store, ArrayList<Animal> animalSpecies, ArrayList<Crop> cropSpecies, 
 			ArrayList<Item> foodItems, ArrayList<Item> cropItems, int day) {
@@ -312,6 +338,33 @@ public class Game {
 	//END methods
 	
 	public static void main(String[] args) {
+		Game game = new Game();
+		ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
+		cropSpecies.add(new Crop("banana", 2, 2, 2, 2, game.getDay()));
+		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, game.getDay()));
+		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, game.getDay()));
+		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, game.getDay()));
+		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, game.getDay()));
+		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, game.getDay()));
+		
+		ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
+		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
+		
+		ArrayList <Item> foodItems = new ArrayList <Item>();
+		foodItems.add(new FoodItem("sugar cane", 1, 1));
+		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
+		foodItems.add(new FoodItem("brocooli", 1, 1));
+		
+		ArrayList <Item> cropItems = new ArrayList <Item>();
+		cropItems.add(new CropItem("fertilizer", 1, 1));
+		cropItems.add(new CropItem("pestiside", 2, 2));
+		
+		game.setSpecies(animalSpecies, cropSpecies, foodItems, cropItems);
+		game.populateStore();
+		
+		game.launchStartScreen();
 		//BEGIN Initialisation
 		//-----------------------------------------------------------------------------------------------------------------
 		//Variables for handling data input and input defence 
@@ -526,9 +579,9 @@ public class Game {
 		int actionsRemaining = 2;
 		boolean playingGame = true;
 		
-		//Define game elements
+		//Define game elements -- commented out, probably need to make a copy of this class
 		//-------------------------------------------------------------------------
-		final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
+		/*final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
 		cropSpecies.add(new Crop("banana", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
@@ -548,7 +601,7 @@ public class Game {
 		
 		final ArrayList <Item> cropItems = new ArrayList <Item>();
 		cropItems.add(new CropItem("fertilizer", 1, 1));
-		cropItems.add(new CropItem("pestiside", 1, 1));
+		cropItems.add(new CropItem("pestiside", 1, 1));*/
 		//-------------------------------------------------------------------------
 		
 		//Fill the store with the elements

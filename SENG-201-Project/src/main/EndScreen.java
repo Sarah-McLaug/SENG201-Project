@@ -7,13 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EndScreen {
 
 	private JFrame screen;
 	private Game game;
 
-	private final int windowHeight = 220;
+	private final int windowHeight = 300;
 	private final int windowWidth = 600;
 
 	/**
@@ -88,6 +93,17 @@ public class EndScreen {
 		initialize();
 		screen.setVisible(true);
 	}
+	
+	/**
+	 * Close the window
+	 */
+	public void closeWindow() {
+		screen.dispose();
+	}
+	
+	public void finishedWindow() {
+		game.closeEndScreen(this);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -117,6 +133,14 @@ public class EndScreen {
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreLabel.setBounds(0, 130, windowWidth, 30);
 		screen.getContentPane().add(scoreLabel);
+		
+		JButton closeGameBtn = new JButton("Close Game");
+		closeGameBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+			}
+		});
+		closeGameBtn.setBounds(windowWidth/2 - 75, 190, 150, 50);
+		screen.getContentPane().add(closeGameBtn);
 	}
-
 }

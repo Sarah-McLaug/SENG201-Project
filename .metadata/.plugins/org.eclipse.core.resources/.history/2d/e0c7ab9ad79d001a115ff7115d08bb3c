@@ -1,0 +1,220 @@
+package main;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JSlider;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
+
+public class StartScreen {
+
+	private JFrame screen;
+	private JTextField farmerNameField;
+	private JTextField farmNameField;
+	private Game game;
+	private String farmType;
+	private int age;
+	private boolean farmerNameSet = false;
+	private boolean farmerAgeSet = false;
+	private boolean farmTypeSet = false;
+	private boolean farmNameSet = false;
+	private String inputError = "";
+	
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final int windowWidth = 550;
+	private final int windowHeight = 400;
+	private final String farmerNameError = "Farmer name not valid.\n";
+	private final String farmerAgeError = "Farmer age not valid.\n";
+	private final String farmTypeError = "Please select a farm type.\n";
+	private final String farmNameError = "Farm name not valid.\n";
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StartScreen window = new StartScreen(new Game());
+					window.screen.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the window
+	 */
+	public StartScreen(Game incomingGame) {
+		game = incomingGame;
+		initialize();
+		screen.setVisible(true);
+	}
+	
+	/**
+	 * Close the window
+	 */
+	public void closeWindow() {
+		screen.dispose();
+	}
+	
+	public void finishedWindow() {
+		game.closeStartScreen(this);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		screen = new JFrame();
+		screen.setResizable(false);
+		screen.setBounds(100, 100, windowWidth, windowHeight);
+		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		screen.getContentPane().setLayout(null);
+		
+		JLabel welcome = new JLabel("Welcome!");
+		welcome.setHorizontalAlignment(SwingConstants.CENTER);
+		welcome.setBounds(226, 21, 101, 36);
+		screen.getContentPane().add(welcome);
+		welcome.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		
+		JLabel farmerNameLabel = new JLabel("Please enter your name (3-15 characters): ");
+		farmerNameLabel.setBounds(22, 69, 266, 16);
+		screen.getContentPane().add(farmerNameLabel);
+		
+		farmerNameField = new JTextField();
+		farmerNameField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		farmerNameField.setBounds(407, 64, 130, 26);
+		screen.getContentPane().add(farmerNameField);
+		farmerNameField.setColumns(10);
+		
+		JLabel farmerAgeLabel = new JLabel("Please enter your age: ");
+		farmerAgeLabel.setBounds(22, 97, 141, 16);
+		screen.getContentPane().add(farmerAgeLabel);
+		
+		JFormattedTextField farmerAgeField = new JFormattedTextField();
+		farmerAgeField.setBounds(407, 92, 130, 26);
+		screen.getContentPane().add(farmerAgeField);
+		
+		JLabel farmNameLabel = new JLabel("Name your farm: ");
+		farmNameLabel.setBounds(22, 227, 109, 16);
+		screen.getContentPane().add(farmNameLabel);
+		
+		farmNameField = new JTextField();
+		farmNameField.setBounds(407, 222, 130, 26);
+		screen.getContentPane().add(farmNameField);
+		farmNameField.setColumns(10);
+		
+		JSlider gameLengthSlider = new JSlider();
+		gameLengthSlider.setValue(5);
+		gameLengthSlider.setBounds(347, 255, 190, 52);
+		gameLengthSlider.setMajorTickSpacing(1);
+		gameLengthSlider.setSnapToTicks(true);
+		gameLengthSlider.setPaintLabels(true);
+		gameLengthSlider.setPaintTicks(true);
+		gameLengthSlider.setMaximum(10);
+		gameLengthSlider.setMinimum(5);
+		screen.getContentPane().add(gameLengthSlider);
+		
+		JLabel gameLengthLabel = new JLabel("Set the length of your game: ");
+		gameLengthLabel.setBounds(22, 255, 182, 16);
+		screen.getContentPane().add(gameLengthLabel);
+		
+		JLabel farmTypeLabel = new JLabel("Choose your farm type: ");
+		farmTypeLabel.setBounds(22, 129, 151, 16);
+		screen.getContentPane().add(farmTypeLabel);
+		
+		JRadioButton friendlyFarmButton = new JRadioButton("Friendly Farm");
+		friendlyFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmTypeSet = true;
+				farmType = "friendly";
+			}
+		});
+		friendlyFarmButton.setBounds(120, 157, 117, 23);
+		buttonGroup.add(friendlyFarmButton);
+		screen.getContentPane().add(friendlyFarmButton);
+		
+		JRadioButton fertileFarmButton = new JRadioButton("Fertile Farm");
+		fertileFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmTypeSet = true;
+				farmType = "fertile";
+			}
+		});
+		fertileFarmButton.setBounds(120, 192, 106, 23);
+		buttonGroup.add(fertileFarmButton);
+		screen.getContentPane().add(fertileFarmButton);
+		
+		JRadioButton fastFarmButton = new JRadioButton("Fast Farm");
+		fastFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmTypeSet = true;
+				farmType = "fast";
+			}
+		});
+		fastFarmButton.setBounds(294, 157, 93, 23);
+		buttonGroup.add(fastFarmButton);
+		screen.getContentPane().add(fastFarmButton);
+		
+		JRadioButton richFarmButton = new JRadioButton("Rich Farm");
+		richFarmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				farmTypeSet = true;
+				farmType = "rich";
+			}
+		});
+		richFarmButton.setBounds(294, 192, 94, 23);
+		buttonGroup.add(richFarmButton);
+		screen.getContentPane().add(richFarmButton);
+		
+		JButton startGameButton = new JButton("Start Game");
+		startGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(farmerNameField.getText().length() >= 3 && farmerNameField.getText().length() <= 15) farmerNameSet = true;
+				else farmerNameSet = false;
+				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input, validate it
+				if(age > 0) farmerAgeSet = true;
+				else farmerAgeSet = false;
+				if(farmNameField.getText().length() > 0) farmNameSet = true;
+				else farmNameSet = false;
+				if(!farmerNameSet || !farmerAgeSet || !farmTypeSet || !farmNameSet) {
+					if(!farmerNameSet) inputError += farmerNameError;
+					if(!farmerAgeSet) inputError += farmerAgeError;
+					if(!farmTypeSet) inputError += farmTypeError;
+					if(!farmNameSet) inputError += farmNameError;
+					JOptionPane.showMessageDialog(screen, inputError, "Invalid Input", JOptionPane.ERROR_MESSAGE);
+					inputError = "";
+				} else {
+					game.setFarm(new Farm(farmNameField.getText(), farmType, new Farmer(farmerNameField.getText(), age)));
+					game.setDuration((int)gameLengthSlider.getValue());
+					game.setActionCount(2);
+					finishedWindow();
+				}
+			}
+		});
+		startGameButton.setEnabled(true);
+		startGameButton.setBounds(211, 322, 117, 50);
+		screen.getContentPane().add(startGameButton);
+	}
+}

@@ -1,0 +1,137 @@
+package main;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+
+public class EndScreen {
+
+	private JFrame screen;
+	private Game game;
+
+	private final int windowHeight = 300;
+	private final int windowWidth = 600;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		//Defaults for easy testing: TODO: (remove later)
+		//--------------------------------------------------------------------
+		String farmName = "Incognito Farms";
+		String farmType = "friendly";
+		String farmerName = "Lollipop Chainsaw";
+		int age = 22;
+		int day = 5;
+		//--------------------------------------------------------------------
+		
+		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
+		Store store = new Store();
+		int actionsRemaining = 2;
+		boolean playingGame = true;
+		
+		//Define game elements
+		//-------------------------------------------------------------------------
+		final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
+		cropSpecies.add(new Crop("banana", 2, 2, 2, 2, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, farm.getCropGrowthBonus()));
+		
+		final ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
+		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
+		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
+		
+		final ArrayList <Item> foodItems = new ArrayList <Item>();
+		foodItems.add(new FoodItem("sugar cane", 1, 1));
+		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
+		foodItems.add(new FoodItem("brocooli", 1, 1));
+		
+		final ArrayList <Item> cropItems = new ArrayList <Item>();
+		cropItems.add(new CropItem("fertilizer", 1, 1));
+		cropItems.add(new CropItem("pestiside", 2, 2));
+		//-------------------------------------------------------------------------
+		
+
+		Game dummyGame = new Game();
+		dummyGame.setDay(day);
+		dummyGame.setFarm(farm);
+		dummyGame.setDuration(5);
+		dummyGame.setActionCount(actionsRemaining);
+		dummyGame.setSpecies(animalSpecies, cropSpecies, foodItems, cropItems);
+		dummyGame.populateStore();
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EndScreen window = new EndScreen(dummyGame);
+					window.screen.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public EndScreen(Game incomingGame) {
+		game = incomingGame;
+		initialize();
+		screen.setVisible(true);
+	}
+	
+	/**
+	 * Close the window
+	 */
+	public void closeWindow() {
+		screen.dispose();
+	}
+	
+	public void finishedWindow() {
+		game.closeEndScreen(this);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		screen = new JFrame();
+		screen.setBounds(100, 100, windowWidth, windowHeight);
+		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		screen.getContentPane().setLayout(null);
+		
+		JLabel farmNameLabel = new JLabel(game.getFarm().getName());
+		farmNameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		farmNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		farmNameLabel.setBounds(0, 20, windowWidth, 30);
+		screen.getContentPane().add(farmNameLabel);
+		
+		JLabel durationLabel = new JLabel("Duration: " + game.getDuration() + " days");
+		durationLabel.setBounds(100, 70, 200, 16);
+		screen.getContentPane().add(durationLabel);
+		
+		JLabel profitLabel = new JLabel("Profit: $" + String.format("%.2f", game.profit()));
+		profitLabel.setBounds(100, 100, 200, 16);
+		screen.getContentPane().add(profitLabel);
+		
+		JLabel scoreLabel = new JLabel("Score: " + game.score());
+		scoreLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		scoreLabel.setBounds(0, 130, windowWidth, 30);
+		screen.getContentPane().add(scoreLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 190, windowWidth, windowHeight-190);
+		screen.getContentPane().add(panel);
+	}
+}

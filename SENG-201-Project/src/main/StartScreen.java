@@ -60,12 +60,23 @@ public class StartScreen {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the window
 	 */
 	public StartScreen(Game incomingGame) {
 		game = incomingGame;
 		initialize();
 		screen.setVisible(true);
+	}
+	
+	/**
+	 * Close the window
+	 */
+	public void closeWindow() {
+		screen.dispose();
+	}
+	
+	public void finishedWindow() {
+		game.closeStartScreen(this);
 	}
 
 	/**
@@ -196,9 +207,10 @@ public class StartScreen {
 					inputError = "";
 				} else {
 					game.setFarm(new Farm(farmNameField.getText(), farmType, new Farmer(farmerNameField.getText(), age)));
-					game.setDuration((int)gameLengthSlider.getValue());
+					game.setDuration((int) gameLengthSlider.getValue());
+					game.setDay((int) gameLengthSlider.getValue());
 					game.setActionCount(2);
-					//TODO: close start screen and open main screen
+					finishedWindow();
 				}
 			}
 		});

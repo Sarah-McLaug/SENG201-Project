@@ -141,6 +141,17 @@ public class MainScreen {
 		initialize();
 		screen.setVisible(true);
 	}
+	
+	/**
+	 * Close the window
+	 */
+	public void closeWindow() {
+		screen.dispose();
+	}
+	
+	public void finishedWindow() {
+		game.closeMainScreen(this);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -276,6 +287,11 @@ public class MainScreen {
 		
 		JButton nextDayButton = new JButton("Move to Next Day");
 		JButton endGameButton = new JButton("End Game");
+		endGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finishedWindow();
+			}
+		});
 		nextDayButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.advanceDay();
