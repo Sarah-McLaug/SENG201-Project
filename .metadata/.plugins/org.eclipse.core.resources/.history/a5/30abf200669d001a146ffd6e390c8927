@@ -209,43 +209,6 @@ public class MainScreen {
 			}
 		}
 		
-		//set up store animals table model
-		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
-		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0);
-		storeAnimalsModel.setColumnIdentifiers(storeAnimalsColumnNames);
-		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
-			Animal a = game.getStore().getAnimals().get(i);
-			storeAnimalsModel.addRow(new Object[] {a.getId(), a.getSpecies(), a.getPurchasePrice()});
-		}
-		
-		//set up store crops table model
-		String[] storeCropsColumnNames = {"ID", "Species", "Days Until Mature", "Price"};
-		DefaultTableModel storeCropsModel = new DefaultTableModel(0, 0);
-		storeCropsModel.setColumnIdentifiers(storeCropsColumnNames);
-		for(int i = 0; i < game.getStore().getCrops().size(); i++) {
-			Crop c = game.getStore().getCrops().get(i);
-			storeCropsModel.addRow(new Object[] {c.getId(), c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice()});
-		}
-		
-		//set up store items table model
-		String[] storeItemsColumnNames = {"ID", "Name", "Type", "Benefit", "Price"};
-		DefaultTableModel storeItemsModel = new DefaultTableModel(0, 0);
-		storeItemsModel.setColumnIdentifiers(storeItemsColumnNames);
-		for(int i = 0; i < game.getStore().getItems().size(); i++) {
-			Item item = game.getStore().getItems().get(i);
-			Object[] tableRow = new Object[] {item.getId(), item.getName(), null, null, item.getPrice()};
-			if(item.isFoodItem()) {
-				tableRow[2] = "Food Item";
-				tableRow[3] = item.getBenefit() + " Health Points";
-			}
-			else {
-				tableRow[2] = "Crop Item";
-				if(item.getBenefit() == 1) tableRow[3] = item.getBenefit() + " Day Growth Enhancement";
-				else tableRow[3] = item.getBenefit() + " Days Growth Enhancement";
-			}
-			storeItemsModel.addRow(tableRow);
-		}
-		
 		//-------------------------------------------------------------
 		//set up frame
 		screen = new JFrame();
@@ -561,7 +524,14 @@ public class MainScreen {
 		
 		//set up table of animals user is able to buy
 		storeAnimalsTable = new JTable();
+		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
+		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0);
+		storeAnimalsModel.setColumnIdentifiers(storeAnimalsColumnNames);
 		storeAnimalsTable.setModel(storeAnimalsModel);
+		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
+			Animal a = game.getStore().getAnimals().get(i);
+			storeAnimalsModel.addRow(new Object[] {a.getId(), a.getSpecies(), a.getPurchasePrice()});
+		}
 		storeAnimalsTableContainer.setViewportView(storeAnimalsTable);
 		
 		JButton buyAnimalsBtn = new JButton("Purchase");
@@ -603,7 +573,14 @@ public class MainScreen {
 		buyCropsTab.add(storeCropsTableContainer);
 		
 		storeCropsTable = new JTable();
+		String[] storeCropsColumnNames = {"ID", "Species", "Days Until Mature", "Price"};
+		DefaultTableModel storeCropsModel = new DefaultTableModel(0, 0);
+		storeCropsModel.setColumnIdentifiers(storeCropsColumnNames);
 		storeCropsTable.setModel(storeCropsModel);
+		for(int i = 0; i < game.getStore().getCrops().size(); i++) {
+			Crop c = game.getStore().getCrops().get(i);
+			storeCropsModel.addRow(new Object[] {c.getId(), c.getSpecies(), c.getDaysUntilMature(), c.getPurchasePrice()});
+		}
 		storeCropsTableContainer.setViewportView(storeCropsTable);
 		
 		JButton buyCropsBtn = new JButton("Purchase");
@@ -642,7 +619,24 @@ public class MainScreen {
 		buyItemsTab.add(storeItemsTableContainer);
 		
 		storeItemsTable = new JTable();
+		String[] storeItemsColumnNames = {"ID", "Name", "Type", "Benefit", "Price"};
+		DefaultTableModel storeItemsModel = new DefaultTableModel(0, 0);
+		storeItemsModel.setColumnIdentifiers(storeItemsColumnNames);
 		storeItemsTable.setModel(storeItemsModel);
+		for(int i = 0; i < game.getStore().getItems().size(); i++) {
+			Item item = game.getStore().getItems().get(i);
+			Object[] tableRow = new Object[] {item.getId(), item.getName(), null, null, item.getPrice()};
+			if(item.isFoodItem()) {
+				tableRow[2] = "Food Item";
+				tableRow[3] = item.getBenefit() + " Health Points";
+			}
+			else {
+				tableRow[2] = "Crop Item";
+				if(item.getBenefit() == 1) tableRow[3] = item.getBenefit() + " Day Growth Enhancement";
+				else tableRow[3] = item.getBenefit() + " Days Growth Enhancement";
+			}
+			storeItemsModel.addRow(tableRow);
+		}
 		storeItemsTableContainer.setViewportView(storeItemsTable);
 		
 		JButton buyItemsBtn = new JButton("Purchase");
