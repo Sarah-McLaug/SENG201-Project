@@ -185,25 +185,25 @@ public class MainScreen {
 		}
 		
 		//set up farm food item table model
-		String[] farmFoodItemsColumnNames = {"ID", "Name", "Health Points"};
+		String[] farmFoodItemsColumnNames = {"Name", "Health Points"};
 		DefaultTableModel farmFoodItemsModel = new DefaultTableModel(0, 0);
 		farmFoodItemsModel.setColumnIdentifiers(farmFoodItemsColumnNames);
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(item.isFoodItem()) {
-				farmFoodItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit()});
+				farmFoodItemsModel.addRow(new Object[] {item.getName(), item.getBenefit()});
 			}
 		}
 		
 		//set up farm crop item table model
-		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
+		String[] farmCropItemsColumnNames = {"Name","Growth Enhancement"};
 		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
-				if(item.getBenefit() == 1)  farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Day"});
-				else farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Days"});
+				if(item.getBenefit() == 1)  farmItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Day"});
+				else farmItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Days"});
 			}
 		}
 		
@@ -325,28 +325,6 @@ public class MainScreen {
 		feedAnimalsBtn = new JButton("Feed Animals");
 		feedAnimalsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] foodItemIds = new Object[farmFoodItemsModel.getRowCount()];
-				for(int i = 0; i < foodItemIds.length; i++) foodItemIds[i] = farmFoodItemsModel.getValueAt(i, 0);
-				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the food item you would like to use", "Selection", 
-						JOptionPane.PLAIN_MESSAGE, null, foodItemIds, foodItemIds[0]);
-				if(purchase != null && purchase.intValue() != 0) {
-					Item item = game.getFarm().fetchItem(purchase.intValue());
-					game.getFarm().feedAnimals((FoodItem) item);
-					int index = -1;
-					for(int i = 0; i < farmFoodItemsModel.getRowCount(); i++) {
-						if((int) farmFoodItemsModel.getValueAt(i, 0) == item.getId()) index = i;
-					}
-					farmFoodItemsModel.removeRow(index);
-					farmAnimalsModel.setRowCount(0);
-					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-						Animal a = game.getFarm().getAnimals().get(i);
-						farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					}
-					game.setActionCount(game.getActionCount() - 1);
-					actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
-					if(game.getActionCount() == 0) disableActions();
-					if(farmFoodItemsModel.getRowCount() == 0) feedAnimalsBtn.setEnabled(false);
-				}
 			}
 		});
 		feedAnimalsBtn.setBounds(315, 268, 120, 30);
@@ -370,14 +348,8 @@ public class MainScreen {
 		playAnimalsBtn = new JButton("Play with Animals");
 		playAnimalsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(actionConfirmation()) {
-					game.getFarm().playAnimals();
-					farmAnimalsModel.setRowCount(0);
-					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
-						Animal a = game.getFarm().getAnimals().get(i);
-						farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					}
-				}
+				Integer input = JOptionPane.showConfirmDialog(screen, "This will take one action. \n Are you sure?", "Confirmation", 
+						JOptionPane.OK_CANCEL_OPTION);
 			}
 		});
 		playAnimalsBtn.setBounds(552, 119, 155, 60);
@@ -504,8 +476,8 @@ public class MainScreen {
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					if(farmFoodItemsModel.getRowCount() > 0 && game.getActionCount() > 0) feedAnimalsBtn.setEnabled(true);
-					if(game.getActionCount() > 0) playAnimalsBtn.setEnabled(true);
+					if(farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
+					playAnimalsBtn.setEnabled(true);
 					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}
 			}
@@ -553,7 +525,7 @@ public class MainScreen {
 					game.getFarm().updateBalance(-c.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-					if(game.getActionCount() > 0) tendCropsBtn.setEnabled(true);
+					tendCropsBtn.setEnabled(true);
 					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
 				}
 			}
@@ -611,8 +583,8 @@ public class MainScreen {
 					//update all item models
 					if(item.isFoodItem()) {
 						farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
-						farmFoodItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit()});
-						if(game.getFarm().getAnimals().size() > 0 && game.getActionCount() > 0) feedAnimalsBtn.setEnabled(true);
+						farmFoodItemsModel.addRow(new Object[] {item.getName(), item.getBenefit()});
+						if(game.getFarm().getAnimals().size() > 0) feedAnimalsBtn.setEnabled(true);
 					}
 					else {
 						String enhancement = "";
@@ -622,9 +594,9 @@ public class MainScreen {
 						}
 						else {
 							enhancement += item.getBenefit() + " Days Growth Enhancement";
-							farmCropItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Days"});
+							farmCropItemsModel.addRow(new Object[] {item.getName(), item.getBenefit() + " Days"});
 						}
-						farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), "Crop Item", enhancement});
+						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
 					}
 					if(game.getStore().getItems().size() == 0) buyItemsBtn.setEnabled(false);
 				}

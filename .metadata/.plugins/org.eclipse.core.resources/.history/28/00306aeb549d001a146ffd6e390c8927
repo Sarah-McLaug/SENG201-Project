@@ -504,8 +504,8 @@ public class MainScreen {
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
-					if(farmFoodItemsModel.getRowCount() > 0 && game.getActionCount() > 0) feedAnimalsBtn.setEnabled(true);
-					if(game.getActionCount() > 0) playAnimalsBtn.setEnabled(true);
+					if(farmFoodItemsModel.getRowCount() > 0) feedAnimalsBtn.setEnabled(true);
+					playAnimalsBtn.setEnabled(true);
 					if(game.getStore().getAnimals().size() == 0) buyAnimalsBtn.setEnabled(false);
 				}
 			}
@@ -553,7 +553,7 @@ public class MainScreen {
 					game.getFarm().updateBalance(-c.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-					if(game.getActionCount() > 0) tendCropsBtn.setEnabled(true);
+					tendCropsBtn.setEnabled(true);
 					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
 				}
 			}
@@ -612,7 +612,7 @@ public class MainScreen {
 					if(item.isFoodItem()) {
 						farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
 						farmFoodItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit()});
-						if(game.getFarm().getAnimals().size() > 0 && game.getActionCount() > 0) feedAnimalsBtn.setEnabled(true);
+						if(game.getFarm().getAnimals().size() > 0) feedAnimalsBtn.setEnabled(true);
 					}
 					else {
 						String enhancement = "";
