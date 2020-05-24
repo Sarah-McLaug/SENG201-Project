@@ -354,8 +354,6 @@ public class MainScreen {
 					}
 					storeItemsModel.addRow(tableRow);
 				}
-				//update harvestable crop button
-				if(game.getActionCount() > 0 && harvestableCropsModel.getRowCount() > 0) harvestCropsBtn.setEnabled(true);
 			}
 		});
 		nextDayButton.setBounds(617, 335, 150, 45);
