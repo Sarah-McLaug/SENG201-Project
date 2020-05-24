@@ -132,7 +132,7 @@ public class EndScreen {
 		profitLabel.setBounds(100, 100, 200, 16);
 		screen.getContentPane().add(profitLabel);
 		
-		JLabel scoreLabel = new JLabel("Score: " + game.score());
+		JLabel scoreLabel = new JLabel("Score: " + game.score() + "pts");
 		scoreLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreLabel.setBounds(0, 130, windowWidth, 30);
