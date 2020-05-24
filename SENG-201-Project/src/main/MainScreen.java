@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -160,7 +162,14 @@ public class MainScreen {
 		//set up data models
 		//set up farm animal table model
 		String[] farmAnimalsColumnNames = {"Species", "Health", "Happiness"};
-		DefaultTableModel farmAnimalsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel farmAnimalsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
+		
 		farmAnimalsModel.setColumnIdentifiers(farmAnimalsColumnNames);
 		for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
 			Animal a = game.getFarm().getAnimals().get(i);
@@ -169,7 +178,13 @@ public class MainScreen {
 		
 		//set up farm crop table model
 		String[] farmCropsColumnNames = {"Species", "Days Until Mature", "Age"};
-		DefaultTableModel farmCropsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel farmCropsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		farmCropsModel.setColumnIdentifiers(farmCropsColumnNames);
 		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
 			Crop c = game.getFarm().getCrops().get(i);
@@ -178,7 +193,13 @@ public class MainScreen {
 		
 		//set up farm harvestable crops table model
 		String[] harvestableCropsColumnNames = {"Species: ", "Selling Price"};
-		DefaultTableModel harvestableCropsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel harvestableCropsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		harvestableCropsModel.setColumnIdentifiers(harvestableCropsColumnNames);
 		for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
 			Crop c = game.getFarm().getCrops().get(i);
@@ -187,7 +208,13 @@ public class MainScreen {
 		
 		//set up farm item table model
 		String[] farmItemsColumnNames = {"Name", "Type", "Benefit"};
-		DefaultTableModel farmItemsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel farmItemsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		farmItemsModel.setColumnIdentifiers(farmItemsColumnNames);
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
@@ -202,7 +229,13 @@ public class MainScreen {
 		
 		//set up farm food item table model
 		String[] farmFoodItemsColumnNames = {"ID", "Name", "Health Points"};
-		DefaultTableModel farmFoodItemsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel farmFoodItemsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		farmFoodItemsModel.setColumnIdentifiers(farmFoodItemsColumnNames);
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
@@ -213,7 +246,13 @@ public class MainScreen {
 		
 		//set up farm crop item table model
 		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
-		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
 		farmCropItemsModel.addRow(new Object[] {1, "water", "1 Day"});
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
@@ -226,7 +265,13 @@ public class MainScreen {
 		
 		//set up store animals table model
 		String[] storeAnimalsColumnNames = {"ID", "Species", "Price"};
-		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel storeAnimalsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		storeAnimalsModel.setColumnIdentifiers(storeAnimalsColumnNames);
 		for(int i = 0; i < game.getStore().getAnimals().size(); i++) {
 			Animal a = game.getStore().getAnimals().get(i);
@@ -235,7 +280,13 @@ public class MainScreen {
 		
 		//set up store crops table model
 		String[] storeCropsColumnNames = {"ID", "Species", "Days Until Mature", "Price"};
-		DefaultTableModel storeCropsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel storeCropsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		storeCropsModel.setColumnIdentifiers(storeCropsColumnNames);
 		for(int i = 0; i < game.getStore().getCrops().size(); i++) {
 			Crop c = game.getStore().getCrops().get(i);
@@ -244,7 +295,13 @@ public class MainScreen {
 		
 		//set up store items table model
 		String[] storeItemsColumnNames = {"ID", "Name", "Type", "Benefit", "Price"};
-		DefaultTableModel storeItemsModel = new DefaultTableModel(0, 0);
+		DefaultTableModel storeItemsModel = new DefaultTableModel(0, 0)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};
 		storeItemsModel.setColumnIdentifiers(storeItemsColumnNames);
 		for(int i = 0; i < game.getStore().getItems().size(); i++) {
 			Item item = game.getStore().getItems().get(i);
