@@ -353,9 +353,9 @@ public class Game {
 		animalSpecies.add(new Animal("panda", 9999, 5000, 1, 1));
 		
 		ArrayList <Item> foodItems = new ArrayList <Item>();
-		foodItems.add(new FoodItem("sugar cane", 2500, 2));
-		foodItems.add(new FoodItem("eucalyptus leaves", 3000, 4));
-		foodItems.add(new FoodItem("brocooli", 1500, 1));
+		foodItems.add(new FoodItem("sugar cane", 2, 2500));
+		foodItems.add(new FoodItem("eucalyptus leaves", 4, 3000));
+		foodItems.add(new FoodItem("brocooli", 1, 1500));
 		
 		ArrayList <Item> cropItems = new ArrayList <Item>();
 		cropItems.add(new CropItem("fertilizer", 2000, 1));
