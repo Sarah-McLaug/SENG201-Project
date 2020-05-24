@@ -316,6 +316,7 @@ public class MainScreen {
 						game.setActionCount(game.getActionCount() - 1);
 						actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
 						if(game.getActionCount() == 0) disableActions();
+						if(farmFoodItemsModel.getRowCount() == 0) feedAnimalsBtn.setEnabled(false);
 					}
 				}
 			}

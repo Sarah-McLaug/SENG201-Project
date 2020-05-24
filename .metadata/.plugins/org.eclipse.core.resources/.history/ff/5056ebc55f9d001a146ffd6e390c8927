@@ -290,33 +290,27 @@ public class MainScreen {
 				for(int i = 0; i < game.getCropSpecies().size(); i++) {
 					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) numCropSpeciesOwned++;
 				}
-				Object[] cropSpeciesOwned = new Object[numCropSpeciesOwned];
-				for(int i = 0; i < game.getCropSpecies().size(); i++) {
-					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) cropSpeciesOwned[i] = game.getCropSpecies().get(i).getSpecies();
-				}
-				String speciesSelection = (String) JOptionPane.showInputDialog(screen, "Select the species you want to tend", "Selection",
-						JOptionPane.PLAIN_MESSAGE, null, cropSpeciesOwned, cropSpeciesOwned[0]);
-				if(speciesSelection != null) {
-					Integer cropItemSelection = (Integer) JOptionPane.showInputDialog(screen, "Select the crop item you would like to use", "Selection", 
-							JOptionPane.PLAIN_MESSAGE, null, cropItemIds, cropItemIds[0]);
-					if(cropItemSelection != null && cropItemSelection.intValue() != 0) {
-						Item item = game.getFarm().fetchItem(cropItemSelection.intValue());
-						if(cropItemSelection.intValue() == 0) game.getFarm().waterCrop(speciesSelection);
-						else game.getFarm().tendCrop(speciesSelection, (CropItem) item);
-						int index = -1;
-						for(int i = 0; i < farmCropItemsModel.getRowCount(); i++) {
-							if((int) farmCropItemsModel.getValueAt(i, 0) == item.getId()) index = i;
-						}
-						farmCropItemsModel.removeRow(index);
-						farmCropsModel.setRowCount(0);
-						for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-							Crop c = game.getFarm().getCrops().get(i);
-							farmCropsModel.addRow(new Object[]{c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-						}
-						game.setActionCount(game.getActionCount() - 1);
-						actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
-						if(game.getActionCount() == 0) disableActions();
+				Integer speciesSelection = (Integer) JOptionPane.showInputDialog(screen, "Select the species you want to tend", "Selection",
+						JOptionPane.PLAIN_MESSAGE, game.getCropSpecies());
+				Integer selection = (Integer) JOptionPane.showInputDialog(screen, "Select the crop item you would like to use", "Selection", 
+						JOptionPane.PLAIN_MESSAGE, null, cropItemIds, cropItemIds[0]);
+				if(selection != null && selection.intValue() != 0) {
+					Item item = game.getFarm().fetchItem(selection.intValue());
+					game.getFarm().tendCrop("banana", (CropItem) item);
+					int index = -1;
+					for(int i = 0; i < farmFoodItemsModel.getRowCount(); i++) {
+						if((int) farmFoodItemsModel.getValueAt(i, 0) == item.getId()) index = i;
 					}
+					farmFoodItemsModel.removeRow(index);
+					farmAnimalsModel.setRowCount(0);
+					for(int i = 0; i < game.getFarm().getAnimals().size(); i++) {
+						Animal a = game.getFarm().getAnimals().get(i);
+						farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
+					}
+					game.setActionCount(game.getActionCount() - 1);
+					actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
+					if(game.getActionCount() == 0) disableActions();
+					if(farmFoodItemsModel.getRowCount() == 0) feedAnimalsBtn.setEnabled(false);
 				}
 			}
 		});

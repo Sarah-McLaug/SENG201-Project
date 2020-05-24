@@ -56,10 +56,6 @@ public class Game {
 	public void setDay(int day) {
 		this.day = day;
 	}
-	
-	public ArrayList<Crop> getCropSpecies(){
-		return cropSpecies;
-	}
 	//*********************************************
 	// - Do we actually need these?
 	

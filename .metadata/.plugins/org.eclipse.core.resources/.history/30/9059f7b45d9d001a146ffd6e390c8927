@@ -199,7 +199,6 @@ public class MainScreen {
 		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
 		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
-		farmCropItemsModel.addRow(new Object[] {0, "Water", "1 Day"});
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
@@ -282,44 +281,6 @@ public class MainScreen {
 		tendCropsItemTableContainer.setViewportView(tendCropsItemTable);
 		
 		tendCropsBtn = new JButton("Tend Crops");
-		tendCropsBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object[] cropItemIds = new Object[farmCropItemsModel.getRowCount()];
-				for(int i = 0; i < cropItemIds.length; i++) cropItemIds[i] = farmCropItemsModel.getValueAt(i, 0);
-				int numCropSpeciesOwned = 0;
-				for(int i = 0; i < game.getCropSpecies().size(); i++) {
-					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) numCropSpeciesOwned++;
-				}
-				Object[] cropSpeciesOwned = new Object[numCropSpeciesOwned];
-				for(int i = 0; i < game.getCropSpecies().size(); i++) {
-					if(game.getFarm().ownsCrop(game.getCropSpecies().get(i).getSpecies())) cropSpeciesOwned[i] = game.getCropSpecies().get(i).getSpecies();
-				}
-				String speciesSelection = (String) JOptionPane.showInputDialog(screen, "Select the species you want to tend", "Selection",
-						JOptionPane.PLAIN_MESSAGE, null, cropSpeciesOwned, cropSpeciesOwned[0]);
-				if(speciesSelection != null) {
-					Integer cropItemSelection = (Integer) JOptionPane.showInputDialog(screen, "Select the crop item you would like to use", "Selection", 
-							JOptionPane.PLAIN_MESSAGE, null, cropItemIds, cropItemIds[0]);
-					if(cropItemSelection != null && cropItemSelection.intValue() != 0) {
-						Item item = game.getFarm().fetchItem(cropItemSelection.intValue());
-						if(cropItemSelection.intValue() == 0) game.getFarm().waterCrop(speciesSelection);
-						else game.getFarm().tendCrop(speciesSelection, (CropItem) item);
-						int index = -1;
-						for(int i = 0; i < farmCropItemsModel.getRowCount(); i++) {
-							if((int) farmCropItemsModel.getValueAt(i, 0) == item.getId()) index = i;
-						}
-						farmCropItemsModel.removeRow(index);
-						farmCropsModel.setRowCount(0);
-						for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
-							Crop c = game.getFarm().getCrops().get(i);
-							farmCropsModel.addRow(new Object[]{c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
-						}
-						game.setActionCount(game.getActionCount() - 1);
-						actionsRemainingLabel.setText("Actions Remaining: " + game.getActionCount());
-						if(game.getActionCount() == 0) disableActions();
-					}
-				}
-			}
-		});
 		if(tendCropsTable.getSelectionModel().isSelectionEmpty() || 
 				tendCropsItemTable.getSelectionModel().isSelectionEmpty()) tendCropsBtn.setEnabled(false);
 		else tendCropsBtn.setEnabled(true);
@@ -366,10 +327,10 @@ public class MainScreen {
 			public void actionPerformed(ActionEvent e) {
 				Object[] foodItemIds = new Object[farmFoodItemsModel.getRowCount()];
 				for(int i = 0; i < foodItemIds.length; i++) foodItemIds[i] = farmFoodItemsModel.getValueAt(i, 0);
-				Integer selection = (Integer) JOptionPane.showInputDialog(screen, "Select the food item you would like to use", "Selection", 
+				Integer purchase = (Integer) JOptionPane.showInputDialog(screen, "Select the food item you would like to use", "Selection", 
 						JOptionPane.PLAIN_MESSAGE, null, foodItemIds, foodItemIds[0]);
-				if(selection != null && selection.intValue() != 0) {
-					Item item = game.getFarm().fetchItem(selection.intValue());
+				if(purchase != null && purchase.intValue() != 0) {
+					Item item = game.getFarm().fetchItem(purchase.intValue());
 					game.getFarm().feedAnimals((FoodItem) item);
 					int index = -1;
 					for(int i = 0; i < farmFoodItemsModel.getRowCount(); i++) {
