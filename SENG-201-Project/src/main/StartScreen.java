@@ -201,9 +201,16 @@ public class StartScreen {
 			public void actionPerformed(ActionEvent e) {
 				if(farmerNameField.getText().length() >= 3 && farmerNameField.getText().length() <= 15) farmerNameSet = true;
 				else farmerNameSet = false;
-				age = 1; //((Number)farmerAgeField.getValue()).intValue(); TODO: get user input, validate it
-				if(age > 0) farmerAgeSet = true;
-				else farmerAgeSet = false;
+				try {
+					age = Integer.parseInt(farmerAgeField.getText());
+					if (age <= 0 || age > 100) {
+						throw new IllegalArgumentException();
+					} 
+					farmerAgeSet = true;
+				} catch (IllegalArgumentException ex) {
+					farmerAgeSet = false;
+				} 
+				
 				if(farmNameField.getText().length() > 0) farmNameSet = true;
 				else farmNameSet = false;
 				if(!farmerNameSet || !farmerAgeSet || !farmTypeSet || !farmNameSet) {
