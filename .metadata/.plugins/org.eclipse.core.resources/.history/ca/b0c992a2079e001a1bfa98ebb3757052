@@ -78,14 +78,7 @@ class FarmTest {
 	}
 	
 	@Test
-	public void testTendFarm() {
-		int[] initialAnimalHappiness = {9, 6, 1};
-		testFarm.tendFarm();
-		assertEquals(1.1, testFarm.getCropYieldFactor());
-		assertEquals(1.35, testFarm.getAnimalHappinessFactor());
-		for(int i = 0; i < testFarm.getAnimals().size(); i++) {
-			assertEquals(initialAnimalHappiness[i] + 1, testFarm.getAnimals().get(i).getHappiness());
-		}
+	public void testFeedAnimals() {
 	}
 	
 	@Test
@@ -97,7 +90,7 @@ class FarmTest {
 	@Test
 	public void testCropsReady() {
 		assertFalse(testFarm.cropsReady());
-		testFarm.getCrops().get(0).setDaysUntilMature(0, 0);
+		testFarm.addCrop(new Crop("banana", 20, 0, 0, 0, 0), 0);
 		assertTrue(testFarm.cropsReady());
 	}
 }
