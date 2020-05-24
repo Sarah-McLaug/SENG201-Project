@@ -204,7 +204,7 @@ public class MainScreen {
 		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
 		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
-		farmCropItemsModel.addRow(new Object[] {1, "water", "1 Day"});
+		farmCropItemsModel.addRow(new Object[] {1, "Water", "1 Day"});
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
@@ -777,7 +777,7 @@ public class MainScreen {
 		buyItemsTab.setLayout(null);
 		
 		JScrollPane storeItemsTableContainer = new JScrollPane();
-		storeItemsTableContainer.setBounds(5, 5, 500, 270);
+		storeItemsTableContainer.setBounds(5, 5, 500, 272);
 		buyItemsTab.add(storeItemsTableContainer);
 		
 		storeItemsTable = new JTable();
@@ -819,7 +819,7 @@ public class MainScreen {
 							enhancement += item.getBenefit() + " Days Growth Enhancement";
 							farmCropItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Days"});
 						}
-						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
+						farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), "Crop Item", enhancement});
 					}
 					if(game.getStore().getItems().size() == 0) buyItemsBtn.setEnabled(false);
 				}
@@ -827,12 +827,6 @@ public class MainScreen {
 		});
 		buyItemsBtn.setBounds(552, 119, 155, 60);
 		buyItemsTab.add(buyItemsBtn);
-		
-		JLabel storeItemsTableTitle = new JLabel("Store Items");
-		storeItemsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		storeItemsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		storeItemsTableTitle.setBounds(5, 275, 500, 13);
-		buyItemsTab.add(storeItemsTableTitle);
 		
 	}
 }

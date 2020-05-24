@@ -44,7 +44,6 @@ public class MainScreen {
 	private JButton harvestCropsBtn;
 	private JButton tendFarmBtn;
 	private JLabel farmBalance;
-	private JLabel viewfarmFundsLabel;
 	private JLabel actionsRemainingLabel;
 	private JTable viewFarmCropsTable;
 	private JTable viewFarmAnimalsTable;
@@ -204,7 +203,7 @@ public class MainScreen {
 		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
 		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
-		farmCropItemsModel.addRow(new Object[] {1, "water", "1 Day"});
+		farmCropItemsModel.addRow(new Object[] {1, "Water", "1 Day"});
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
@@ -363,7 +362,7 @@ public class MainScreen {
 		mainPanel.add(nextDayButton);
 		mainPanel.add(endGameButton);
 		
-		viewfarmFundsLabel = new JLabel("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
+		JLabel viewfarmFundsLabel = new JLabel("New label");
 		viewfarmFundsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		viewfarmFundsLabel.setBounds(0, 6, 780, 16);
 		mainPanel.add(viewfarmFundsLabel);
@@ -383,18 +382,6 @@ public class MainScreen {
 		viewFarmAnimalsTable = new JTable();
 		viewFarmAnimalsTable.setModel(farmAnimalsModel);
 		viewFarmAnimalsTableContainer.setViewportView(viewFarmAnimalsTable);
-		
-		JLabel viewFarmAnimalsTableTitle = new JLabel("Animals");
-		viewFarmAnimalsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		viewFarmAnimalsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		viewFarmAnimalsTableTitle.setBounds(400, 310, 380, 16);
-		mainPanel.add(viewFarmAnimalsTableTitle);
-		
-		JLabel viewFarmCropsTableTitle = new JLabel("Crops");
-		viewFarmCropsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		viewFarmCropsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		viewFarmCropsTableTitle.setBounds(0, 310, 380, 16);
-		mainPanel.add(viewFarmCropsTableTitle);
 		
 		//-------------------------------------------------------------
 		//set up actions tab
@@ -551,18 +538,6 @@ public class MainScreen {
 		else feedAnimalsBtn.setEnabled(true);
 		feedAnimalsTab.add(feedAnimalsBtn);
 		
-		JLabel feedAnimalsTableTitle = new JLabel("Animals");
-		feedAnimalsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		feedAnimalsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		feedAnimalsTableTitle.setBounds(5, 255, 370, 13);
-		feedAnimalsTab.add(feedAnimalsTableTitle);
-		
-		JLabel feedAnimalsItemTableTitle = new JLabel("Inventory");
-		feedAnimalsItemTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		feedAnimalsItemTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		feedAnimalsItemTableTitle.setBounds(385, 255, 370, 13);
-		feedAnimalsTab.add(feedAnimalsItemTableTitle);
-		
 		JPanel playAnimalsTab = new JPanel();
 		actionTabs.addTab("Play with Animals", null, playAnimalsTab, null);
 		playAnimalsTab.setLayout(null);
@@ -614,7 +589,6 @@ public class MainScreen {
 				if(actionConfirmation()) {
 					game.getFarm().harvestCrop();
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 					harvestableCropsModel.setRowCount(0);
 					for(int i = 0; i < farmCropsModel.getRowCount(); i++) {
 						if((int) farmCropsModel.getValueAt(i, 1) == 0) farmCropsModel.removeRow(i);
@@ -663,7 +637,7 @@ public class MainScreen {
 		viewItemsTab.setLayout(null);
 		
 		JScrollPane ownedItemsTableContainer = new JScrollPane();
-		ownedItemsTableContainer.setBounds(146, 5, 454, 270);
+		ownedItemsTableContainer.setBounds(146, 5, 454, 272);
 		viewItemsTab.add(ownedItemsTableContainer);
 		
 		ownedItemsTable = new JTable();
@@ -671,9 +645,8 @@ public class MainScreen {
 		ownedItemsTableContainer.setViewportView(ownedItemsTable);
 		
 		JLabel inventoryLabel = new JLabel("Inventory");
-		inventoryLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		inventoryLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		inventoryLabel.setBounds(146, 275, 454, 13);
+		inventoryLabel.setBounds(341, 286, 61, 16);
 		viewItemsTab.add(inventoryLabel);
 		
 		JPanel buyAnimalsTab = new JPanel();
@@ -681,7 +654,7 @@ public class MainScreen {
 		buyAnimalsTab.setLayout(null);
 		
 		JScrollPane storeAnimalsTableContainer = new JScrollPane();
-		storeAnimalsTableContainer.setBounds(5, 5, 500, 270);
+		storeAnimalsTableContainer.setBounds(5, 5, 500, 272);
 		buyAnimalsTab.add(storeAnimalsTableContainer);
 		
 		//set up table of animals user is able to buy
@@ -707,7 +680,6 @@ public class MainScreen {
 					game.getFarm().addAnimal(a);
 					game.getFarm().updateBalance(-a.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmAnimalsModel.addRow(new Object[]{a.getSpecies(), a.getHealth(), a.getHappiness()});
 					if(farmFoodItemsModel.getRowCount() > 0 && game.getActionCount() > 0) feedAnimalsBtn.setEnabled(true);
 					if(game.getActionCount() > 0) playAnimalsBtn.setEnabled(true);
@@ -720,18 +692,12 @@ public class MainScreen {
 		else buyAnimalsBtn.setEnabled(true);
 		buyAnimalsTab.add(buyAnimalsBtn);
 		
-		JLabel storeAnimalsTableTitle = new JLabel("Store Animals");
-		storeAnimalsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		storeAnimalsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		storeAnimalsTableTitle.setBounds(5, 275, 500, 13);
-		buyAnimalsTab.add(storeAnimalsTableTitle);
-		
 		JPanel buyCropsTab = new JPanel();
 		storeTabs.addTab("Buy Crops", null, buyCropsTab, null);
 		buyCropsTab.setLayout(null);
 		
 		JScrollPane storeCropsTableContainer = new JScrollPane();
-		storeCropsTableContainer.setBounds(5, 5, 500, 270);
+		storeCropsTableContainer.setBounds(5, 5, 500, 272);
 		buyCropsTab.add(storeCropsTableContainer);
 		
 		storeCropsTable = new JTable();
@@ -756,7 +722,6 @@ public class MainScreen {
 					game.getFarm().addCrop(c, game.getDay());
 					game.getFarm().updateBalance(-c.getPurchasePrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 					farmCropsModel.addRow(new Object[] {c.getSpecies(), c.getDaysUntilMature(), c.getAge(game.getDay())});
 					if(game.getActionCount() > 0) tendCropsBtn.setEnabled(true);
 					if(game.getStore().getCrops().size() == 0) buyCropsBtn.setEnabled(false);
@@ -766,18 +731,12 @@ public class MainScreen {
 		buyCropsBtn.setBounds(552, 119, 155, 60);
 		buyCropsTab.add(buyCropsBtn);
 		
-		JLabel storeCropsTableTitle = new JLabel("Store Crops");
-		storeCropsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		storeCropsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		storeCropsTableTitle.setBounds(5, 275, 500, 13);
-		buyCropsTab.add(storeCropsTableTitle);
-		
 		JPanel buyItemsTab = new JPanel();
 		storeTabs.addTab("Buy Farming Supplies", null, buyItemsTab, null);
 		buyItemsTab.setLayout(null);
 		
 		JScrollPane storeItemsTableContainer = new JScrollPane();
-		storeItemsTableContainer.setBounds(5, 5, 500, 270);
+		storeItemsTableContainer.setBounds(5, 5, 500, 272);
 		buyItemsTab.add(storeItemsTableContainer);
 		
 		storeItemsTable = new JTable();
@@ -802,7 +761,6 @@ public class MainScreen {
 					game.getFarm().addItem(item);
 					game.getFarm().updateBalance(-item.getPrice());
 					farmBalance.setText("Cash Remaining: $" + String.format("%.2f", game.getFarm().getBalance()));
-					viewfarmFundsLabel.setText("Farm Funds: $" + String.format("%.2f", game.getFarm().getBalance()));
 					//update all item models
 					if(item.isFoodItem()) {
 						farmItemsModel.addRow(new Object[] {item.getName(), "Food Item", item.getBenefit() + " Health Points"});
@@ -819,7 +777,7 @@ public class MainScreen {
 							enhancement += item.getBenefit() + " Days Growth Enhancement";
 							farmCropItemsModel.addRow(new Object[] {item.getId(), item.getName(), item.getBenefit() + " Days"});
 						}
-						farmItemsModel.addRow(new Object[] {item.getName(), "Crop Item", enhancement});
+						farmItemsModel.addRow(new Object[] {item.getId(), item.getName(), "Crop Item", enhancement});
 					}
 					if(game.getStore().getItems().size() == 0) buyItemsBtn.setEnabled(false);
 				}
@@ -827,12 +785,6 @@ public class MainScreen {
 		});
 		buyItemsBtn.setBounds(552, 119, 155, 60);
 		buyItemsTab.add(buyItemsBtn);
-		
-		JLabel storeItemsTableTitle = new JLabel("Store Items");
-		storeItemsTableTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		storeItemsTableTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-		storeItemsTableTitle.setBounds(5, 275, 500, 13);
-		buyItemsTab.add(storeItemsTableTitle);
 		
 	}
 }
