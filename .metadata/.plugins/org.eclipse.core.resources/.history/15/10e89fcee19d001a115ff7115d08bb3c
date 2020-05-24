@@ -60,6 +60,17 @@ public class Animal {
 	
 	/**
 	 * 
+	 * @param animalHappinessFactor 
+	 * @param animalHealthFactor
+	 */
+	public void setDailyBonus(double animalHappinessFactor, double animalHealthFactor) {
+		//The daily bonus from an animal must be a function of it's happiness and it's health
+		//These decimals should be happiness/health factors from the farm
+		this.dailyBonus = dailyBonus + (0.05 * this.happiness) + (0.25 * this.health);
+	}
+	
+	/**
+	 * 
 	 * @return happiness of the animal, range: 1-10, inclusive
 	 */
 	public double getHappiness() {
@@ -72,6 +83,14 @@ public class Animal {
 	 */
 	public double getHealth() {
 		return this.health;
+	}
+	
+	/**
+	 * 
+	 * @param animal's health to set to, range 1-10, inclusive
+	 */
+	public void setHealth(double health) {
+		this.health = health;
 	}
 	
 	/**
