@@ -67,7 +67,7 @@ public class MainScreen {
 				//Define game elements
 				//-------------------------------------------------------------------------
 				final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
-				cropSpecies.add(new Crop("banana", 2, 2, 2, 2, farm.getCropGrowthBonus()));
+				cropSpecies.add(new Crop("banana", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));

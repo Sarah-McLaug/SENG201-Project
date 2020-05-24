@@ -67,7 +67,7 @@ public class MainScreen {
 				//Define game elements
 				//-------------------------------------------------------------------------
 				final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
-				cropSpecies.add(new Crop("banana", 2, 2, 2, 2, farm.getCropGrowthBonus()));
+				cropSpecies.add(new Crop("banana", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
 				cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));
@@ -201,7 +201,7 @@ public class MainScreen {
 		String[] farmCropItemsColumnNames = {"ID", "Name","Growth Enhancement"};
 		DefaultTableModel farmCropItemsModel = new DefaultTableModel(0, 0);
 		farmCropItemsModel.setColumnIdentifiers(farmCropItemsColumnNames);
-		farmCropItemsModel.addRow(new Object[] {1, "Water", "1 Day"});
+		farmCropItemsModel.addRow(new Object[] {0, "Water", "1 Day"});
 		for(int i = 0; i < game.getFarm().getInventory().size(); i++) {
 			Item item = game.getFarm().getInventory().get(i);
 			if(!item.isFoodItem()) {
@@ -349,15 +349,13 @@ public class MainScreen {
 							JOptionPane.PLAIN_MESSAGE, null, cropItemIds, cropItemIds[0]);
 					if(cropItemSelection != null && cropItemSelection.intValue() != 0) {
 						Item item = game.getFarm().fetchItem(cropItemSelection.intValue());
-						if(cropItemSelection.intValue() == 1) game.getFarm().tendCrop(speciesSelection);
-						else {
-							game.getFarm().tendCrop(speciesSelection, (CropItem) item);
-							int index = -1;
-							for(int i = 0; i < farmCropItemsModel.getRowCount(); i++) {
-								if((int) farmCropItemsModel.getValueAt(i, 0) == item.getId()) index = i;
-							}
-							farmCropItemsModel.removeRow(index);
+						if(cropItemSelection.intValue() == 0) game.getFarm().waterCrop(speciesSelection);
+						else game.getFarm().tendCrop(speciesSelection, (CropItem) item);
+						int index = -1;
+						for(int i = 0; i < farmCropItemsModel.getRowCount(); i++) {
+							if((int) farmCropItemsModel.getValueAt(i, 0) == item.getId()) index = i;
 						}
+						farmCropItemsModel.removeRow(index);
 						farmCropsModel.setRowCount(0);
 						harvestableCropsModel.setRowCount(0);
 						for(int i = 0; i < game.getFarm().getCrops().size(); i++) {
