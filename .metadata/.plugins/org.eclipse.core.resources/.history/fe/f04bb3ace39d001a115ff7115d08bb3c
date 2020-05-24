@@ -35,112 +35,62 @@ public class Crop {
 		this.id = count++;
 	}
 
-	/**
-	 * 
-	 * @return species of the crop
-	 */
+	//BEGIN getters and setters
 	public String getSpecies() {
 		return this.species;
 	}
 	
-	/**
-	 * 
-	 * @return unique ID number of the crop
-	 */
 	public int getId() {
 		return this.id;
 	}
 	
-	/**
-	 * 
-	 * @return cost to buy the crop, in dollars
-	 */
 	public double getPurchasePrice() {
 		return this.purchasePrice;
 	}
 	
-	/**
-	 * 
-	 * @param purchasePrice cost to set for purchasing the crop, in dollars
-	 */
 	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
 	
-	/**
-	 * 
-	 * @return cost to sell crop, in dollars
-	 */
 	public double getSellingPrice() {
 		return this.sellingPrice;
 	}
 	
-	/**
-	 * 
-	 * @param sellingPrice cost to set for selling the crop, in dollars
-	 */
 	public void setSellingPrice(double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
 	
-	/**
-	 * 
-	 * @return number of days until crop is mature
-	 */
 	public int getDaysUntilMature() {
 		return this.daysUntilMature;
 	}
 	
-	/**
-	 * 
-	 * @param days - days until the crop is mature
-	 * @param growthBonus - reduction of days until crop is mature
-	 */
 	public void setDaysUntilMature(int days, int growthBonus) {
 		this.daysUntilMature = days - growthBonus;
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
 	
-	/**
-	 * 
-	 * @param day - day the crop was planted in the farm
-	 */
 	public void setDayPlanted(int day) {
 		this.dayPlanted = day;
 	}
 	
-	/**
-	 * 
-	 * @param currentDay - what day the user is on in the game
-	 * @return - how much time the crop has been planted, in days
-	 */
 	public int getAge(int currentDay) {
 		//Days count down to 0
 		return this.dayPlanted - currentDay;
 	}
 	
-	/**
-	 * 
-	 * @return health of the crop, range 1-10 (inclusive)
-	 */
 	public double getHealth() {
 		return this.health;
 	}
 	
-	/**
-	 * 
-	 * @param health - health to set for the crop, range 1-10 (inclusive)
-	 */
 	public void setHealth(double health) {
 		this.health = health;
 	}
+	//END getters and setters
 	
-	/**
-	 * Reduction of days until mature
-	 * @param reduction - number of days to reduce days until mature by
-	 */
+	//BEGIN methods
 	public void reduceDaysUntilMature(int reduction) {
 		daysUntilMature -= reduction;
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
+	//END methods
 }

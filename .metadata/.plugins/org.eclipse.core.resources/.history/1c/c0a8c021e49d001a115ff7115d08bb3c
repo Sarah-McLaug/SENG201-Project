@@ -134,13 +134,12 @@ public class Crop {
 	public void setHealth(double health) {
 		this.health = health;
 	}
+	//END getters and setters
 	
-	/**
-	 * Reduction of days until mature
-	 * @param reduction - number of days to reduce days until mature by
-	 */
+	//BEGIN methods
 	public void reduceDaysUntilMature(int reduction) {
 		daysUntilMature -= reduction;
 		if(daysUntilMature < 0) daysUntilMature = 0;
 	}
+	//END methods
 }
