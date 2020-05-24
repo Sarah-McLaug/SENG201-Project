@@ -72,8 +72,12 @@ public class Game {
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	public double score() {
-		return 0.0;
-		//insert some func here
+		double profit = profit();
+		if (profit >= 0 ) {
+			return profit/this.getDuration();
+		} else {
+			return 0;
+		}
 	}
 	
 	public double profit() {
