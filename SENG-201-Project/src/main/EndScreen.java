@@ -20,71 +20,7 @@ public class EndScreen {
 
 	private final int windowHeight = 300;
 	private final int windowWidth = 600;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		//Defaults for easy testing: TODO: (remove later)
-		//--------------------------------------------------------------------
-		String farmName = "Incognito Farms";
-		String farmType = "friendly";
-		String farmerName = "Lollipop Chainsaw";
-		int age = 22;
-		int day = 5;
-		//--------------------------------------------------------------------
-		
-		Farm farm = new Farm(farmName, farmType, new Farmer(farmerName, age));
-		Store store = new Store();
-		int actionsRemaining = 2;
-		boolean playingGame = true;
-		
-		//Define game elements
-		//-------------------------------------------------------------------------
-		final ArrayList <Crop> cropSpecies = new ArrayList <Crop>();
-		cropSpecies.add(new Crop("banana", 2, 2, 2, 2, farm.getCropGrowthBonus()));
-		cropSpecies.add(new Crop("corn", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-		cropSpecies.add(new Crop("kiwi", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-		cropSpecies.add(new Crop("kumera", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-		cropSpecies.add(new Crop("mango", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-		cropSpecies.add(new Crop("spinach", 1, 1, 1, 1, farm.getCropGrowthBonus()));
-		
-		final ArrayList <Animal> animalSpecies = new ArrayList <Animal>();
-		animalSpecies.add(new Animal("llama", 1, 1, 1, 1));
-		animalSpecies.add(new Animal("koala", 1, 1, 1, 1));
-		animalSpecies.add(new Animal("panda", 1, 1, 1, 1));
-		
-		final ArrayList <Item> foodItems = new ArrayList <Item>();
-		foodItems.add(new FoodItem("sugar cane", 1, 1));
-		foodItems.add(new FoodItem("eucalyptus leaves", 1, 1));
-		foodItems.add(new FoodItem("brocooli", 1, 1));
-		
-		final ArrayList <Item> cropItems = new ArrayList <Item>();
-		cropItems.add(new CropItem("fertilizer", 1, 1));
-		cropItems.add(new CropItem("pestiside", 2, 2));
-		//-------------------------------------------------------------------------
-		
-
-		Game dummyGame = new Game();
-		dummyGame.setDay(day);
-		dummyGame.setFarm(farm);
-		dummyGame.setDuration(5);
-		dummyGame.setActionCount(actionsRemaining);
-		dummyGame.setSpecies(animalSpecies, cropSpecies, foodItems, cropItems);
-		dummyGame.populateStore();
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EndScreen window = new EndScreen(dummyGame);
-					window.screen.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the window
 	 * @param incomingGame - state of the game when window is launched

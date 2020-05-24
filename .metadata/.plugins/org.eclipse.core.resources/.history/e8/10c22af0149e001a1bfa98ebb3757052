@@ -44,6 +44,22 @@ public class StartScreen {
 	private final String farmNameError = "Farm name not valid.\n";
 	
 	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StartScreen window = new StartScreen(new Game());
+					window.screen.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
 	 * Create the window
 	 * @param incomingGame - state of the game when the window is launched
 	 */
