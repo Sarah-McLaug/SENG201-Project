@@ -72,6 +72,11 @@
 		<item key="antpath" value="/Users/sarahmclaughlin/eclipse-workspace/SENG-201-Project/javadoc.xml"/>
 		<item key="destdir" value="/Users/sarahmclaughlin/eclipse-workspace/SENG-201-Project/doc"/>
 		<section name="projects">
+			<section name="SENG-201-Project">
+				<item key="href" value=""/>
+				<item key="destdir" value="/Users/sarahmclaughlin/eclipse-workspace/SENG-201-Project/doc"/>
+				<item key="antpath" value="/Users/sarahmclaughlin/eclipse-workspace/SENG-201-Project/javadoc.xml"/>
+			</section>
 		</section>
 	</section>
 </section>

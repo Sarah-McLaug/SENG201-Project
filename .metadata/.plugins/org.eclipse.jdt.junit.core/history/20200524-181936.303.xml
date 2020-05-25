@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="StoreTest" project="SENG-201-Project" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="test.StoreTest" time="0.046" displayname="StoreTest" uniqueid="[engine:junit-jupiter]/[class:test.StoreTest]">
-    <testcase name="testAnimalExists" classname="test.StoreTest" time="0.026" displayname="testAnimalExists()" uniqueid="[engine:junit-jupiter]/[class:test.StoreTest]/[method:testAnimalExists()]"/>
-    <testcase name="testCropExists" classname="test.StoreTest" time="0.003" displayname="testCropExists()" uniqueid="[engine:junit-jupiter]/[class:test.StoreTest]/[method:testCropExists()]"/>
-    <testcase name="testGetItemStockCount" classname="test.StoreTest" time="0.004" displayname="testGetItemStockCount()" uniqueid="[engine:junit-jupiter]/[class:test.StoreTest]/[method:testGetItemStockCount()]"/>
-    <testcase name="testItemExists" classname="test.StoreTest" time="0.013" displayname="testItemExists()" uniqueid="[engine:junit-jupiter]/[class:test.StoreTest]/[method:testItemExists()]"/>
-  </testsuite>
-</testrun>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FarmTest" project="SENG-201-Project" tests="3" started="3" failures="0" errors="0" ignored="0">
-  <testsuite name="test.FarmTest" time="0.053" displayname="FarmTest" uniqueid="[engine:junit-jupiter]/[class:test.FarmTest]">
-    <testcase name="testOwnCrop" classname="test.FarmTest" time="0.03" displayname="testOwnCrop()" uniqueid="[engine:junit-jupiter]/[class:test.FarmTest]/[method:testOwnCrop()]"/>
-    <testcase name="testFeedAnimals" classname="test.FarmTest" time="0.015" displayname="testFeedAnimals()" uniqueid="[engine:junit-jupiter]/[class:test.FarmTest]/[method:testFeedAnimals()]"/>
-    <testcase name="testSetType" classname="test.FarmTest" time="0.008" displayname="testSetType()" uniqueid="[engine:junit-jupiter]/[class:test.FarmTest]/[method:testSetType()]"/>
-  </testsuite>
-</testrun>

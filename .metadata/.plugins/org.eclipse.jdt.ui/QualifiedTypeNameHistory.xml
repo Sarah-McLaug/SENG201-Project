@@ -5,4 +5,15 @@
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="javax.swing.event.ListSelectionEvent"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="main.Animal"/>
+<fullyQualifiedTypeName name="main.Crop"/>
+<fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+<fullyQualifiedTypeName name="main.Farm"/>
+<fullyQualifiedTypeName name="main.Farmer"/>
+<fullyQualifiedTypeName name="junit.framework.Assert"/>
+<fullyQualifiedTypeName name="org.junit.Assert"/>
+<fullyQualifiedTypeName name="main.FoodItem"/>
+<fullyQualifiedTypeName name="main.CropItem"/>
+<fullyQualifiedTypeName name="main.Store"/>
+<fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
 </qualifiedTypeNameHistroy>
